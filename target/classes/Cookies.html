@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookies</title>
+    <style>
+
+        #cookie-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 5px;
+            box-shadow: 0 0 10px black;
+            text-align: center;
+        }
+        #cookies-Accepted {
+            padding: 10px 20px;
+            background-color: darkblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="cookie-popup">
+    <p>Vi bruger cookies for den bedste brugeroplevelse. <a href="">Lær mere</a></p>
+    <button id="cookies-Accepted">Accept Cookies</button>
+</div>
+<script>
+    function CheckCookie() {
+        return localStorage.getItem('cookies-Accepted') === true;
+    }
+    function ShowCookie() {
+        if (!CheckCookie()) {
+            document.getElementById('cookie-popup').style.display = 'block';
+        }
+    }
+    function acceptCookie() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        document.getElementById('cookie-popup').style.display = 'none';
+    }
+    window.onload = function() {
+        ShowCookie();
+
+    };
+</script>
+</body>
+</html>

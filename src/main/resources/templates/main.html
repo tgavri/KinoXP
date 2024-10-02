@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema Website</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div id="app" class="background">
+    <div class="container">
+        <h1>DAGENS PROGRAM</h1>
+        <div class="movie-list" id="movie-list">
+        </div>
+    </div>
+</div>
+
+<style>
+    .background {
+        background-image: url('../static/rødegardiner.JPG');
+        background-size: cover;
+        background-position: center;
+        background-repeat: repeat-y;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        width: 70%;
+        text-align: center;
+        color: white;
+        margin-top: 200px;
+    }
+
+    .movie-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .movie-container {
+        background-color: #f0f0f0;
+        color: black;
+        width: 400px;
+        margin: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 600px;
+    }
+
+    .poster {
+        width: 100%;
+        height: 450px;
+        cursor: pointer;
+    }
+
+    .title-container {
+        padding: 10px;
+        text-align: center;
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    h2 {
+        font-size: 25px;
+        margin: 0;
+        color: black;
+    }
+
+    .showtimes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-top: 10px;
+        background-color: #333;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        height: 100px;
+        width: 100%;
+        gap: 10px
+    }
+
+    .showtimes span {
+        display: block;
+        width: 40%;
+        margin-left: 4%;
+        margin-bottom: 10px;
+        height: 18px;
+        padding: 7px;
+        background-color: #8B0000;
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bolder;
+        cursor: pointer;
+    }
+    .movie-details {
+        text-align: center;
+        color: black;
+        background-color: #f0f0f0;
+        padding: 20px;
+        width: 80%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .movie-details img {
+        margin-bottom: 20px;
+    }
+
+    .movie-details ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .movie-details li {
+        font-size: 18px;
+        margin-bottom: 10px;
+        background-color: #8B0000;
+    }
+
+    #backToList {
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+</style>
+
+<script>
+    $(document).ready(function () {
+        const movies = [
+            {
+                title: "Find Nemo",
+                poster: "https://m.media-amazon.com/images/M/MV5BMTc5NjExNTA5OV5BMl5BanBnXkFtZTYwMTQ0ODY2._V1_.jpg",
+                description: "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
+                showtimes: ["12:00 PM", "3:00 PM", "6:00 PM"]
+            },
+            {
+                title: "Winnie the Pooh: Blood and Honey",
+                poster: "https://m.media-amazon.com/images/M/MV5BZmRiMzUzYWItNmMzYS00NDBmLWIyZDMtOTk3MmI2OGJjN2Q1XkEyXkFqcGc@._V1_.jpg",
+                description: "After Christopher Robin abandons them for college, Pooh and Piglet embark on a bloody rampage as they search for a new source of food.",
+                showtimes: ["1:00 PM", "4:00 PM", "9:00 PM"]
+            },
+            {
+                title: "Goebbels and the Führer",
+                poster: "https://m.media-amazon.com/images/M/MV5BMGEyMDY3ZWMtNzc1Yi00NTQxLTljODItMzEyYTMyZmZhNzk0XkEyXkFqcGc@._V1_FMjpg_UY576_.jpg",
+                description: "Nazi propaganda minister Joseph Goebbels is in charge of building public support for the Holocaust and for the war that Hitler is about to start.",
+                showtimes: ["11:00 AM", "2:00 PM", "5:00 PM"]
+            },
+            {
+                title: "My Little Pony: The Movie",
+                poster: "https://m.media-amazon.com/images/M/MV5BNDZiNDRlNGQtNGQ4Ny00NDRiLTkwOWItZDJlZTQ4YTlmM2M3XkEyXkFqcGc@._V1_FMjpg_UY486_.jpg",
+                description: "After a dark force conquers Canterlot, the Mane 6 embark on an unforgettable journey beyond Equestria where they meet new friends and exciting challenges on a quest to use the magic of friendship to save their homeland.",
+                showtimes: ["9:00 AM", "2:00 PM"]
+            },
+            {
+                title: "Weathering With You",
+                poster: "https://m.media-amazon.com/images/M/MV5BOWQ2MzY5OWMtNDVlMi00NTUyLTljY2QtYzQ4MzkxMjhhMThkXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
+                description: "Tokyo is currently experiencing rain showers that seem to disrupt the usual pace of everyone living there to no end. Amidst this seemingly eternal downpour arrives the runaway high school student Hodaka Morishima, who struggles to financially support himself—ending up with a job at a small-time publisher. At the same time, the orphaned Hina Amano also strives to find work to sustain herself and her younger brother.Both fates intertwine when Hodaka attempts to rescue Hina from shady men, deciding to run away together. Subsequently, Hodaka discovers that Hina has a strange yet astounding power: the ability to call out the sun whenever she prays for it. With Tokyo's unusual weather in mind, Hodaka sees the potential of this ability. He suggests that Hina should become a \"sunshine girl\"—someone who will clear the sky for people when they need it the most. Things begin looking up for them at first. However, it is common knowledge that power always comes with a hefty price...",
+                showtimes: ["10:00 AM", "8:00 PM"]
+            }
+        ];
+
+        function loadMovieList() {
+            $('#movie-list').empty();
+            movies.forEach(movie => {
+                const movieContainer = $('<div>').addClass('movie-container');
+                const poster = $('<img>').attr('src', movie.poster).attr('alt', movie.title).addClass('poster');
+                const titleContainer = $('<div>').addClass('title-container');
+                const title = $('<h2>').text(movie.title);
+                titleContainer.append(title);
+
+                const showtimesDiv = $('<div>').addClass('showtimes');
+                movie.showtimes.forEach(time => {
+                    const timeSpan = $('<span>').text(time);
+                    showtimesDiv.append(timeSpan);
+                });
+
+                movieContainer.append(poster).append(titleContainer).append(showtimesDiv);
+
+                $('#movie-list').append(movieContainer);
+                title.click(function() {
+                    loadMovieDetails(movie)
+                });
+                poster.click(function() {
+                    loadMovieDetails(movie);
+                });
+            });
+        }
+
+        function loadMovieDetails(movie) {
+            $('#movie-list').html(`
+                <div class="movie-details">
+                    <h2>${movie.title}</h2>
+                        <img src="${movie.poster}" alt="${movie.title}" class="poster" style="max-width: 300px;">
+                        <p>${movie.description}</p>
+                        <h3>Showtimes</h3>
+                        <ul>
+                        ${movie.showtimes.map(time => `<li>${time}</li>`).join('')}
+                        </ul>
+                    <button id="backToList">Back to Movie List</button>
+                </div>
+            `);
+
+            $('#backToList').click(function() {
+                loadMovieList();
+            });
+        }
+
+        loadMovieList();
+    });
+</script>
+</body>
+</html>
