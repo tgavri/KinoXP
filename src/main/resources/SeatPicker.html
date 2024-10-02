@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oversigt</title>
+    <script>src="https://code.jquery.com/jquery-3.7.1.min.js"</script>
+    <style>
+.Screen {
+    color: white;
+    background-color: darkblue;
+    height: 50px;
+    width: 400px;
+    text-align: center;
+    line-height: 50px;
+
+
+
+}
+.BodyScreen {
+    margin: 10px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.TitleSeat {
+    font-size: 30px;
+    margin: 20px 20px;
+    padding: 10px 10px;
+    height: 40px;
+    text-align: left;
+}
+#log-output {
+    color: black;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    max-height: 150px;
+;
+}
+#seat-map {
+    justify-content: center;
+    margin: 20px 20px;
+    grid-gap: 5px;
+    grid-template-columns: repeat(20, 20px);
+    display: grid;
+}
+.seat {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    border: 1px black;
+}
+.seat.selected {
+    background-color: blue;
+    cursor: pointer;
+}
+.seat:hover:not(taken) {
+    background-color: black;
+}
+.seat.taken {
+    background-color: darkred;
+}
+    </style>
+
+
+</head>
+<body>
+<div class="TitleSeat">Sædeoversigt</div>
+<div class="BodyScreen">
+<div class="Screen">LÆRRED</div>
+</div>
+<div id="seat-map"></div>
+<div id="log-output"></div>
+
+    <script>
+        function ShowLogMessage(message) {
+            var LogOutputMessage = document.getElementById('log-output');
+            LogOutputMessage.innerHTML += message + '<br>';
+
+        }
+        function SeatMapCreate(Rows, seatsPerRow) {
+            var Seatmap = document.getElementById('seat-map');
+
+            for (var row = 1; row <= Rows; row++){
+                for (var seat = 1; seat <= seatsPerRow; seat++) {
+
+                    var SeatDiv = document.createElement('div')
+                    SeatDiv.classList.add('seat')
+
+                    SeatDiv.setAttribute('data-row', row);
+                    SeatDiv.setAttribute('data-seat', seat);
+
+                    SeatDiv.addEventListener('click', function() {
+                        if (!this.classList.contains('taken')) {
+                            this.classList.toggle('selected');
+
+                            var rowNumb = this.getAttribute('data-row');
+                            var seatNumb = this.getAttribute('data-seat');
+                            var showMessage = `Række: ${rowNumb}, Sæde: ${seatNumb}`;
+
+                            if (this.classList.contains('selected')) {
+                                ShowLogMessage(`Du har valgt ${showMessage}`);
+                            } else {
+                                var logOutput = document.getElementById('log-output');
+                                logOutput.innerHTML = logOutput.innerHTML.replace(`Du har valgt ${showMessage}<br>`, '');
+
+                            }
+                        }
+                    });
+                    Seatmap.append(SeatDiv);
+                }
+            }
+        }
+        SeatMapCreate(20, 12);
+    </script>
+
+
+
+
+
+</body>
+</html>
