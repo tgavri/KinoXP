@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kino</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: #000080;
+            color: white;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            justify-content: space-between;
+        }
+
+        .navbar .brand {
+            flex: 1;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            margin-right: -5%; /* Adjust margin to pull brand to center */
+        }
+
+        .navbar .menu {
+            padding: 5px 15px;
+            background-color: transparent;
+            border: 2px solid white;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .navbar .menu:hover {
+            background-color: white;
+            color: #000080;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dropdown menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #000080;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .modal-content h2 {
+            text-align: center; /* centrer login teksten i boksen */
+            margin: 0;
+            padding-bottom: 15px;
+        }
+
+        .close {
+            color: #fff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ddd;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .modal-content input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .modal-content button {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+            color: #000080;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #f0f0f0;
+            transition: background-color 0.3s;
+        }
+
+        .modal-content button:active {
+            background-color: #004080;
+        }
+
+    </style>
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const navbar = `
+            <header>
+            <div class="navbar">
+                <div class="brand">Kino</div>
+                <button class="menu">Menu</button>
+                <div class="dropdown-content">
+                    <a href="#">Kommende film</a>
+                    <a href="#">Om os</a>
+                    <a href="#">Log ind</a>
+                </div>
+            </div>
+            </header>
+        `;
+        $('body').prepend(navbar);
+
+        // Login
+        const modal = `
+            <div id="loginModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Login</h2>
+                    <form id="loginForm">
+                        <label for="username">Brugernavn:</label>
+                        <input type="text" id="username" name="username" required>
+                        <label for="password">Kode:</label>
+                        <input type="password" id="password" name="password" required>
+                        <button type="submit">Log ind</button>
+                    </form>
+                </div>
+            </div>
+        `;
+        $('body').append(modal); //
+
+        // Toggle dropdown
+        $('.menu').on('click', function () {
+            $('.dropdown-content').toggle();
+        });
+
+        // Hide dropdown
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.menu').length) {
+                $('.dropdown-content').hide();
+            }
+        });
+
+        // Show login when clicked
+        $('.dropdown-content a').on('click', function (e) {
+            if ($(this).text() === "Log ind") {
+                e.preventDefault(); // Prevent the default anchor behavior
+                $('#loginModal').css('display', 'block'); // Show the modal
+            }
+        });
+
+        // Close login when x button is clicked
+        $('.close').on('click', function () {
+            $('#loginModal').css('display', 'none');
+        });
+
+        // Close the modal when clicking outside of the modal
+        $(window).on('click', function (event) {
+            if ($(event.target).is('#loginModal')) {
+                $('#loginModal').css('display', 'none');
+            }
+        });
+
+        // Handle form submission
+        $('#loginForm').on('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get the username and password values
+            const username = $('#username').val();
+            const password = $('#password').val();
+
+            // Here you can handle the login (e.g., send a request to your server)
+            console.log('Username:', username, 'Password:', password);
+            // Validate the input (you can add your own validation logic)
+            if (username === '' || password === '') {
+                alert('Please enter both username and password.');
+                return;
+            }
+
+            // Example action: show an alert with the input values
+            alert('Logging in with:\nUsername: ' + username + '\nPassword: ' + password);
+
+            // fremtidig kode til processering af brugernavn, kode.
+            // $.post('/your-login-endpoint', { username, password })
+            //     .done(function(response) {
+            //         // Handle successful login response
+            //     })
+            //     .fail(function() {
+            //         // Handle login failure
+            //         alert('Login failed. Please try again.');
+            //     });
+
+            // For demonstration, close the modal after submission
+            $('#loginModal').css('display', 'none');
+        });
+
+    });
+</script>
+
+</body>
+</html>
