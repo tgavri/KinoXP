@@ -6,7 +6,33 @@
     <title>Oversigt</title>
     <script>src="https://code.jquery.com/jquery-3.7.1.min.js"</script>
     <style>
-.Screen {
+
+.ContainerSeat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    width: 80%;
+    max-width: 1200px;
+
+}
+.Background-containerSeat {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-image: url('https://www.avcenter.dk/media/bojogdac/biografstole-i-samsoe-bio.jpg?anchor=center&mode=crop&width=1500&height=0&rnd=132881886021800000');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+.ScreenSeat {
     color: white;
     background-color: darkblue;
     height: 50px;
@@ -60,24 +86,47 @@
     cursor: pointer;
 }
 .seat:hover:not(taken) {
-    background-color: black;
+    background-color: white;
 }
-.seat.taken {
-    background-color: darkred;
+
+#buy-seats {
+padding: 10px 20px;
+background-color: darkblue;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+#totalPris {
+    font-family: Arial,serif;
 }
     </style>
 
 
 </head>
 <body>
-<div class="TitleSeat">Sædeoversigt</div>
-<div class="BodyScreen">
-<div class="Screen">LÆRRED</div>
-</div>
+<div class="Background-containerSeat">
+    <div class="ContainerSeat">
+
+    <div class="TitleSeat">Sædeoversigt</div>
+    <div class="BodyScreen">
+        <div class="ScreenSeat">LÆRRED</div>
+    </div>
 <div id="seat-map"></div>
 <div id="log-output"></div>
+    <div>
+        <button id="buy-seats">Køb valgte sæder</button>
+        <p id="totalPris">Pris</p>
+    </div>
+    </div>
+</div>
+
 
     <script>
+
+        var SelectSeats = [];
+        var PriceSeat = 100;
+
         function ShowLogMessage(message) {
             var LogOutputMessage = document.getElementById('log-output');
             LogOutputMessage.innerHTML += message + '<br>';
@@ -104,18 +153,28 @@
                             var showMessage = `Række: ${rowNumb}, Sæde: ${seatNumb}`;
 
                             if (this.classList.contains('selected')) {
+                                SelectSeats.push(showMessage);
                                 ShowLogMessage(`Du har valgt ${showMessage}`);
                             } else {
+                                SelectSeats = SelectSeats.filter(seat => seat !== showMessage);
                                 var logOutput = document.getElementById('log-output');
                                 logOutput.innerHTML = logOutput.innerHTML.replace(`Du har valgt ${showMessage}<br>`, '');
 
                             }
+                            TotalPriceCalc();
                         }
                     });
                     Seatmap.append(SeatDiv);
                 }
             }
         }
+        function TotalPriceCalc() {
+            var totalPrice = SelectSeats.length * PriceSeat;
+            document.getElementById('totalPris').innerText = `Total pris: ${totalPrice} kr.`;
+
+
+        }
+
         SeatMapCreate(20, 12);
     </script>
 
