@@ -6,11 +6,12 @@
     <title>KinoXP</title>
     <link rel="stylesheet" href="../static/css/main.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
 <!-- placeholder for når headeren bliver loadet -->
 <div id="header-placeholder"></div>
-
+<div id="cookie-placeholder"></div>
 <div id="app" class="background">
     <div class="frontpage-info">
         <h1 class="movie-title"></h1>
@@ -19,13 +20,20 @@
     <div class="container">
         <div class="header-container">
             <h1>Aktuelle Film</h1>
+            <label for="date-picker">Vælg en dato:</label>
+            <div id="calendar-container" style="display: none; margin-top: 0;">
+                <input type="date" id="date-picker">
+            </div>
+            <button id="calendarButton">📅</button>
             <select id="genre-filter">
                 <option value="all">Alle Genre</option>
             </select>
         </div>
         <div class="movie-list" id="movie-list"></div>
     </div>
+
 </div>
+
 
 <script>
     $(document).ready(function () {
@@ -33,6 +41,7 @@
 
         // henter header from "../../frontend/indexheader.html"
         $('#header-placeholder').load('/frontend/indexheader.html');
+        $('#cookie-placeholder').load('/frontend/Cookies.html');
 
         const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
         const today = new Date();
@@ -77,6 +86,20 @@
                 }, 100);
             });
         });
+
+        $('#calendarButton').click(function() {
+            $('#calendar-container').toggle();
+            const date = getSelectedDate();
+        });
+
+        $('#date-picker').on('change', function() {
+            const selectedDate = $(this).val();
+            $('#selected-date').text(`Selected date: ${selectedDate}`);
+        });
+        function getSelectedDate() {
+            const selectedDate = $('#date-picker').val();
+            return selectedDate;
+        }
 
         function loadMovieList(movies, todayWeekday) {
             $('#movie-list').empty();
