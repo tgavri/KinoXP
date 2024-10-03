@@ -3,181 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinema Website</title>
+    <title>KinoXP</title>
+    <link rel="stylesheet" href="../static/css/main.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<!-- placeholder for når headeren bliver loadet -->
+<div id="header-placeholder"></div>
+
 <div id="app" class="background">
+    <div class="frontpage-info">
+        <h1 class="movie-title"></h1>
+        <p class="premier-date"></p>
+    </div>
     <div class="container">
-        <h1>DAGENS PROGRAM</h1>
-        <div class="movie-list" id="movie-list">
+        <div class="header-container">
+            <h1>Aktuelle Film</h1>
+            <select id="genre-filter">
+                <option value="all">Alle Genre</option>
+            </select>
         </div>
+        <div class="movie-list" id="movie-list"></div>
     </div>
 </div>
 
-<style>
-    .background {
-        background-image: url('../static/rødegardiner.JPG');
-        background-size: cover;
-        background-position: center;
-        background-repeat: repeat-y;
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .container {
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 20px;
-        border-radius: 10px;
-        width: 70%;
-        text-align: center;
-        color: white;
-        margin-top: 200px;
-    }
-
-    .movie-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-
-    .movie-container {
-        background-color: #f0f0f0;
-        color: black;
-        width: 400px;
-        margin: 10px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 600px;
-    }
-
-    .poster {
-        width: 100%;
-        height: 450px;
-        cursor: pointer;
-    }
-
-    .title-container {
-        padding: 10px;
-        text-align: center;
-        background-color: #f0f0f0;
-        cursor: pointer;
-    }
-
-    h2 {
-        font-size: 25px;
-        margin: 0;
-        color: black;
-    }
-
-    .showtimes {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        padding-top: 10px;
-        background-color: #333;
-        color: white;
-        font-size: 14px;
-        text-align: center;
-        height: 100px;
-        width: 100%;
-        gap: 10px
-    }
-
-    .showtimes span {
-        display: block;
-        width: 40%;
-        margin-left: 4%;
-        margin-bottom: 10px;
-        height: 18px;
-        padding: 7px;
-        background-color: #8B0000;
-        color: white;
-        border-radius: 10px;
-        text-align: center;
-        font-weight: bolder;
-        cursor: pointer;
-    }
-    .movie-details {
-        text-align: center;
-        color: black;
-        background-color: #f0f0f0;
-        padding: 20px;
-        width: 80%;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .movie-details img {
-        margin-bottom: 20px;
-    }
-
-    .movie-details ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .movie-details li {
-        font-size: 18px;
-        margin-bottom: 10px;
-        background-color: #8B0000;
-    }
-
-    #backToList {
-        padding: 10px 20px;
-        background-color: #333;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-</style>
-
 <script>
     $(document).ready(function () {
-        const movies = [
-            {
-                title: "Find Nemo",
-                poster: "https://m.media-amazon.com/images/M/MV5BMTc5NjExNTA5OV5BMl5BanBnXkFtZTYwMTQ0ODY2._V1_.jpg",
-                description: "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
-                showtimes: ["12:00 PM", "3:00 PM", "6:00 PM"]
-            },
-            {
-                title: "Winnie the Pooh: Blood and Honey",
-                poster: "https://m.media-amazon.com/images/M/MV5BZmRiMzUzYWItNmMzYS00NDBmLWIyZDMtOTk3MmI2OGJjN2Q1XkEyXkFqcGc@._V1_.jpg",
-                description: "After Christopher Robin abandons them for college, Pooh and Piglet embark on a bloody rampage as they search for a new source of food.",
-                showtimes: ["1:00 PM", "4:00 PM", "9:00 PM"]
-            },
-            {
-                title: "Goebbels and the Führer",
-                poster: "https://m.media-amazon.com/images/M/MV5BMGEyMDY3ZWMtNzc1Yi00NTQxLTljODItMzEyYTMyZmZhNzk0XkEyXkFqcGc@._V1_FMjpg_UY576_.jpg",
-                description: "Nazi propaganda minister Joseph Goebbels is in charge of building public support for the Holocaust and for the war that Hitler is about to start.",
-                showtimes: ["11:00 AM", "2:00 PM", "5:00 PM"]
-            },
-            {
-                title: "My Little Pony: The Movie",
-                poster: "https://m.media-amazon.com/images/M/MV5BNDZiNDRlNGQtNGQ4Ny00NDRiLTkwOWItZDJlZTQ4YTlmM2M3XkEyXkFqcGc@._V1_FMjpg_UY486_.jpg",
-                description: "After a dark force conquers Canterlot, the Mane 6 embark on an unforgettable journey beyond Equestria where they meet new friends and exciting challenges on a quest to use the magic of friendship to save their homeland.",
-                showtimes: ["9:00 AM", "2:00 PM"]
-            },
-            {
-                title: "Weathering With You",
-                poster: "https://m.media-amazon.com/images/M/MV5BOWQ2MzY5OWMtNDVlMi00NTUyLTljY2QtYzQ4MzkxMjhhMThkXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
-                description: "Tokyo is currently experiencing rain showers that seem to disrupt the usual pace of everyone living there to no end. Amidst this seemingly eternal downpour arrives the runaway high school student Hodaka Morishima, who struggles to financially support himself—ending up with a job at a small-time publisher. At the same time, the orphaned Hina Amano also strives to find work to sustain herself and her younger brother.Both fates intertwine when Hodaka attempts to rescue Hina from shady men, deciding to run away together. Subsequently, Hodaka discovers that Hina has a strange yet astounding power: the ability to call out the sun whenever she prays for it. With Tokyo's unusual weather in mind, Hodaka sees the potential of this ability. He suggests that Hina should become a \"sunshine girl\"—someone who will clear the sky for people when they need it the most. Things begin looking up for them at first. However, it is common knowledge that power always comes with a hefty price...",
-                showtimes: ["10:00 AM", "8:00 PM"]
-            }
-        ];
+        let movies = [];
 
-        function loadMovieList() {
+        // henter header from "../../frontend/indexheader.html"
+        $('#header-placeholder').load('/frontend/indexheader.html');
+
+        const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+        const today = new Date();
+        const todayWeekday = weekdayNames[today.getDay()];
+
+        $.getJSON("../static/movies.json", function (movieData) {
+            const upcomingMovies = movieData.upcomingMovies;
+            if (upcomingMovies.length > 0) {
+                const firstUpcomingMovie = upcomingMovies[0];
+                const frontPageImage = firstUpcomingMovie["front-page-image"];
+                const title = firstUpcomingMovie.title;
+                const premierDate = firstUpcomingMovie.premierDate;
+
+                $('.background').css('background-image', `url(${frontPageImage}), url('../static/rødegardiner.JPG')`);
+                $('.movie-title').text(title);
+                $('.premier-date').text(`Premiere: ${premierDate}`);
+            }
+
+            movies = movieData.runningMovies;
+
+            // tilpas genrevalg efter eksisterende genre
+            const uniqueGenres = [...new Set(movies.flatMap(movie => movie.genre.split(', ').map(g => g.trim())))];
+            uniqueGenres.forEach(genre => {
+                $('#genre-filter').append(new Option(genre, genre));
+            });
+
+            loadMovieList(movies, todayWeekday);
+
+            // hvis en genre er valgt, sorter så kun disse vises
+            $('#genre-filter').change(function () {
+                const selectedGenre = $(this).val();
+                const filteredMovies = selectedGenre === 'all'
+                    ? movies
+                    : movies.filter(movie => movie.genre.split(', ').includes(selectedGenre));
+                loadMovieList(filteredMovies, todayWeekday);
+
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: 400,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            });
+        });
+
+        function loadMovieList(movies, todayWeekday) {
             $('#movie-list').empty();
+            $('.container h1').show();                          // vis "aktuelle film"
+            $('#genre-filter').show();                          // vis genre dropdown menuen
+            window.scrollTo({ top: 300, behavior: 'smooth' });  // tager brugeren til toppen
+
             movies.forEach(movie => {
                 const movieContainer = $('<div>').addClass('movie-container');
                 const poster = $('<img>').attr('src', movie.poster).attr('alt', movie.title).addClass('poster');
@@ -186,43 +92,90 @@
                 titleContainer.append(title);
 
                 const showtimesDiv = $('<div>').addClass('showtimes');
-                movie.showtimes.forEach(time => {
+                const todayShowtimes = movie.weekday[todayWeekday].showtimes || [];
+
+                todayShowtimes.forEach(time => {
                     const timeSpan = $('<span>').text(time);
                     showtimesDiv.append(timeSpan);
                 });
 
                 movieContainer.append(poster).append(titleContainer).append(showtimesDiv);
-
                 $('#movie-list').append(movieContainer);
-                title.click(function() {
-                    loadMovieDetails(movie)
+
+                title.click(function () {
+                    loadMovieDetails(movie, todayWeekday);
                 });
-                poster.click(function() {
-                    loadMovieDetails(movie);
+                poster.click(function () {
+                    loadMovieDetails(movie, todayWeekday);
                 });
             });
         }
 
-        function loadMovieDetails(movie) {
+        function loadMovieDetails(movie, todayWeekday) {
+            const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+            const ugedage = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
+            const todayIndex = weekdayNames.indexOf(todayWeekday);
+
+            $('.container h1').hide();                          // skjul "aktuelle film"
+            $('#genre-filter').hide();                          // skjul genre dropdown menuen
+            $('#genre-filter').val('all');
+            window.scrollTo({ top: 300, behavior: 'smooth' });  // tager brugeren til toppen
+
+            let showtimesHtml = '<div class="weekdays-container">';
+            for (let i = 0; i < 7; i++) {
+                const currentDayIndex = (todayIndex + i) % 7;
+                const currentDayKey = weekdayNames[currentDayIndex];
+                const currentDayName = (i === 0) ? 'I dag' : ugedage[currentDayIndex];
+                const showtimes = movie.weekday[currentDayKey]?.showtimes || [];
+
+                if (showtimes.length > 0) {
+                    showtimesHtml += `<div class="weekday-column"><h4>${currentDayName}</h4><ul>`;
+                    showtimesHtml += showtimes.map(time => `<li>${time}</li>`).join('');
+                    showtimesHtml += '</ul></div>';
+                }
+            }
+            showtimesHtml += '</div>';
+
+            let youtubeEmbed = '';
+            if (movie.youtubeTrailer) {
+                youtubeEmbed = `
+            <div class="trailer-container">
+                <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/${movie.youtubeTrailer}"
+                    title="YouTube Video Player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>`;
+            }
+
             $('#movie-list').html(`
-                <div class="movie-details">
-                    <h2>${movie.title}</h2>
-                        <img src="${movie.poster}" alt="${movie.title}" class="poster" style="max-width: 300px;">
-                        <p>${movie.description}</p>
-                        <h3>Showtimes</h3>
-                        <ul>
-                        ${movie.showtimes.map(time => `<li>${time}</li>`).join('')}
-                        </ul>
-                    <button id="backToList">Back to Movie List</button>
+        <div class="movie-details">
+        <h2>${movie.title}</h2>
+        ${youtubeEmbed}
+            <div class="movie-info-container">
+                <div class="movie-poster">
+                    <img src="${movie.poster}" alt="${movie.title}" class="poster">
                 </div>
-            `);
+                <div class="movie-description">
+                    ${movie.description}
+                    <p><strong>Skuespillere: </strong>${movie.actors.join(', ')}</p>
+                    <p><strong>Instruktør: </strong>${movie.director}</p>
+                    <p><strong>Genre: </strong>${movie.genre}</p>
+                    <p><strong>Varighed: </strong>${movie.playtime}</p>
+                    <p><strong>Aldersgrænse: </strong>${movie.age}</p>
+                </div>
+            </div>
+            ${showtimesHtml}
+            <button id="backToList">Back to Movie List</button>
+        </div>
+    `);
 
-            $('#backToList').click(function() {
-                loadMovieList();
+            $('#backToList').click(function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                loadMovieList(movies, todayWeekday);
             });
         }
-
-        loadMovieList();
     });
 </script>
 </body>
