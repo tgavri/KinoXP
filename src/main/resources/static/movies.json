@@ -1,0 +1,158 @@
+{
+  "runningMovies": [
+    {
+      "title": "Find Nemo",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTc5NjExNTA5OV5BMl5BanBnXkFtZTYwMTQ0ODY2._V1_.jpg",
+      "description": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
+      "youtubeTrailer": "SPHfeNgogVs",
+      "actors": ["Albert Brooks", "Ellen DeGeneres", "Alexander Gould", "Willem Dafoe"],
+      "director": "Andrew Stanton",
+      "genre": "Animation, Adventure, Comedy",
+      "playtime": "100 min",
+      "age": "Tilladt for alle",
+      "weekday": {
+        "mon": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
+        "tue": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
+        "wed": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
+        "thu": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
+        "fri": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
+        "sat": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
+        "sun": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] }
+      }
+    },
+    {
+      "title": "Winnie the Pooh: Blood and Honey",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZmRiMzUzYWItNmMzYS00NDBmLWIyZDMtOTk3MmI2OGJjN2Q1XkEyXkFqcGc@._V1_.jpg",
+      "description": "After Christopher Robin abandons them for college, Pooh and Piglet embark on a bloody rampage as they search for a new source of food.",
+      "youtubeTrailer": "W3E74j_xFtg",
+      "actors": ["Craig David Dowsett", "Chris Cordell", "Nikolai Leon"],
+      "director": "Rhys Frake-Waterfield",
+      "genre": "Horror, Thriller",
+      "playtime": "84 min",
+      "age": "Tilladt for børn over 15 år",
+      "weekday": {
+        "mon": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
+        "tue": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
+        "wed": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
+        "thu": { "showtimes": ["2:00 PM", "4:00 PM", "9:00 PM"] },
+        "fri": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
+        "sat": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
+        "sun": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] }
+      }
+    },
+    {
+      "title": "Goebbels and the Führer",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMGEyMDY3ZWMtNzc1Yi00NTQxLTljODItMzEyYTMyZmZhNzk0XkEyXkFqcGc@._V1_FMjpg_UY576_.jpg",
+      "description": "Nazi propaganda minister Joseph Goebbels is in charge of building public support for the Holocaust and for the war that Hitler is about to start.",
+      "youtubeTrailer": "HIqeLlET_LQ",
+      "actors": ["Kenneth Branagh", "David McIlwraith", "David Calder"],
+      "director": "Lutz Becker",
+      "genre": "Documentary, Drama, War",
+      "playtime": "70 min",
+      "age": "Tilladt for børn over 15 år",
+      "weekday": {
+        "mon": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "tue": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "wed": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "thu": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "fri": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "sat": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "sun": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] }
+      }
+    },
+    {
+      "title": "My Little Pony: The Movie",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNDZiNDRlNGQtNGQ4Ny00NDRiLTkwOWItZDJlZTQ4YTlmM2M3XkEyXkFqcGc@._V1_FMjpg_UY486_.jpg",
+      "description": "After a dark force conquers Canterlot, the Mane 6 embark on an unforgettable journey beyond Equestria where they meet new friends and exciting challenges on a quest to use the magic of friendship to save their homeland.",
+      "youtubeTrailer": "aeQe_mZcyf8",
+      "actors": ["Emily Blunt", "Kristin Chenoweth", "Liev Schreiber", "Taye Diggs"],
+      "director": "Jayson Thiessen",
+      "genre": "Animation, Adventure, Comedy",
+      "playtime": "99 min",
+      "age": "Tilladt for alle",
+      "weekday": {
+        "mon": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "tue": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "wed": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "thu": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "fri": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "sat": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "sun": { "showtimes": ["9:00 AM", "2:00 PM"] }
+      }
+    },
+    {
+      "title": "Weathering With You",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOWQ2MzY5OWMtNDVlMi00NTUyLTljY2QtYzQ4MzkxMjhhMThkXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
+      "description": "Tokyo is experiencing eternal rain. Amidst this, runaway student Hodaka meets Hina, who has the power to summon sunlight. As they bond, their powers come at a cost.",
+      "youtubeTrailer": "Q6iK6DjV_iE",
+      "actors": ["Kotaro Daigo", "Nana Mori"],
+      "director": "Makoto Shinkai",
+      "genre": "Animation, Drama, Fantasy",
+      "playtime": "112 min",
+      "age": "Tilladt for børn over 11 år",
+      "weekday": {
+        "mon": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "tue": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "wed": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "thu": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "fri": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "sat": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "sun": { "showtimes": ["8:00 AM", "6:00 PM"] }
+      }
+    }
+  ],
+  "upcomingMovies": [
+    {
+      "title": "Gladiator II",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMWYzZTM5ZGQtOGE5My00NmM2LWFlMDEtMGNjYjdmOWM1MzA1XkEyXkFqcGc@._V1_FMjpg_UY337_.jpg",
+      "front-page-image": "https://m.media-amazon.com/images/M/MV5BNDQwOTIxODYtMDAyMi00NzY2LWJkNzEtMjMyNGY3ZWQ0OGRkXkEyXkFqcGc@._V1_FMjpg_UX600_.jpg",
+      "youtubeTrailer": "6RRa0kw7T5I",
+      "description": "Lucius, the nephew of the former gladiator Maximus, must return to the Colosseum to restore Rome’s honor and avenge his family.",
+      "actors": ["Paul Mescal", "Connie Nielsen", "Denzel Washington"],
+      "director": "Ridley Scott",
+      "genre": "Action, Drama, Adventure",
+      "playtime": "TBD",
+      "age": "Tilladt for børn over 15 år",
+      "premierDate": "14/10 - 2024"
+    },
+    {
+      "title": "Joker: Folie à Deux",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTE0M2Q0ODgtY2U2My00YThlLWI1ZjUtNzBkMmU4NTQ2YzVlXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
+      "front-page-image": "https://m.media-amazon.com/images/M/MV5BZmRkOGNlMjUtNzllMi00ODJhLTg3YjUtNjE3MWI5NzY3NTlmXkEyXkFqcGc@._V1_FMjpg_UX1280_.jpg",
+      "youtubeTrailer": "_Nvq2FdOHOA",
+      "description": "Arthur Fleck returns as Joker, this time institutionalized and exploring a twisted musical journey. Struggling with his dual identity, Joker meets new love while dealing with his past.",
+      "actors": ["Joaquin Phoenix, Lady Gaga, Zazie Beetz"],
+      "director": "Todd Phillips",
+      "genre": "Drama, Crime, Musical",
+      "playtime": "TBD",
+      "age": "Tilladt for børn over 15 år",
+      "premierDate": "4 / 10 - 2024"
+    },
+    {
+      "title": "Smile 2",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTU4ZDUzNDQtYTY1NC00ZDg4LWFlOGMtYmI5MmE2ZTkzOTM2XkEyXkFqcGc@._V1_FMjpg_UY679_.jpg",
+      "front-page-image": "https://m.media-amazon.com/images/M/MV5BYWI4OTE2ODYtNjI3Ni00NTFmLTk0NmUtN2VlZjNkNDJmMjljXkEyXkFqcGc@._V1_FMjpg_UX480_.jpg",
+      "youtubeTrailer": "yqGEz5ytPBM",
+      "description": "After witnessing several supernatural incidents, a therapist dives deeper into an ominous curse. With time running out, she must uncover the truth behind the horror before it consumes her completely.",
+      "actors": ["Sosie Bacon, Jessie T. Usher, Kyle Gallner"],
+      "director": "Parker Finn",
+      "genre": "Horror, Thriller",
+      "playtime": "TBD",
+      "age": "Tilladt for børn over 15 år",
+      "premierDate": "18 / 10 - 2024"
+    },
+    {
+      "title": "Terrifier 3",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZDkzMDMwZWItNTNjZS00NzM5LTllYzktZjIxMGQ2ODNmM2JiXkEyXkFqcGc@._V1_FMjpg_UY2560_.jpg",
+      "front-page-image": "https://m.media-amazon.com/images/M/MV5BNmE3YzE5N2ItNmQyMy00MzE0LTk4OGYtNmFiMjIxNDAzZmZmXkEyXkFqcGc@._V1_FMjpg_UX600_.jpg",
+      "youtubeTrailer": "Ts0N8swyWFI",
+      "description": "Art the Clown returns to wreak havoc in a night of terror as a new group of victims faces unspeakable horrors. Will anyone survive the bloodbath, or will the town face its final demise?",
+      "actors": ["David Howard Thornton, Lauren LaVera, Samantha Scaffidi"],
+      "director": "Damien Leone",
+      "genre": "Horror, Slasher",
+      "playtime": "TBD",
+      "age": "Tilladt for børn over 15 år",
+      "premierDate": "11 / 10 - 2024"
+    }
+  ]
+}
