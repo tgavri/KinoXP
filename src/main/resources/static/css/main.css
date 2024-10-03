@@ -1,5 +1,5 @@
 .background {
-    background-image: url('../static/rødegardiner.JPG');
+    background-image: url('../rødegardiner.JPG');
     background-size: 100% 650px, cover;
     background-position: top, center;
     background-repeat: no-repeat, repeat-y;
