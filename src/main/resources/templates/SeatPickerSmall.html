@@ -171,6 +171,15 @@ cursor: pointer;
 
 
         }
+        document.getElementById('buy-seats').addEventListener('click', function () {
+            sessionStorage.setItem('selectedSeats', JSON.stringify(SelectSeats));
+
+            var totalPrice = SelectSeats.length * PriceSeat;
+            sessionStorage.setItem('totalPrice', totalPrice);
+
+
+            window.location.href = 'SeatPickerEkstra.html';
+        });
 
         SeatMapCreate(20, 12);
     </script>
