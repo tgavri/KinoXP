@@ -1,5 +1,5 @@
 .background {
-    background-image: url('../static/rødegardiner.JPG');
+    background-image: url('../rødegardiner.JPG');
     background-size: 100% 650px, cover;
     background-position: top, center;
     background-repeat: no-repeat, repeat-y;
@@ -268,3 +268,28 @@ h2 {
     text-align: center;
     cursor: pointer;
 }
+
+#calendarButton {
+    background-color: transparent;
+    color: white;
+    padding: 0;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 0;
+}
+#calendarButton img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+.calender-btn:focus {
+    outline: none;
+}
+
+#selected-date {
+    margin-top: 10px;
+    font-size: 16px;
+}
+

@@ -1,44 +1,40 @@
 {
   "runningMovies": [
     {
-      "title": "Find Nemo",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTc5NjExNTA5OV5BMl5BanBnXkFtZTYwMTQ0ODY2._V1_.jpg",
-      "description": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
-      "youtubeTrailer": "SPHfeNgogVs",
-      "actors": ["Albert Brooks", "Ellen DeGeneres", "Alexander Gould", "Willem Dafoe"],
-      "director": "Andrew Stanton",
-      "genre": "Animation, Adventure, Comedy",
-      "playtime": "100 min",
-      "age": "Tilladt for alle",
-      "weekday": {
-        "mon": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "tue": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "wed": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "thu": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "fri": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "sat": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "sun": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] }
-      }
+      "title": "The Room Next Door",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYzk2MjI1YTgtOTcxYS00OTUyLTgyOTAtMGE0OGYyMjc0MTc3XkEyXkFqcGc@._V1_FMjpg_UY576_.jpg",
+      "description": "The Room Next Door” af den spanske mesterinstruktør Pedro Almodóvar er historien om en uperfekt mor og en ondskabsfuld datter, der har mistet kontakten på baggrund af en stor misforståelse.\n\nMellem dem er en anden kvinde, Ingrid (Julianne Moore), moderens veninde, bindeleddet til deres smerte og bitterhed. Martha, moderen (spillet af Tilda Swinton), er krigsreporter og Ingrid en autofiktiv romanforfatter.\n\nFilmen adresserer den endeløse grusomhed ved krig, de meget forskellige måder, hvorpå de to kvindelige forfattere nærmer sig og skriver om virkelighed, død samt venskab og seksuel nydelse som kamp mod rædsel.\n\nDer bliver skabt en varm opvågning, i et hus bygget midt i et naturreservat i New England, hvor de to venner lever i en ekstrem og forunderlig sød virkelighed",
+      "youtubeTrailer": "DbE1REJcXSw",
+      "actors": ["TILDA SWINTON", "JULIANNE MOORE", "JOHN TUTURRO", "ALEX HØGH ANDERSEN"],
+      "director": "PEDRO ALMODOVAR",
+      "genre": "DRAMA",
+      "playtime": "147 min",
+      "age": "TILLADT FOR BØRN OVER 11 ÅR",
+      "release": "TORSDAG 31. OKTOBER"
     },
     {
-      "title": "Winnie the Pooh: Blood and Honey",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZmRiMzUzYWItNmMzYS00NDBmLWIyZDMtOTk3MmI2OGJjN2Q1XkEyXkFqcGc@._V1_.jpg",
-      "description": "After Christopher Robin abandons them for college, Pooh and Piglet embark on a bloody rampage as they search for a new source of food.",
-      "youtubeTrailer": "W3E74j_xFtg",
-      "actors": ["Craig David Dowsett", "Chris Cordell", "Nikolai Leon"],
-      "director": "Rhys Frake-Waterfield",
-      "genre": "Horror, Thriller",
-      "playtime": "84 min",
-      "age": "Tilladt for børn over 15 år",
-      "weekday": {
-        "mon": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "tue": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "wed": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "thu": { "showtimes": ["2:00 PM", "4:00 PM", "9:00 PM"] },
-        "fri": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "sat": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "sun": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] }
-      }
+      "title": "Niko og nordlysets hemmelighed",
+      "poster": "https://www.humlebio.dk/data/TempFolderLongTerm//mediacache_73787ab9264f9055e3296839c8bbbabf.jpg",
+      "description": "Niko er et flyvende rensdyr og hans største drøm er at blive en del af julemandens Kanekorps, ligesom sin far, Sprinter. Da Niko ankommer til udvælgelsen til Kanekorpset, er den eneste anden ansøger et ukendt rensdyr ved navn Stella – de skal nu gennem nogle prøver for at se, hvem der vinder pladsen hos julemanden.\n\nSelvom de er konkurrenter, bliver Stella og Niko venner, og Niko viser Stella, hvor julemandens kane står gemt. Men natten før juleaften stjæler Stella kanen og selve julen er i fare!\n\nNiko må nu ud på en farefuld færd, for at genfinde kanen og redde julen. Undervejs opdager han hemmeligheder om både sin egen far og Stellas familie, og Niko må træffe nogle svære valg for at redde julen, og genforene gamle venner. Niko er et hjertevarmt juleeventyr for hele familien.",
+      "youtubeTrailer": "mHQ5va-g-ec",
+      "actors": ["SILAS SANTIN", "JASMIN ADDINGTON", "NIELS OLSEN", "LARS THIESGAARD"],
+      "director": "KARI JUUSONEN, JØRGEN LERDAM",
+      "genre": "ANIMATION/TEGNEFILM, BØRNE-/FAMILIEFILM, EVENTYR",
+      "playtime": "125 min",
+      "age": "FRARÅDES FOR BØRN UNDER 7 ÅR",
+      "release": "TORSDAG 07. NOVEMBER"
+    },
+    {
+      "title": "Gladiator 2",
+      "poster": "https://www.humlebio.dk/data/TempFolderLongTerm//mediacache_73787ab9264f9055e3296839c8bbbabf.jpg",
+      "description": "Filmen 'Gladiator 2' er en fortsættelse til Gladiator fra 2000, der vandt hele fem Oscars.\n\nLucius (Paul Mescal) mister sit hjem da, det bliver erobret af de tyranniske kejsere, der nu leder Rom. Nu er Lucius tvunget til at tage kampen op i Colosseum og må se på sin fortid for at finde styrke til at returnere Roms herlighed til dets folk.\n\nRidley Scott er tilbage bag kameraet, mens manuskriptet forfattes af David Scarpa, der tidligere har skrevet All the Money in the World, som Ridley Scott også instruerede.",
+      "youtubeTrailer": "B3W2gXWBKww",
+      "actors": ["DENZEL WASHINGTON", "PEDRO PASCAL", "CONNIE NIELSEN", "PAUL MESCAL", "JOSEPH QUINN"],
+      "director": "RIDLEY SCOTT",
+      "genre": "ACTION, DRAMA, EVENTYR",
+      "playtime": "185 min",
+      "age": "TILLADT FOR BØRN OVER 11 ÅR",
+      "release": "TORSDAG 14. NOVEMBER"
     },
     {
       "title": "Goebbels and the Führer",
@@ -116,23 +112,10 @@
       "premierDate": "14/10 - 2024"
     },
     {
-      "title": "The Chronicles of Rick Roll",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTAzNDIzMjEzMDBeQTJeQWpwZ15BbWU3MDIzNDI3Mzk@._V1_.jpg",
-      "front-page-image": "https://m.media-amazon.com/images/M/MV5BNTQ3NjYzMjA3Ml5BMl5BanBnXkFtZTcwMzAxNDA0OQ@@._V1_.jpg",
-      "description": "The plot of the film is that a man must save the love of his life after they were sucked into the internet. The film was said to have taken heavy inspiration from Alice in Wonderland. Nothing else regarding the film's plot and direction wasn't released during its production.",
-      "youtubeTrailer": "iaxGjGFwE8M",
-      "actors": ["Mark Christopher Lawrence", "John Hennigan", "Matthew Brandon"],
-      "director": ["Peter Farrell", "Andrew Fischer"],
-      "genre": "Action, Adventure, Fantasy",
-      "playtime": "TBD",
-      "age": "Tilladt for alle",
-      "premierDate": "TBD"
-    },
-    {
       "title": "Joker: Folie à Deux",
       "poster": "https://m.media-amazon.com/images/M/MV5BZTE0M2Q0ODgtY2U2My00YThlLWI1ZjUtNzBkMmU4NTQ2YzVlXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
       "front-page-image": "https://m.media-amazon.com/images/M/MV5BZmRkOGNlMjUtNzllMi00ODJhLTg3YjUtNjE3MWI5NzY3NTlmXkEyXkFqcGc@._V1_FMjpg_UX1280_.jpg",
-      "youtubeTrailer": "_OKAwz2MsJs",
+      "youtubeTrailer": "_Nvq2FdOHOA",
       "description": "Arthur Fleck returns as Joker, this time institutionalized and exploring a twisted musical journey. Struggling with his dual identity, Joker meets new love while dealing with his past.",
       "actors": ["Joaquin Phoenix, Lady Gaga, Zazie Beetz"],
       "director": "Todd Phillips",
