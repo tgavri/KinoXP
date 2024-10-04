@@ -87,6 +87,7 @@
         <p><strong>Showtime:</strong> <span id="showtime"></span></p>
         <p><strong>Dato:</strong> <span id="date"></span></p>
         <p><strong>Valgte Pladser:</strong> <span id="selected-seats"></span></p>
+        <p><strong>Sal: </strong> <span id="hall"></span></p>
 
         <p><strong>Billet ID:</strong> <span id="ticket-id"></span></p>
 
@@ -108,6 +109,7 @@
     var showtime = sessionStorage.getItem('showtime');
     var date = sessionStorage.getItem('date');
     var selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats'));
+    var hall = sessionStorage.getItem('hall');
     var totalPrice = sessionStorage.getItem('totalPrice');
     var colaSmall = sessionStorage.getItem('colaSmall') === 'true' ? 'Ja' : null;
     var colaBig = sessionStorage.getItem('colaBig') === 'true' ? 'Ja' : null;
@@ -137,7 +139,7 @@
         var seatText = selectedSeats.join('\n');
         document.getElementById('selected-seats').textContent = seatText;
     }
-
+    document.getElementById('hall').textContent = hall;
     document.getElementById('total-price').textContent = totalPrice;
     var extrasDiv = document.getElementById('extras');
     if (colaSmall) {
