@@ -1,106 +1,302 @@
 {
   "runningMovies": [
-    {
-      "title": "Find Nemo",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTc5NjExNTA5OV5BMl5BanBnXkFtZTYwMTQ0ODY2._V1_.jpg",
-      "description": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
-      "youtubeTrailer": "SPHfeNgogVs",
-      "actors": ["Albert Brooks", "Ellen DeGeneres", "Alexander Gould", "Willem Dafoe"],
-      "director": "Andrew Stanton",
-      "genre": "Animation, Adventure, Comedy",
-      "playtime": "100 min",
-      "age": "Tilladt for alle",
-      "weekday": {
-        "mon": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "tue": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "wed": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "thu": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "fri": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "sat": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] },
-        "sun": { "showtimes": ["12:00 PM", "3:00 PM", "6:00 PM"] }
+      {
+        "title": "Find Nemo",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTc5NjExNTA5OV5BMl5BanBnXkFtZTYwMTQ0ODY2._V1_.jpg",
+        "description": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.",
+        "youtubeTrailer": "SPHfeNgogVs",
+        "actors": ["Albert Brooks", "Ellen DeGeneres", "Alexander Gould", "Willem Dafoe"],
+        "director": "Andrew Stanton",
+        "genre": "Animation, Adventure, Comedy",
+        "playtime": "100 min",
+        "age": "Tilladt for alle",
+        "weekday": {
+          "mon": {
+            "showtimes": [
+              { "showtime": "09:00 AM", "hall": 1 },
+              { "showtime": "01:45 PM", "hall": 2 },
+              { "showtime": "06:30 PM", "hall": 1 }
+            ]
+          },
+          "tue": {
+            "showtimes": [
+              { "showtime": "09:00 AM", "hall": 1 },
+              { "showtime": "01:45 PM", "hall": 2 },
+              { "showtime": "06:30 PM", "hall": 1 }
+            ]
+          },
+          "wed": {
+            "showtimes": [
+              { "showtime": "09:00 AM", "hall": 1 },
+              { "showtime": "01:45 PM", "hall": 2 },
+              { "showtime": "06:30 PM", "hall": 1 }
+            ]
+          },
+          "thu": {
+            "showtimes": [
+              { "showtime": "09:00 AM", "hall": 1 },
+              { "showtime": "01:45 PM", "hall": 2 },
+              { "showtime": "06:30 PM", "hall": 1 }
+            ]
+          },
+          "fri": {
+            "showtimes": [
+              { "showtime": "09:00 AM", "hall": 1 },
+              { "showtime": "01:45 PM", "hall": 2 },
+              { "showtime": "06:30 PM", "hall": 1 }
+            ]
+          },
+          "sat": {
+            "showtimes": [
+              { "showtime": "10:30 AM", "hall": 1 },
+              { "showtime": "03:45 PM", "hall": 2 },
+              { "showtime": "06:30 PM", "hall": 1 }
+            ]
+          },
+          "sun": {
+            "showtimes": [
+              { "showtime": "10:30 AM", "hall": 1 },
+              { "showtime": "03:45 PM", "hall": 2 },
+              { "showtime": "06:30 PM", "hall": 1 }
+            ]
+          }
+        }
+      },
+      {
+        "title": "Winnie the Pooh: Blood and Honey",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZmRiMzUzYWItNmMzYS00NDBmLWIyZDMtOTk3MmI2OGJjN2Q1XkEyXkFqcGc@._V1_.jpg",
+        "description": "After Christopher Robin abandons them for college, Pooh and Piglet embark on a bloody rampage as they search for a new source of food.",
+        "youtubeTrailer": "W3E74j_xFtg",
+        "actors": ["Craig David Dowsett", "Chris Cordell", "Nikolai Leon"],
+        "director": "Rhys Frake-Waterfield",
+        "genre": "Horror, Thriller",
+        "playtime": "84 min",
+        "age": "Tilladt for børn over 15 år",
+        "weekday": {
+          "mon": {
+            "showtimes": [
+              { "showtime": "09:30 AM", "hall": 2 },
+              { "showtime": "02:30 PM", "hall": 1 },
+              { "showtime": "07:45 PM", "hall": 2 }
+            ]
+          },
+          "tue": {
+            "showtimes": [
+              { "showtime": "09:30 AM", "hall": 2 },
+              { "showtime": "02:30 PM", "hall": 1 },
+              { "showtime": "07:45 PM", "hall": 2 }
+            ]
+          },
+          "wed": {
+            "showtimes": [
+              { "showtime": "09:30 AM", "hall": 2 },
+              { "showtime": "02:30 PM", "hall": 1 },
+              { "showtime": "07:45 PM", "hall": 2 }
+            ]
+          },
+          "thu": {
+            "showtimes": [
+              { "showtime": "09:30 AM", "hall": 2 },
+              { "showtime": "02:30 PM", "hall": 1 },
+              { "showtime": "07:45 PM", "hall": 2 }
+            ]
+          },
+          "fri": {
+            "showtimes": [
+              { "showtime": "09:30 AM", "hall": 2 },
+              { "showtime": "02:30 PM", "hall": 1 },
+              { "showtime": "07:45 PM", "hall": 2 }
+            ]
+          },
+          "sat": {
+            "showtimes": [
+              { "showtime": "11:30 AM", "hall": 2 },
+              { "showtime": "04:45 PM", "hall": 1 },
+              { "showtime": "07:30 PM", "hall": 2 }
+            ]
+          },
+          "sun": {
+            "showtimes": [
+              { "showtime": "11:30 AM", "hall": 2 },
+              { "showtime": "04:45 PM", "hall": 1 },
+              { "showtime": "07:30 PM", "hall": 2 }
+            ]
+          }
+        }
+      },
+      {
+        "title": "Goebbels and the Führer",
+        "poster": "https://m.media-amazon.com/images/M/MV5BMGEyMDY3ZWMtNzc1Yi00NTQxLTljODItMzEyYTMyZmZhNzk0XkEyXkFqcGc@._V1_FMjpg_UY576_.jpg",
+        "description": "Nazi propaganda minister Joseph Goebbels is in charge of building public support for the Holocaust and for the war that Hitler is about to start.",
+        "youtubeTrailer": "HIqeLlET_LQ",
+        "actors": ["Kenneth Branagh", "David McIlwraith", "David Calder"],
+        "director": "Lutz Becker",
+        "genre": "Documentary, Drama, War",
+        "playtime": "70 min",
+        "age": "Tilladt for børn over 15 år",
+        "weekday": {
+          "mon": {
+            "showtimes": [
+              { "showtime": "11:00 AM", "hall": 1 },
+              { "showtime": "06:00 PM", "hall": 2 },
+              { "showtime": "08:30 PM", "hall": 1 }
+            ]
+          },
+          "tue": {
+            "showtimes": [
+              { "showtime": "11:00 AM", "hall": 2 },
+              { "showtime": "06:00 PM", "hall": 2 },
+              { "showtime": "08:30 PM", "hall": 1 }
+            ]
+          },
+          "wed": {
+            "showtimes": [
+              { "showtime": "11:00 AM", "hall": 1 },
+              { "showtime": "06:00 PM", "hall": 2 },
+              { "showtime": "08:30 PM", "hall": 1 }
+            ]
+          },
+          "thu": {
+            "showtimes": [
+              { "showtime": "11:00 AM", "hall": 2 },
+              { "showtime": "06:00 PM", "hall": 2 },
+              { "showtime": "08:30 PM", "hall": 1 }
+            ]
+          },
+          "fri": {
+            "showtimes": [
+              { "showtime": "11:00 AM", "hall": 1 },
+              { "showtime": "06:00 PM", "hall": 2 },
+              { "showtime": "08:30 PM", "hall": 1 }
+            ]
+          },
+          "sat": {
+            "showtimes": [
+              { "showtime": "09:00 AM", "hall": 1 },
+              { "showtime": "05:45 PM", "hall": 2 }
+            ]
+          },
+          "sun": {
+            "showtimes": [
+              { "showtime": "09:00 AM", "hall": 1 },
+              { "showtime": "05:45 PM", "hall": 2 }
+            ]
+          }
+        }
+      },
+      {
+        "title": "My Little Pony: The Movie",
+        "poster": "https://m.media-amazon.com/images/M/MV5BNDZiNDRlNGQtNGQ4Ny00NDRiLTkwOWItZDJlZTQ4YTlmM2M3XkEyXkFqcGc@._V1_FMjpg_UY486_.jpg",
+        "description": "After a dark force conquers Canterlot, the Mane 6 embark on an unforgettable journey beyond Equestria where they meet new friends and exciting challenges on a quest to use the magic of friendship to save their homeland.",
+        "youtubeTrailer": "aeQe_mZcyf8",
+        "actors": ["Emily Blunt", "Kristin Chenoweth", "Liev Schreiber", "Taye Diggs"],
+        "director": "Jayson Thiessen",
+        "genre": "Animation, Adventure, Comedy",
+        "playtime": "99 min",
+        "age": "Tilladt for alle",
+        "weekday": {
+          "mon": {
+            "showtimes": [
+              { "showtime": "12:30 PM", "hall": 1 },
+              { "showtime": "04:00 PM", "hall": 2 }
+            ]
+          },
+          "tue": {
+            "showtimes": [
+              { "showtime": "12:30 PM", "hall": 1 },
+              { "showtime": "04:00 PM", "hall": 2 }
+            ]
+          },
+          "wed": {
+            "showtimes": [
+              { "showtime": "12:30 PM", "hall": 1 },
+              { "showtime": "04:00 PM", "hall": 2 }
+            ]
+          },
+          "thu": {
+            "showtimes": [
+              { "showtime": "12:30 PM", "hall": 1 },
+              { "showtime": "04:00 PM", "hall": 2 }
+            ]
+          },
+          "fri": {
+            "showtimes": [
+              { "showtime": "12:30 PM", "hall": 1 },
+              { "showtime": "04:00 PM", "hall": 2 }
+            ]
+          },
+          "sat": {
+            "showtimes": [
+              { "showtime": "12:30 PM", "hall": 1 },
+              { "showtime": "08:30 PM", "hall": 1 },
+              { "showtime": "09:30 AM", "hall": 2 }
+            ]
+          },
+          "sun": {
+            "showtimes": [
+              { "showtime": "12:30 PM", "hall": 1 },
+              { "showtime": "08:30 PM", "hall": 1 },
+              { "showtime": "09:30 AM", "hall": 2 }
+            ]
+          }
+        }
+      },
+      {
+        "title": "Weathering With You",
+        "poster": "https://m.media-amazon.com/images/M/MV5BOWQ2MzY5OWMtNDVlMi00NTUyLTljY2QtYzQ4MzkxMjhhMThkXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
+        "description": "Tokyo is experiencing eternal rain. Amidst this, runaway student Hodaka meets Hina, who has the power to summon sunlight. As they bond, their powers come at a cost.",
+        "youtubeTrailer": "Q6iK6DjV_iE",
+        "actors": ["Kotaro Daigo", "Nana Mori"],
+        "director": "Makoto Shinkai",
+        "genre": "Animation, Drama, Fantasy",
+        "playtime": "112 min",
+        "age": "Tilladt for børn over 11 år",
+        "weekday": {
+          "mon": {
+            "showtimes": [
+              { "showtime": "04:15 PM", "hall": 1 },
+              { "showtime": "11:30 AM", "hall": 2 }
+            ]
+          },
+          "tue": {
+            "showtimes": [
+              { "showtime": "04:15 PM", "hall": 1 },
+              { "showtime": "11:30 AM", "hall": 2 }
+            ]
+          },
+          "wed": {
+            "showtimes": [
+              { "showtime": "04:15 PM", "hall": 1 },
+              { "showtime": "11:30 AM", "hall": 2 }
+            ]
+          },
+          "thu": {
+            "showtimes": [
+              { "showtime": "04:15 PM", "hall": 1 },
+              { "showtime": "11:30 AM", "hall": 2 }
+            ]
+          },
+          "fri": {
+            "showtimes": [
+              { "showtime": "04:15 PM", "hall": 1 },
+              { "showtime": "11:30 AM", "hall": 2 }
+            ]
+          },
+          "sat": {
+            "showtimes": [
+              { "showtime": "02:30 PM", "hall": 1 },
+              { "showtime": "01:30 PM", "hall": 2 }
+            ]
+          },
+          "sun": {
+            "showtimes": [
+              { "showtime": "02:30 PM", "hall": 1 },
+              { "showtime": "01:30 PM", "hall": 2 }
+            ]
+          }
+        }
       }
-    },
-    {
-      "title": "Winnie the Pooh: Blood and Honey",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZmRiMzUzYWItNmMzYS00NDBmLWIyZDMtOTk3MmI2OGJjN2Q1XkEyXkFqcGc@._V1_.jpg",
-      "description": "After Christopher Robin abandons them for college, Pooh and Piglet embark on a bloody rampage as they search for a new source of food.",
-      "youtubeTrailer": "W3E74j_xFtg",
-      "actors": ["Craig David Dowsett", "Chris Cordell", "Nikolai Leon"],
-      "director": "Rhys Frake-Waterfield",
-      "genre": "Horror, Thriller",
-      "playtime": "84 min",
-      "age": "Tilladt for børn over 15 år",
-      "weekday": {
-        "mon": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "tue": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "wed": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "thu": { "showtimes": ["2:00 PM", "4:00 PM", "9:00 PM"] },
-        "fri": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "sat": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] },
-        "sun": { "showtimes": ["1:00 PM", "4:00 PM", "9:00 PM"] }
-      }
-    },
-    {
-      "title": "Goebbels and the Führer",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMGEyMDY3ZWMtNzc1Yi00NTQxLTljODItMzEyYTMyZmZhNzk0XkEyXkFqcGc@._V1_FMjpg_UY576_.jpg",
-      "description": "Nazi propaganda minister Joseph Goebbels is in charge of building public support for the Holocaust and for the war that Hitler is about to start.",
-      "youtubeTrailer": "HIqeLlET_LQ",
-      "actors": ["Kenneth Branagh", "David McIlwraith", "David Calder"],
-      "director": "Lutz Becker",
-      "genre": "Documentary, Drama, War",
-      "playtime": "70 min",
-      "age": "Tilladt for børn over 15 år",
-      "weekday": {
-        "mon": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
-        "tue": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
-        "wed": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
-        "thu": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
-        "fri": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
-        "sat": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
-        "sun": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] }
-      }
-    },
-    {
-      "title": "My Little Pony: The Movie",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNDZiNDRlNGQtNGQ4Ny00NDRiLTkwOWItZDJlZTQ4YTlmM2M3XkEyXkFqcGc@._V1_FMjpg_UY486_.jpg",
-      "description": "After a dark force conquers Canterlot, the Mane 6 embark on an unforgettable journey beyond Equestria where they meet new friends and exciting challenges on a quest to use the magic of friendship to save their homeland.",
-      "youtubeTrailer": "aeQe_mZcyf8",
-      "actors": ["Emily Blunt", "Kristin Chenoweth", "Liev Schreiber", "Taye Diggs"],
-      "director": "Jayson Thiessen",
-      "genre": "Animation, Adventure, Comedy",
-      "playtime": "99 min",
-      "age": "Tilladt for alle",
-      "weekday": {
-        "mon": { "showtimes": ["9:00 AM", "2:00 PM"] },
-        "tue": { "showtimes": ["9:00 AM", "2:00 PM"] },
-        "wed": { "showtimes": ["9:00 AM", "2:00 PM"] },
-        "thu": { "showtimes": ["9:00 AM", "2:00 PM"] },
-        "fri": { "showtimes": ["9:00 AM", "2:00 PM"] },
-        "sat": { "showtimes": ["9:00 AM", "2:00 PM"] },
-        "sun": { "showtimes": ["9:00 AM", "2:00 PM"] }
-      }
-    },
-    {
-      "title": "Weathering With You",
-      "poster": "https://m.media-amazon.com/images/M/MV5BOWQ2MzY5OWMtNDVlMi00NTUyLTljY2QtYzQ4MzkxMjhhMThkXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
-      "description": "Tokyo is experiencing eternal rain. Amidst this, runaway student Hodaka meets Hina, who has the power to summon sunlight. As they bond, their powers come at a cost.",
-      "youtubeTrailer": "Q6iK6DjV_iE",
-      "actors": ["Kotaro Daigo", "Nana Mori"],
-      "director": "Makoto Shinkai",
-      "genre": "Animation, Drama, Fantasy",
-      "playtime": "112 min",
-      "age": "Tilladt for børn over 11 år",
-      "weekday": {
-        "mon": { "showtimes": ["8:00 AM", "6:00 PM"] },
-        "tue": { "showtimes": ["8:00 AM", "6:00 PM"] },
-        "wed": { "showtimes": ["8:00 AM", "6:00 PM"] },
-        "thu": { "showtimes": ["8:00 AM", "6:00 PM"] },
-        "fri": { "showtimes": ["8:00 AM", "6:00 PM"] },
-        "sat": { "showtimes": ["8:00 AM", "6:00 PM"] },
-        "sun": { "showtimes": ["8:00 AM", "6:00 PM"] }
-      }
-    }
-  ],
+    ],
   "upcomingMovies": [
     {
       "title": "Gladiator II",
