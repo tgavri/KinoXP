@@ -100,6 +100,22 @@
             const selectedDate = $('#date-picker').val();
             return selectedDate;
         }
+        function seatPickerRedirect(movieTitle, showtime, hall, date = null) {
+
+            if (!date) {                                                    // metode hvis en dato ikke modtages fra kalender - det antages
+                const today = new Date();                                   // at dagens dato så skal bruges.
+                const dd = String(today.getDate()).padStart(2, '0');        // find dagens dato
+                const mm = String(today.getMonth() + 1).padStart(2, '0');   // find dagens måned
+                const yyyy = today.getFullYear();                           // find dagens årstal
+                date = `${dd}/${mm}/${yyyy}`;                               // opret format
+            }
+
+            sessionStorage.setItem('movieTitle', movieTitle);
+            sessionStorage.setItem('showtime', showtime);
+            sessionStorage.setItem('date', date);
+
+            window.location.href = hall === 1 ? 'SeatPickerSmall.html' : 'SeatPickerBig.html';
+        }
 
         function loadMovieList(movies, todayWeekday) {
             $('#movie-list').empty();
@@ -115,10 +131,13 @@
                 titleContainer.append(title);
 
                 const showtimesDiv = $('<div>').addClass('showtimes');
-                const todayShowtimes = movie.weekday[todayWeekday].showtimes || [];
+                const todayShowtimes = movie.weekday[todayWeekday]?.showtimes || [];
 
                 todayShowtimes.forEach(time => {
-                    const timeSpan = $('<span>').text(time);
+                    const timeSpan = $('<span>').text(time.showtime).addClass('showtime-link');
+                    timeSpan.click(function() {
+                        seatPickerRedirect(movie.title, time.showtime, time.hall);
+                    });
                     showtimesDiv.append(timeSpan);
                 });
 
@@ -153,7 +172,7 @@
 
                 if (showtimes.length > 0) {
                     showtimesHtml += `<div class="weekday-column"><h4>${currentDayName}</h4><ul>`;
-                    showtimesHtml += showtimes.map(time => `<li>${time}</li>`).join('');
+                    showtimesHtml += showtimes.map(time => `<li class="showtime-link" data-showtime="${time.showtime}" data-hall="${time.hall}">${time.showtime}</li>`).join('');
                     showtimesHtml += '</ul></div>';
                 }
             }
@@ -162,14 +181,14 @@
             let youtubeEmbed = '';
             if (movie.youtubeTrailer) {
                 youtubeEmbed = `
-            <div class="trailer-container">
-                <iframe width="750" height="515"
-                    src="https://www.youtube.com/embed/${movie.youtubeTrailer}"
-                    title="YouTube Video Player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>`;
+        <div class="trailer-container">
+            <iframe width="750" height="515"
+                src="https://www.youtube.com/embed/${movie.youtubeTrailer}"
+                title="YouTube Video Player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>`;
             }
 
             $('#movie-list').html(`
@@ -194,11 +213,18 @@
         </div>
     `);
 
+            $('.showtime-link').click(function() {
+                const showtime = $(this).data('showtime');
+                const hall = $(this).data('hall');
+                seatPickerRedirect(movie.title, showtime, hall);
+            });
+
             $('#backToList').click(function () {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 loadMovieList(movies, todayWeekday);
             });
         }
+
     });
 </script>
 </body>

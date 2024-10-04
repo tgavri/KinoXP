@@ -95,7 +95,23 @@
             }
             #totalPrisEkstra {
                 font-family: Arial,serif;
-            }}
+            }
+
+            .purchase {
+                display: block;
+                width: 15%;
+                margin-bottom: 4px;
+                height: 18px;
+                padding: 7px;
+                background-color: #000080;
+                color: white;
+                border-radius: 10px;
+                border: 2px solid;
+                text-align: center;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
     </style>
 
 
@@ -120,6 +136,10 @@
                 <div>
                     <p id="totalPrisEkstra">Pris</p>
                 </div>
+
+        <div class="purchase">
+            <span id="betal-button">Betal</span>
+        </div>
     </div>
 </div>
 
@@ -133,6 +153,14 @@
     var PriceTotal = document.getElementById('totalPrisEkstra');
     PriceTotal.innerHTML = totalPrice + ' kr';
 
+    document.getElementById('betal-button').addEventListener('click', function() {              // @LAURITS hvis du tilføjer nedenstående til session et andet sted, så bare slet
+        sessionStorage.setItem('colaSmall', document.getElementById('Cola-Small').checked);     // dem herfra. Evt. gør at i stedet for at det er ja / nej for ekstra, så tilføj antal på hver
+        sessionStorage.setItem('colaBig', document.getElementById('Cola-Big').checked);
+        sessionStorage.setItem('popcornSmall', document.getElementById('Pop-lille').checked);
+        sessionStorage.setItem('popcornBig', document.getElementById('Pop-Big').checked);
+
+        window.location.href = 'Checkout.html';
+    });
 
 
 
