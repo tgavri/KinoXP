@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KinoXP</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<!-- placeholder for når headeren bliver loadet -->
+<div id="header-placeholder"></div>
+
+<div id="app" class="background">
+    <div class="frontpage-info">
+        <h1 class="movie-title"></h1>
+        <p class="premier-date"></p>
+    </div>
+    <div class="container">
+        <div class="header-container">
+            <h1>Kommende Film</h1>
+        </div>
+        <div class="movie-list" id="movie-list"></div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        let movies = [];
+
+        // henter header from "header.html"
+        $('#header-placeholder').load('/fragments/header');
+
+        const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+        const today = new Date();
+        const todayWeekday = weekdayNames[today.getDay()];
+
+        $.getJSON("movies.json", function (movieData) {
+            const upcomingMovies = movieData.upcomingMovies;
+            if (upcomingMovies.length > 0) {
+                const firstUpcomingMovie = upcomingMovies[0];
+                const frontPageImage = firstUpcomingMovie["front-page-image"];
+                const title = firstUpcomingMovie.title;
+                const premierDate = firstUpcomingMovie.premierDate;
+
+                $('.background').css('background-image', `url(${frontPageImage}), url('../static/rødegardiner.JPG')`);
+                $('.movie-title').text(title);
+                $('.premier-date').text(`Premiere: ${premierDate}`);
+            }
+
+            movies = movieData.upcomingMovies;
+
+            // tilpas genrevalg efter eksisterende genre
+            const uniqueGenres = [...new Set(movies.flatMap(movie => movie.genre.split(', ').map(g => g.trim())))];
+            uniqueGenres.forEach(genre => {
+                $('#genre-filter').append(new Option(genre, genre));
+            });
+
+            loadMovieList(movies, todayWeekday);
+
+            // hvis en genre er valgt, sorter så kun disse vises
+            $('#genre-filter').change(function () {
+                const selectedGenre = $(this).val();
+                const filteredMovies = selectedGenre === 'all'
+                    ? movies
+                    : movies.filter(movie => movie.genre.split(', ').includes(selectedGenre));
+                loadMovieList(filteredMovies, todayWeekday);
+
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: 400,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            });
+        });
+
+        function loadMovieList(movies, todayWeekday) {
+            $('#movie-list').empty();
+            $('.container h1').show();                          // vis "aktuelle film"
+            $('#genre-filter').show();                          // vis genre dropdown menuen
+            window.scrollTo({ top: 300, behavior: 'smooth' });  // tager brugeren til toppen
+
+            movies.forEach(movie => {
+                const movieContainer = $('<div>').addClass('movie-container');
+                const poster = $('<img>').attr('src', movie.poster).attr('alt', movie.title).addClass('poster');
+                const titleContainer = $('<div>').addClass('title-container');
+                const title = $('<h2>')
+                    .text(movie.title)
+                    .css({
+                        'margin-top': '-140px'});
+                titleContainer.append(title);
+
+                // Premier dato tilføjes
+                const premierDate = $('<p>')
+                    .addClass('premier-date')
+                    .text(`Premiere: ${movie.premierDate}`)
+                    .css({
+                        'font-size': '25px',
+                        'margin-top': '20px'}); // Set font size directly here
+                titleContainer.append(premierDate);
+
+                movieContainer.append(poster).append(titleContainer);
+                $('#movie-list').append(movieContainer);
+
+                title.click(function () {
+                    loadMovieDetails(movie, todayWeekday);
+                });
+                poster.click(function () {
+                    loadMovieDetails(movie, todayWeekday);
+                });
+            });
+        }
+
+        function loadMovieDetails(movie, todayWeekday) {
+            const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+            const ugedage = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
+            const todayIndex = weekdayNames.indexOf(todayWeekday);
+
+            $('.container h1').hide();                          // skjul "aktuelle film"
+            $('#genre-filter').hide();                          // skjul genre dropdown menuen
+            $('#genre-filter').val('all');
+            window.scrollTo({ top: 300, behavior: 'smooth' });  // tager brugeren til toppen
+
+            let youtubeEmbed = '';
+            if (movie.youtubeTrailer) {
+                youtubeEmbed = `
+            <div class="trailer-container">
+                <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/${movie.youtubeTrailer}"
+                    title="YouTube Video Player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>`;
+            }
+
+            $('#movie-list').html(`
+        <div class="movie-details">
+        <h2>${movie.title}</h2>
+        ${youtubeEmbed}
+            <div class="movie-info-container">
+                <div class="movie-poster">
+                    <img src="${movie.poster}" alt="${movie.title}" class="poster">
+                </div>
+                <div class="movie-description">
+                    ${movie.description}
+                    <p><strong>Skuespillere: </strong>${movie.actors.join(', ')}</p>
+                    <p><strong>Instruktør: </strong>${movie.director}</p>
+                    <p><strong>Genre: </strong>${movie.genre}</p>
+                    <p><strong>Varighed: </strong>${movie.playtime}</p>
+                    <p><strong>Aldersgrænse: </strong>${movie.age}</p>
+                </div>
+            </div>
+            <button id="backToList">Back to Movie List</button>
+        </div>
+    `);
+
+            $('#backToList').click(function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                loadMovieList(movies);
+            });
+        }
+    });
+</script>
+</body>
+</html>

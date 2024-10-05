@@ -155,7 +155,7 @@
         extrasDiv.innerHTML += `<p><strong>Popcorn (Stor):</strong> ${popcornBig}</p>`;
     }
 
-    fetch('../static/movies.json')
+    fetch('movies.json')
         .then(response => response.json())
         .then(data => {
             const movies = data.runningMovies;
