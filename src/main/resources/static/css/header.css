@@ -90,6 +90,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .modal-content h2 {
+    color: white;
     text-align: center; /* centrer login teksten i boksen */
     margin: 0;
     padding-bottom: 15px;
