@@ -1,3 +1,21 @@
 {
-  "tickets": []
+  "tickets": [
+    {
+      "date": "06\/10\/2024",
+      "selectedSeats": [
+        "Række: 13, Sæde: 8",
+        "Række: 13, Sæde: 9"
+      ],
+      "totalPrice": "200",
+      "showtime": "10:30 AM",
+      "extras": {
+        "popcornSmall": "",
+        "colaSmall": "",
+        "popcornBig": "",
+        "colaBig": ""
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "8205935007334423"
+    }
+  ]
 }
