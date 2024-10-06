@@ -20,6 +20,9 @@ WORKDIR /app
 # Copy the JAR file from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
+# Copy static resources, including tickets.json
+COPY src/main/resources/static/tickets.json /app/src/main/resources/static/tickets.json
+
 # Expose the port that the application will run on
 EXPOSE 8080
 

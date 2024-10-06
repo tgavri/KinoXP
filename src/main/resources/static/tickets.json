@@ -16,6 +16,40 @@
       },
       "movieTitle": "Find Nemo",
       "ticketID": "8205935007334423"
+    },
+    {
+      "date": "06\/10\/2024",
+      "selectedSeats": [
+        "Række: 13, Sæde: 7",
+        "Række: 13, Sæde: 6"
+      ],
+      "totalPrice": "200",
+      "showtime": "10:30 AM",
+      "extras": {
+        "popcornSmall": "",
+        "colaSmall": "",
+        "popcornBig": "",
+        "colaBig": ""
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "1387471381974605"
+    },
+    {
+      "date": "06\/10\/2024",
+      "selectedSeats": [
+        "Række: 14, Sæde: 8",
+        "Række: 14, Sæde: 9"
+      ],
+      "totalPrice": "200",
+      "showtime": "10:30 AM",
+      "extras": {
+        "popcornSmall": "",
+        "colaSmall": "",
+        "popcornBig": "",
+        "colaBig": ""
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "2245559012354848"
     }
   ]
 }

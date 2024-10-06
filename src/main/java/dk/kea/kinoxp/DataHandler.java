@@ -11,7 +11,8 @@ import java.nio.file.Paths;
 
 public class DataHandler {
 
-    private static final String TICKET_FILE_PATH = "src/main/resources/static/tickets.json";
+    private static final String TICKET_FILE_PATH = "/app/src/main/resources/static/tickets.json";
+
 
     public void saveTicket(JSONObject newTicket) {
         try {

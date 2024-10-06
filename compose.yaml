@@ -8,4 +8,4 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
     volumes:
-      - ./src/main/resources/static:/app/src/main/resources/static
+      - ./src/main/resources/static/tickets.json:/app/src/main/resources/static/tickets.json #fjern denne linje til ikke at opdatere lokal tickets.json
