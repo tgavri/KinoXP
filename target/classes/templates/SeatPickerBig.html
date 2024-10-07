@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OversigtBig</title>
+    <script>src="https://code.jquery.com/jquery-3.7.1.min.js"</script>
+    <style>
+
+        .ContainerSeatBig {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            width: 80%;
+            max-width: 1200px;
+
+        }
+        .Background-containerSeatBig {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background-image: url('https://www.avcenter.dk/media/bojogdac/biografstole-i-samsoe-bio.jpg?anchor=center&mode=crop&width=1500&height=0&rnd=132881886021800000');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .ScreenSeatBig {
+                color: white;
+                background-color: darkblue;
+                height: 50px;
+                width: 400px;
+                text-align: center;
+                line-height: 50px;
+            }
+            .BodyScreenBig {
+                margin: 10px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+            }
+            .TitleSeatBig {
+                font-size: 30px;
+                margin: 20px 20px;
+                padding: 10px 10px;
+                height: 40px;
+                text-align: left;
+            }
+            #log-outputBig {
+                color: black;
+                margin-top: 20px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                background-color: #f0f0f0;
+                max-height: 150px;
+            }
+            #seat-mapBig {
+                justify-content: center;
+                margin: 20px 20px;
+                grid-gap: 5px;
+                grid-template-columns: repeat(16, 20px);
+                display: grid;
+            }
+            .seatBig {
+                cursor: pointer;
+                width: 20px;
+                height: 20px;
+                background-color: green;
+                border: 1px black;
+            }
+            .seatBig.selected {
+                background-color: blue;
+                cursor: pointer;
+            }
+            .seatBig:hover:not(taken) {
+                background-color: white;
+            }
+
+            #buy-seatsBig {
+                padding: 10px 20px;
+                background-color: darkblue;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            #totalPrisBig {
+                font-family: Arial,serif;
+            }}
+    </style>
+
+
+</head>
+<body>
+<div class="Background-containerSeatBig">
+
+    <div class="ContainerSeatBig">
+
+        <div class="TitleSeatBig">Sædeoversigt</div>
+        <div class="BodyScreenBig">
+            <div class="ScreenSeatBig">LÆRRED</div>
+        </div>
+        <div id="seat-mapBig"></div>
+        <div id="log-outputBig"></div>
+        <div>
+            <button id="buy-seatsBig">Køb valgte sæder</button>
+            <p id="totalPrisBig">Pris</p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    var SelectSeats = [];
+    var PriceSeat = 100;
+
+    function ShowLogMessage(message) {
+        var LogOutputMessage = document.getElementById('log-outputBig');
+        LogOutputMessage.innerHTML += message + '<br>';
+
+    }
+    function SeatMapCreate(Rows, seatsPerRow) {
+        var Seatmap = document.getElementById('seat-mapBig');
+
+        for (var row = 1; row <= Rows; row++){
+            for (var seat = 1; seat <= seatsPerRow; seat++) {
+
+                var SeatDiv = document.createElement('div')
+                SeatDiv.classList.add('seatBig')
+
+                SeatDiv.setAttribute('data-rowBig', row);
+                SeatDiv.setAttribute('data-seatBig', seat);
+
+                SeatDiv.addEventListener('click', function() {
+                    if (!this.classList.contains('taken')) {
+                        this.classList.toggle('selected');
+
+                        var rowNumb = this.getAttribute('data-rowBig');
+                        var seatNumb = this.getAttribute('data-seatBig');
+                        var showMessage = `Række: ${rowNumb}, Sæde: ${seatNumb}`;
+
+                        if (this.classList.contains('selected')) {
+                            SelectSeats.push(showMessage);
+                            ShowLogMessage(`Du har valgt ${showMessage}`);
+                        } else {
+                            SelectSeats = SelectSeats.filter(seat => seat !== showMessage);
+                            var logOutput = document.getElementById('log-outputBig');
+                            logOutput.innerHTML = logOutput.innerHTML.replace(`Du har valgt ${showMessage}<br>`, '');
+
+                        }
+                        TotalPriceCalc();
+                    }
+                });
+                Seatmap.append(SeatDiv);
+            }
+        }
+    }
+    function TotalPriceCalc() {
+        var totalPrice = SelectSeats.length * PriceSeat;
+        document.getElementById('totalPrisBig').innerText = `Total pris: ${totalPrice} kr.`;
+
+    }
+    document.getElementById('buy-seatsBig').addEventListener('click', function () {
+        sessionStorage.setItem('selectedSeats', JSON.stringify(SelectSeats));
+
+        var totalPrice = SelectSeats.length * PriceSeat;
+        sessionStorage.setItem('totalPrice', totalPrice);
+
+        window.location.href = 'SeatPickerEkstra.html';
+    });
+
+    SeatMapCreate(25, 16);
+</script>
+
+
+
+
+
+</body>
+</html>

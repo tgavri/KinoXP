@@ -1,0 +1,154 @@
+{
+  "runningMovies": [
+    {
+      "title": "The Room Next Door",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYzk2MjI1YTgtOTcxYS00OTUyLTgyOTAtMGE0OGYyMjc0MTc3XkEyXkFqcGc@._V1_FMjpg_UY576_.jpg",
+      "description": "The Room Next Door” af den spanske mesterinstruktør Pedro Almodóvar er historien om en uperfekt mor og en ondskabsfuld datter, der har mistet kontakten på baggrund af en stor misforståelse.\n\nMellem dem er en anden kvinde, Ingrid (Julianne Moore), moderens veninde, bindeleddet til deres smerte og bitterhed. Martha, moderen (spillet af Tilda Swinton), er krigsreporter og Ingrid en autofiktiv romanforfatter.\n\nFilmen adresserer den endeløse grusomhed ved krig, de meget forskellige måder, hvorpå de to kvindelige forfattere nærmer sig og skriver om virkelighed, død samt venskab og seksuel nydelse som kamp mod rædsel.\n\nDer bliver skabt en varm opvågning, i et hus bygget midt i et naturreservat i New England, hvor de to venner lever i en ekstrem og forunderlig sød virkelighed",
+      "youtubeTrailer": "DbE1REJcXSw",
+      "actors": ["TILDA SWINTON", "JULIANNE MOORE", "JOHN TUTURRO", "ALEX HØGH ANDERSEN"],
+      "director": "PEDRO ALMODOVAR",
+      "genre": "DRAMA",
+      "playtime": "147 min",
+      "age": "TILLADT FOR BØRN OVER 11 ÅR",
+      "release": "TORSDAG 31. OKTOBER"
+    },
+    {
+      "title": "Niko og nordlysets hemmelighed",
+      "poster": "https://www.humlebio.dk/data/TempFolderLongTerm//mediacache_73787ab9264f9055e3296839c8bbbabf.jpg",
+      "description": "Niko er et flyvende rensdyr og hans største drøm er at blive en del af julemandens Kanekorps, ligesom sin far, Sprinter. Da Niko ankommer til udvælgelsen til Kanekorpset, er den eneste anden ansøger et ukendt rensdyr ved navn Stella – de skal nu gennem nogle prøver for at se, hvem der vinder pladsen hos julemanden.\n\nSelvom de er konkurrenter, bliver Stella og Niko venner, og Niko viser Stella, hvor julemandens kane står gemt. Men natten før juleaften stjæler Stella kanen og selve julen er i fare!\n\nNiko må nu ud på en farefuld færd, for at genfinde kanen og redde julen. Undervejs opdager han hemmeligheder om både sin egen far og Stellas familie, og Niko må træffe nogle svære valg for at redde julen, og genforene gamle venner. Niko er et hjertevarmt juleeventyr for hele familien.",
+      "youtubeTrailer": "mHQ5va-g-ec",
+      "actors": ["SILAS SANTIN", "JASMIN ADDINGTON", "NIELS OLSEN", "LARS THIESGAARD"],
+      "director": "KARI JUUSONEN, JØRGEN LERDAM",
+      "genre": "ANIMATION/TEGNEFILM, BØRNE-/FAMILIEFILM, EVENTYR",
+      "playtime": "125 min",
+      "age": "FRARÅDES FOR BØRN UNDER 7 ÅR",
+      "release": "TORSDAG 07. NOVEMBER"
+    },
+    {
+      "title": "Gladiator 2",
+      "poster": "https://www.humlebio.dk/data/TempFolderLongTerm//mediacache_73787ab9264f9055e3296839c8bbbabf.jpg",
+      "description": "Filmen 'Gladiator 2' er en fortsættelse til Gladiator fra 2000, der vandt hele fem Oscars.\n\nLucius (Paul Mescal) mister sit hjem da, det bliver erobret af de tyranniske kejsere, der nu leder Rom. Nu er Lucius tvunget til at tage kampen op i Colosseum og må se på sin fortid for at finde styrke til at returnere Roms herlighed til dets folk.\n\nRidley Scott er tilbage bag kameraet, mens manuskriptet forfattes af David Scarpa, der tidligere har skrevet All the Money in the World, som Ridley Scott også instruerede.",
+      "youtubeTrailer": "B3W2gXWBKww",
+      "actors": ["DENZEL WASHINGTON", "PEDRO PASCAL", "CONNIE NIELSEN", "PAUL MESCAL", "JOSEPH QUINN"],
+      "director": "RIDLEY SCOTT",
+      "genre": "ACTION, DRAMA, EVENTYR",
+      "playtime": "185 min",
+      "age": "TILLADT FOR BØRN OVER 11 ÅR",
+      "release": "TORSDAG 14. NOVEMBER"
+    },
+    {
+      "title": "Goebbels and the Führer",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMGEyMDY3ZWMtNzc1Yi00NTQxLTljODItMzEyYTMyZmZhNzk0XkEyXkFqcGc@._V1_FMjpg_UY576_.jpg",
+      "description": "Nazi propaganda minister Joseph Goebbels is in charge of building public support for the Holocaust and for the war that Hitler is about to start.",
+      "youtubeTrailer": "HIqeLlET_LQ",
+      "actors": ["Kenneth Branagh", "David McIlwraith", "David Calder"],
+      "director": "Lutz Becker",
+      "genre": "Documentary, Drama, War",
+      "playtime": "70 min",
+      "age": "Tilladt for børn over 15 år",
+      "weekday": {
+        "mon": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "tue": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "wed": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "thu": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "fri": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "sat": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] },
+        "sun": { "showtimes": ["11:00 AM", "2:00 PM", "5:00 PM"] }
+      }
+    },
+    {
+      "title": "My Little Pony: The Movie",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNDZiNDRlNGQtNGQ4Ny00NDRiLTkwOWItZDJlZTQ4YTlmM2M3XkEyXkFqcGc@._V1_FMjpg_UY486_.jpg",
+      "description": "After a dark force conquers Canterlot, the Mane 6 embark on an unforgettable journey beyond Equestria where they meet new friends and exciting challenges on a quest to use the magic of friendship to save their homeland.",
+      "youtubeTrailer": "aeQe_mZcyf8",
+      "actors": ["Emily Blunt", "Kristin Chenoweth", "Liev Schreiber", "Taye Diggs"],
+      "director": "Jayson Thiessen",
+      "genre": "Animation, Adventure, Comedy",
+      "playtime": "99 min",
+      "age": "Tilladt for alle",
+      "weekday": {
+        "mon": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "tue": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "wed": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "thu": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "fri": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "sat": { "showtimes": ["9:00 AM", "2:00 PM"] },
+        "sun": { "showtimes": ["9:00 AM", "2:00 PM"] }
+      }
+    },
+    {
+      "title": "Weathering With You",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOWQ2MzY5OWMtNDVlMi00NTUyLTljY2QtYzQ4MzkxMjhhMThkXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
+      "description": "Tokyo is experiencing eternal rain. Amidst this, runaway student Hodaka meets Hina, who has the power to summon sunlight. As they bond, their powers come at a cost.",
+      "youtubeTrailer": "Q6iK6DjV_iE",
+      "actors": ["Kotaro Daigo", "Nana Mori"],
+      "director": "Makoto Shinkai",
+      "genre": "Animation, Drama, Fantasy",
+      "playtime": "112 min",
+      "age": "Tilladt for børn over 11 år",
+      "weekday": {
+        "mon": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "tue": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "wed": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "thu": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "fri": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "sat": { "showtimes": ["8:00 AM", "6:00 PM"] },
+        "sun": { "showtimes": ["8:00 AM", "6:00 PM"] }
+      }
+    }
+  ],
+  "upcomingMovies": [
+    {
+      "title": "Gladiator II",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMWYzZTM5ZGQtOGE5My00NmM2LWFlMDEtMGNjYjdmOWM1MzA1XkEyXkFqcGc@._V1_FMjpg_UY337_.jpg",
+      "front-page-image": "https://m.media-amazon.com/images/M/MV5BNDQwOTIxODYtMDAyMi00NzY2LWJkNzEtMjMyNGY3ZWQ0OGRkXkEyXkFqcGc@._V1_FMjpg_UX600_.jpg",
+      "youtubeTrailer": "6RRa0kw7T5I",
+      "description": "Lucius, the nephew of the former gladiator Maximus, must return to the Colosseum to restore Rome’s honor and avenge his family.",
+      "actors": ["Paul Mescal", "Connie Nielsen", "Denzel Washington"],
+      "director": "Ridley Scott",
+      "genre": "Action, Drama, Adventure",
+      "playtime": "TBD",
+      "age": "Tilladt for børn over 15 år",
+      "premierDate": "14/10 - 2024"
+    },
+    {
+      "title": "Joker: Folie à Deux",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTE0M2Q0ODgtY2U2My00YThlLWI1ZjUtNzBkMmU4NTQ2YzVlXkEyXkFqcGc@._V1_FMjpg_UY720_.jpg",
+      "front-page-image": "https://m.media-amazon.com/images/M/MV5BZmRkOGNlMjUtNzllMi00ODJhLTg3YjUtNjE3MWI5NzY3NTlmXkEyXkFqcGc@._V1_FMjpg_UX1280_.jpg",
+      "youtubeTrailer": "_Nvq2FdOHOA",
+      "description": "Arthur Fleck returns as Joker, this time institutionalized and exploring a twisted musical journey. Struggling with his dual identity, Joker meets new love while dealing with his past.",
+      "actors": ["Joaquin Phoenix, Lady Gaga, Zazie Beetz"],
+      "director": "Todd Phillips",
+      "genre": "Drama, Crime, Musical",
+      "playtime": "TBD",
+      "age": "Tilladt for børn over 15 år",
+      "premierDate": "4 / 10 - 2024"
+    },
+    {
+      "title": "Smile 2",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTU4ZDUzNDQtYTY1NC00ZDg4LWFlOGMtYmI5MmE2ZTkzOTM2XkEyXkFqcGc@._V1_FMjpg_UY679_.jpg",
+      "front-page-image": "https://m.media-amazon.com/images/M/MV5BYWI4OTE2ODYtNjI3Ni00NTFmLTk0NmUtN2VlZjNkNDJmMjljXkEyXkFqcGc@._V1_FMjpg_UX480_.jpg",
+      "youtubeTrailer": "yqGEz5ytPBM",
+      "description": "After witnessing several supernatural incidents, a therapist dives deeper into an ominous curse. With time running out, she must uncover the truth behind the horror before it consumes her completely.",
+      "actors": ["Sosie Bacon, Jessie T. Usher, Kyle Gallner"],
+      "director": "Parker Finn",
+      "genre": "Horror, Thriller",
+      "playtime": "TBD",
+      "age": "Tilladt for børn over 15 år",
+      "premierDate": "18 / 10 - 2024"
+    },
+    {
+      "title": "Terrifier 3",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZDkzMDMwZWItNTNjZS00NzM5LTllYzktZjIxMGQ2ODNmM2JiXkEyXkFqcGc@._V1_FMjpg_UY2560_.jpg",
+      "front-page-image": "https://m.media-amazon.com/images/M/MV5BNmE3YzE5N2ItNmQyMy00MzE0LTk4OGYtNmFiMjIxNDAzZmZmXkEyXkFqcGc@._V1_FMjpg_UX600_.jpg",
+      "youtubeTrailer": "Ts0N8swyWFI",
+      "description": "Art the Clown returns to wreak havoc in a night of terror as a new group of victims faces unspeakable horrors. Will anyone survive the bloodbath, or will the town face its final demise?",
+      "actors": ["David Howard Thornton, Lauren LaVera, Samantha Scaffidi"],
+      "director": "Damien Leone",
+      "genre": "Horror, Slasher",
+      "playtime": "TBD",
+      "age": "Tilladt for børn over 15 år",
+      "premierDate": "11 / 10 - 2024"
+    }
+  ]
+}

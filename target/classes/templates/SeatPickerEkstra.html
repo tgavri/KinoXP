@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oversigt</title>
+    <script>src="https://code.jquery.com/jquery-3.7.1.min.js"</script>
+    <style>
+
+        .ContainerSeatEkstra {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            width: 80%;
+            max-width: 1200px;
+
+        }
+        .Background-containerSeatEkstra {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background-image: url('https://www.avcenter.dk/media/bojogdac/biografstole-i-samsoe-bio.jpg?anchor=center&mode=crop&width=1500&height=0&rnd=132881886021800000');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .ScreenSeatEkstra {
+                color: white;
+                background-color: darkblue;
+                height: 50px;
+                width: 400px;
+                text-align: center;
+                line-height: 50px;
+            }
+            #selected-seats {
+                margin: 10px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: darkblue;
+            }
+            .TitleSeatEkstra {
+                font-size: 30px;
+                margin: 20px 20px;
+                padding: 10px 10px;
+                height: 40px;
+                text-align: left;
+            }
+            #log-outputEkstra {
+                color: black;
+                margin-top: 20px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                background-color: #f0f0f0;
+                max-height: 150px;
+            }
+            #seat-mapEkstra {
+                justify-content: center;
+                margin: 20px 20px;
+                grid-gap: 5px;
+                grid-template-columns: repeat(12, 20px);
+                display: grid;
+            }
+            .seatEkstra {
+                cursor: pointer;
+                width: 20px;
+                height: 20px;
+                background-color: green;
+                border: 1px black;
+            }
+            .seat.selectedEkstra {
+                background-color: blue;
+                cursor: pointer;
+            }
+            .seatEkstra:hover:not(taken) {
+                background-color: white;
+            }
+
+            #buy-seatsEkstra {
+                padding: 10px 20px;
+                background-color: darkblue;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            #totalPrisEkstra {
+                font-family: Arial,serif;
+            }
+
+            .purchase {
+                display: block;
+                width: 15%;
+                margin-bottom: 4px;
+                height: 18px;
+                padding: 7px;
+                background-color: #000080;
+                color: white;
+                border-radius: 10px;
+                border: 2px solid;
+                text-align: center;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="Background-containerSeatEkstra">
+
+    <div class="ContainerSeatEkstra">
+
+        <div class="TitleSeatEkstra">Ekstra køb</div>
+            <div>Valgte Pladser
+                <div id="selected-seats"></div>
+            </div>
+                <div>
+                    <label>Cola lille: <input type="checkbox" id="Cola-Small"></label><br>
+                    <label>Cola Stor: <input type="checkbox" id="Cola-Big"></label><br>
+                    <label>Popcorn lille: <input type="checkbox" id="Pop-lille"></label><br>
+                    <label>Popcorn Stor: <input type="checkbox" id="Pop-Big"></label><br>
+
+                </div>
+                    <div></div>
+                <div>
+                    <p id="totalPrisEkstra">Pris</p>
+                </div>
+
+        <div class="purchase">
+            <span id="betal-button">Betal</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    var selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats'));
+    var totalPrice = sessionStorage.getItem('totalPrice');
+
+    var seatsSelected = document.getElementById('selected-seats');
+    seatsSelected.innerHTML = selectedSeats.join();
+
+    var PriceTotal = document.getElementById('totalPrisEkstra');
+    PriceTotal.innerHTML = totalPrice + ' kr';
+
+    document.getElementById('betal-button').addEventListener('click', function() {              // @LAURITS hvis du tilføjer nedenstående til session et andet sted, så bare slet
+        sessionStorage.setItem('colaSmall', document.getElementById('Cola-Small').checked);     // dem herfra. Evt. gør at i stedet for at det er ja / nej for ekstra, så tilføj antal på hver
+        sessionStorage.setItem('colaBig', document.getElementById('Cola-Big').checked);
+        sessionStorage.setItem('popcornSmall', document.getElementById('Pop-lille').checked);
+        sessionStorage.setItem('popcornBig', document.getElementById('Pop-Big').checked);
+
+        window.location.href = 'Checkout.html';
+    });
+
+
+
+
+</script>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KinoXP</title>
+    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<body>
+<!-- placeholder for når headeren bliver loadet -->
+<div id="header-placeholder"></div>
+<div id="cookie-placeholder"></div>
+<div id="app" class="background">
+    <div class="frontpage-info">
+        <h1 class="movie-title"></h1>
+        <p class="premier-date"></p>
+    </div>
+    <div class="container">
+        <div class="header-container">
+            <h1>Aktuelle Film</h1>
+            <label for="date-picker">Vælg en dato:</label>
+            <div id="calendar-container" style="display: none; margin-top: 0;">
+                <input type="date" id="date-picker">
+            </div>
+            <button id="calendarButton">📅</button>
+            <select id="genre-filter">
+                <option value="all">Alle Genre</option>
+            </select>
+        </div>
+        <div class="movie-list" id="movie-list"></div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        let movies = [];
+
+        // henter header from "../../frontend/indexheader.html"
+        $('#header-placeholder').load('/frontend/indexheader.html');
+        $('#cookie-placeholder').load('/frontend/Cookies.html');
+
+        const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+        const today = new Date();
+        const todayWeekday = weekdayNames[today.getDay()];
+
+        $.getJSON("../static/movies.json", function (movieData) {
+            const upcomingMovies = movieData.upcomingMovies;
+            if (upcomingMovies.length > 0) {
+                const firstUpcomingMovie = upcomingMovies[0];
+                const frontPageImage = firstUpcomingMovie["front-page-image"];
+                const title = firstUpcomingMovie.title;
+                const premierDate = firstUpcomingMovie.premierDate;
+
+                $('.background').css('background-image', `url(${frontPageImage}), url('../static/rødegardiner.JPG')`);
+                $('.movie-title').text(title);
+                $('.premier-date').text(`Premiere: ${premierDate}`);
+            }
+
+            movies = movieData.runningMovies;
+
+            // tilpas genrevalg efter eksisterende genre
+            const uniqueGenres = [...new Set(movies.flatMap(movie => movie.genre.split(', ').map(g => g.trim())))];
+            uniqueGenres.forEach(genre => {
+                $('#genre-filter').append(new Option(genre, genre));
+            });
+
+            loadMovieList(movies, todayWeekday);
+
+            // hvis en genre er valgt, sorter så kun disse vises
+            $('#genre-filter').change(function () {
+                const selectedGenre = $(this).val();
+                const filteredMovies = selectedGenre === 'all'
+                    ? movies
+                    : movies.filter(movie => movie.genre.split(', ').includes(selectedGenre));
+                loadMovieList(filteredMovies, todayWeekday);
+
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: 400,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            });
+        });
+
+        $('#calendarButton').click(function() {
+            $('#calendar-container').toggle();
+            const date = getSelectedDate();
+        });
+
+        $('#date-picker').on('change', function() {
+            const selectedDate = $(this).val();
+            $('#selected-date').text(`Selected date: ${selectedDate}`);
+        });
+        function getSelectedDate() {
+            const selectedDate = $('#date-picker').val();
+            return selectedDate;
+        }
+        function seatPickerRedirect(movieTitle, showtime, hall, date = null) {
+
+            if (!date) {                                                    // metode hvis en dato ikke modtages fra kalender - det antages
+                const today = new Date();                                   // at dagens dato så skal bruges.
+                const dd = String(today.getDate()).padStart(2, '0');        // find dagens dato
+                const mm = String(today.getMonth() + 1).padStart(2, '0');   // find dagens måned
+                const yyyy = today.getFullYear();                           // find dagens årstal
+                date = `${dd}/${mm}/${yyyy}`;                               // opret format
+            }
+
+            sessionStorage.setItem('movieTitle', movieTitle);
+            sessionStorage.setItem('showtime', showtime);
+            sessionStorage.setItem('date', date);
+
+            window.location.href = hall === 1 ? 'SeatPickerSmall.html' : 'SeatPickerBig.html';
+        }
+
+        function loadMovieList(movies, todayWeekday) {
+            $('#movie-list').empty();
+            $('.container h1').show();                          // vis "aktuelle film"
+            $('#genre-filter').show();                          // vis genre dropdown menuen
+            window.scrollTo({ top: 300, behavior: 'smooth' });  // tager brugeren til toppen
+
+            movies.forEach(movie => {
+                const movieContainer = $('<div>').addClass('movie-container');
+                const poster = $('<img>').attr('src', movie.poster).attr('alt', movie.title).addClass('poster');
+                const titleContainer = $('<div>').addClass('title-container');
+                const title = $('<h2>').text(movie.title);
+                titleContainer.append(title);
+
+                const showtimesDiv = $('<div>').addClass('showtimes');
+                const todayShowtimes = movie.weekday[todayWeekday]?.showtimes || [];
+
+                todayShowtimes.forEach(time => {
+                    const timeSpan = $('<span>').text(time.showtime).addClass('showtime-link');
+                    timeSpan.click(function() {
+                        seatPickerRedirect(movie.title, time.showtime, time.hall);
+                    });
+                    showtimesDiv.append(timeSpan);
+                });
+
+                movieContainer.append(poster).append(titleContainer).append(showtimesDiv);
+                $('#movie-list').append(movieContainer);
+
+                title.click(function () {
+                    loadMovieDetails(movie, todayWeekday);
+                });
+                poster.click(function () {
+                    loadMovieDetails(movie, todayWeekday);
+                });
+            });
+        }
+
+        function loadMovieDetails(movie, todayWeekday) {
+            const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+            const ugedage = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
+            const todayIndex = weekdayNames.indexOf(todayWeekday);
+
+            $('.container h1').hide();                          // skjul "aktuelle film"
+            $('#genre-filter').hide();                          // skjul genre dropdown menuen
+            $('#genre-filter').val('all');
+            window.scrollTo({ top: 300, behavior: 'smooth' });  // tager brugeren til toppen
+
+            let showtimesHtml = '<div class="weekdays-container">';
+            for (let i = 0; i < 7; i++) {
+                const currentDayIndex = (todayIndex + i) % 7;
+                const currentDayKey = weekdayNames[currentDayIndex];
+                const currentDayName = (i === 0) ? 'I dag' : ugedage[currentDayIndex];
+                const showtimes = movie.weekday[currentDayKey]?.showtimes || [];
+
+                if (showtimes.length > 0) {
+                    showtimesHtml += `<div class="weekday-column"><h4>${currentDayName}</h4><ul>`;
+                    showtimesHtml += showtimes.map(time => `<li class="showtime-link" data-showtime="${time.showtime}" data-hall="${time.hall}">${time.showtime}</li>`).join('');
+                    showtimesHtml += '</ul></div>';
+                }
+            }
+            showtimesHtml += '</div>';
+
+            let youtubeEmbed = '';
+            if (movie.youtubeTrailer) {
+                youtubeEmbed = `
+        <div class="trailer-container">
+            <iframe width="750" height="515"
+                src="https://www.youtube.com/embed/${movie.youtubeTrailer}"
+                title="YouTube Video Player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>`;
+            }
+
+            $('#movie-list').html(`
+        <div class="movie-details">
+        <h2>${movie.title}</h2>
+        ${youtubeEmbed}
+            <div class="movie-info-container">
+                <div class="movie-poster">
+                    <img src="${movie.poster}" alt="${movie.title}" class="poster">
+                </div>
+                <div class="movie-description">
+                    ${movie.description}
+                    <p><strong>Skuespillere: </strong>${movie.actors.join(', ')}</p>
+                    <p><strong>Instruktør: </strong>${movie.director}</p>
+                    <p><strong>Genre: </strong>${movie.genre}</p>
+                    <p><strong>Varighed: </strong>${movie.playtime}</p>
+                    <p><strong>Aldersgrænse: </strong>${movie.age}</p>
+                </div>
+            </div>
+            ${showtimesHtml}
+            <button id="backToList">Back to Movie List</button>
+        </div>
+    `);
+
+            $('.showtime-link').click(function() {
+                const showtime = $(this).data('showtime');
+                const hall = $(this).data('hall');
+                seatPickerRedirect(movie.title, showtime, hall);
+            });
+
+            $('#backToList').click(function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                loadMovieList(movies, todayWeekday);
+            });
+        }
+
+    });
+</script>
+</body>
+</html>
