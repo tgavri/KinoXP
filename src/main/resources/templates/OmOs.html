@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KinoXP</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            font-family: Arial, sans-serif;
+        }
+
+        .section {
+            padding: 50px;
+            min-height: 100vh;
+        }
+
+        .info-container, .historie, .teknologi, .ansvar, .lokation {
+            display: block;
+        }
+
+
+        .info-container { background-color: #f8f9fa; }
+        .historie { background-color: #f2f2f2; }
+        .teknologi { background-color: #d9e2ec; }
+        .ansvar { background-color: #cce5ff; }
+        .lokation { background-color: #d1ecf1; }
+
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .backgroundOmos{
+            background-image: url('../static/rodegardiner.JPG');
+            background-size: 100% 650px, cover;
+            background-position: top, center;
+            background-repeat: no-repeat, repeat-y;
+            width: 100%;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="header-placeholder"></div>
+<div class="backgroundOmos">
+    <div class="frontpage-info">
+<section id="omos" class="section info-container">
+    <p>Velkommen til KinoXP – biografen, hvor film bliver til en oplevelse. Hos os får du ikke bare en standard filmvisning, men en komplet sanseoplevelse,
+        der bringer dig tættere på filmens verden.
+        Vi kombinerer de nyeste teknologier inden for lyd, billede og komfort, så du kan fordybe dig fuldt ud i magien på det store lærred.
+        Fra spændende premierer til kultklassikere og nichefilm – hos KinoXP er der altid noget for enhver filmsmag.
+        Vi stræber efter at skabe et sted, hvor filmelskere kan samles og nyde film i unikke omgivelser.
+        Med vores rummelige sale, luksuriøse sæder og topmoderne projektioner kan du være sikker på, at din næste biograftur bliver en uforglemmelig oplevelse.</p>
+
+
+    <p><a href="#historie">Læs mere om vores historie</a> |
+        <a href="#teknologi">Læs om vores teknologi</a> |
+        <a href="#ansvar">Samfundsansvar</a> |
+        <a href="#lokation">Find os her</a>
+    </p>
+</section>
+
+
+<section id="historie" class="section historie">
+    <h1>Historie og Baggrund</h1>
+    <p>KinoXP blev grundlagt med en passion for filmkunst og med ønsket om at skabe et sted, hvor mennesker kan samles og nyde film på en helt ny måde.
+        Fra vores første åbningsdag har vi været dedikeret til at levere en enestående biografoplevelse.</p>
+
+
+    <p><a href="#omos">Tilbage til toppen</a></p>
+</section>
+
+
+<section id="teknologi" class="section teknologi">
+    <h1>Teknologi</h1>
+    <p>Hos KinoXP anvender vi den nyeste teknologi inden for filmvisning. Vores sale er udstyret med Dolby Atmos-lydsystemer og 4K-projektorer,
+        hvilket sikrer en overlegen visuel og auditiv oplevelse, der får hver scene til at føles levende.</p>
+
+
+    <p><a href="#omos">Tilbage til toppen</a></p>
+</section>
+
+
+<section id="ansvar" class="section ansvar">
+    <h1>Bæredygtighed og Samfundsansvar</h1>
+    <p>Vi hos KinoXP er dedikerede til at reducere vores miljømæssige fodaftryk.
+        Fra energibesparende teknologier til genbrug af materialer arbejder vi målrettet på at skabe en biografoplevelse, der er både ansvarlig og fremtidssikret.</p>
+
+
+    <p><a href="#omos">Tilbage til toppen</a></p>
+</section>
+
+
+<section id="lokation" class="section lokation">
+    <h1>Lokation</h1>
+    <p>KinoXP er placeret i hjertet af byen, så det er nemt for dig at finde os og få en fantastisk filmoplevelse.</p>
+
+
+    <p><a href="#omos">Tilbage til toppen</a></p>
+</section>
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#header-placeholder').load('/fragments/header');
+        $('a').on('click', function(event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+
+                var hash = this.hash;
+
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
