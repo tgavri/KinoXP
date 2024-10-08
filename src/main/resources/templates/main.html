@@ -47,7 +47,7 @@
         const today = new Date();
         const todayWeekday = weekdayNames[today.getDay()];
 
-        $.getJSON("movies.json", function (movieData) {
+        $.getJSON("/movies.json?v=" + new Date().getTime(), function (movieData) {
             const upcomingMovies = movieData.upcomingMovies;
             if (upcomingMovies.length > 0) {
                 const firstUpcomingMovie = upcomingMovies[0];
