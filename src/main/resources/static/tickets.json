@@ -1,13 +1,13 @@
 {
   "tickets": [
     {
-      "date": "06\/10\/2024",
+      "date": "09\/10\/2024",
       "selectedSeats": [
-        "Række: 13, Sæde: 8",
-        "Række: 13, Sæde: 9"
+        "Række: 11, Sæde: 4",
+        "Række: 11, Sæde: 5"
       ],
       "totalPrice": "200",
-      "showtime": "10:30 AM",
+      "showtime": "09:00 AM",
       "extras": {
         "popcornSmall": "",
         "colaSmall": "",
@@ -15,6 +15,9 @@
         "colaBig": ""
       },
       "movieTitle": "Find Nemo",
+
+      "ticketID": "7313081453697177"
+
       "ticketID": "8205935007334423"
     },
     {
@@ -177,6 +180,7 @@
       },
       "movieTitle": "Weathering With You",
       "ticketID": "6171414160371481"
+
     }
   ]
 }
