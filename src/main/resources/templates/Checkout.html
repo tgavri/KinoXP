@@ -1,152 +1,312 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <title>ArbejdsUge</title>
     <style>
-        .ContainerReceipt {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            justify-content: space-between;
-            color: black;
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        h1 {
             text-align: center;
-            background-color: #feffe1;
-            padding: 25px;
-            width: 80%;
-            max-width: 1000px;
-            margin: 0 auto;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
-
-        .TitleReceipt {
-            font-size: 34px;
-            margin-bottom: 24px;
-        }
-
-        .TicketDetails {
-            text-align: left;
-            width: 60%;
-        }
-
-        .TicketDetails p {
-            margin: 6px 0;
-            font-size: 20px;
-        }
-
-        .PosterContainer {
-            width: 42%;
+        .schedule-container {
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
-
-        .PosterContainer img {
-            max-width: 100%;
-            border-radius: 12px;
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            background-color: #f8f9fa;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-
-        #selected-seats {
-            display: block;
-            white-space: pre-line;
-            font-size: 20px;
-            margin-top: 10px;
+        table, th, td {
+            border: 1px solid #ccc;
         }
-
-        #extras-list {
-            display: block;
-            white-space: pre-line;
-            font-size: 20px;
-            margin-top: 10px;
-        }
-
-        .total-price {
-            font-size: 27px;
-            font-weight: bold;
-            margin-top: 24px;
-        }
-
-        .printbutton {
-            display: block;
-            width: 15%;
-            margin-bottom: 4px;
-            height: 35px;
-            padding: 7px;
-            background-color: #000080;
-            color: white;
-            border-radius: 10px;
-            border: 2px solid;
+        th, td {
+            padding: 15px;
             text-align: center;
-            font-weight: bold;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .worker-input {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+        .worker-input input[type="text"] {
+            padding: 5px;
+            margin-right: 5px;
+            width: 40%;
+        }
+        .worker-input input[type="button"] {
+            padding: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
             cursor: pointer;
+        }
+        .worker-input input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        .opretKnap {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .opretKnap:hover {
+            background-color: #0056b3;
+        }
+        .workers-list {
+            text-align: left;
+            margin-top: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        /* Navigation buttons */
+        .nav-buttons {
+            text-align: center;
+            margin: 20px;
         }
     </style>
 </head>
 <body>
-
-<div class="ContainerReceipt">
-    <div class="TicketDetails">
-        <div class="TitleReceipt">KINOXP</div>
-        <p><strong>Standard Biografbillet - 1 visning</strong></p>
-
-        <p><strong>Film:</strong> <span id="movie-title"></span></p>
-        <p><strong>Showtime:</strong> <span id="showtime"></span></p>
-        <p><strong>Dato:</strong> <span id="date"></span></p>
-        <p><strong>Valgte Pladser:</strong> <span id="selected-seats"></span></p>
-        <p><strong>Ekstra:</strong> <span id="extras-list"></span></p>
-        <p><strong>Sal: </strong> <span id="hall"></span></p>
-
-        <p><strong>Billet ID:</strong> <span id="ticket-id"></span></p>
-
-        <div class="total-price">
-            <p><strong>Total Pris:</strong> <span id="total-price"></span> kr</p>
-        </div>
-        <button class="printbutton" onclick="window.print()">Print</button>
-    </div>
-
-    <div class="PosterContainer">
-        <img id="movie-poster" src="" alt="Movie Poster">
-    </div>
+<h1>ArbejdsUge</h1>
+<div class="nav-buttons">
+    <button class="opretKnap" onclick="previousWeek()">Forrige Uge</button>
+    <button class="opretKnap" onclick="nextWeek()">Næste Uge</button>
 </div>
+<div class="schedule-container">
+    <table>
+        <thead>
+        <tr>
+            <th>Mandag<br><span id="date-0"></span></th>
+            <th>Tirsdag<br><span id="date-1"></span></th>
+            <th>Onsdag<br><span id="date-2"></span></th>
+            <th>Torsdag<br><span id="date-3"></span></th>
+            <th>Fredag<br><span id="date-4"></span></th>
+            <th>Lørdag<br><span id="date-5"></span></th>
+            <th>Søndag<br><span id="date-6"></span></th>
+        </tr>
+        </thead>
+        <tbody id="calendar-body">
+        <tr>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-0" placeholder="Navn">
+                    <input type="text" id="task-0" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(0)">
+                </div>
+                <div id="workers-0" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-1" placeholder="Navn">
+                    <input type="text" id="task-1" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(1)">
+                </div>
+                <div id="workers-1" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-2" placeholder="Navn">
+                    <input type="text" id="task-2" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(2)">
+                </div>
+                <div id="workers-2" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-3" placeholder="Navn">
+                    <input type="text" id="task-3" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(3)">
+                </div>
+                <div id="workers-3" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-4" placeholder="Navn">
+                    <input type="text" id="task-4" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(4)">
+                </div>
+                <div id="workers-4" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-5" placeholder="Navn">
+                    <input type="text" id="task-5" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(5)">
+                </div>
+                <div id="workers-5" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-6" placeholder="Navn">
+                    <input type="text" id="task-6" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(6)">
+                </div>
+                <div id="workers-6" class="workers-list"></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<button class="opretKnap" onclick="submitShifts()">Opret Vagter</button>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
+    let currentWeekStartDate;
 
-    $('#movie-title').text(sessionStorage.getItem('movieTitle'));
-    $('#showtime').text(sessionStorage.getItem('showtime'));
-    $('#date').text(sessionStorage.getItem('date'));
-    var selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats') || '[]');
-    if (selectedSeats.length > 0) {
-        $('#selected-seats').text(selectedSeats.join('\n'));
-    }
-    var extras = JSON.parse(sessionStorage.getItem('extras') || '{}');
-    if (Object.keys(extras).length > 0) {
-        var extrasText = Object.entries(extras)
-            .map(([item, quantity]) => `${item}: ${quantity}`)
-            .join('\n');
-        $('#extras-list').text(extrasText);
-    }
-    $('#hall').text(sessionStorage.getItem('hall'));
-    $('#ticket-id').text(sessionStorage.getItem('ticketID'));
-    $('#total-price').text(sessionStorage.getItem('totalPrice'));
+    function generateWeekDays() {
+        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
 
-    $.getJSON('movies.json', function(data) {
-        const movieTitle = sessionStorage.getItem('movieTitle');
-        const movies = data.runningMovies;
-        const movie = movies.find(m => m.title === movieTitle);
+        for (let i = 0; i < 7; i++) {
+            const currentDate = new Date(currentWeekStartDate);
+            currentDate.setDate(currentDate.getDate() + i);
 
-        if (movie) {
-            $('#movie-poster').attr('src', movie.poster);
-        } else {
-            $('#movie-poster').attr('alt', 'Poster not found');
+            const dayFormatted = String(currentDate.getDate()).padStart(2, '0');
+            const monthFormatted = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const yearFormatted = currentDate.getFullYear();
+
+            document.getElementById(`date-${i}`).innerText = `${dayFormatted}-${monthFormatted}-${yearFormatted}`;
         }
+    }
 
-        setTimeout(function() {
-            sessionStorage.clear();
-        }, 500);
-    });
+    function addWorker(dayIndex) {
+        const workerInput = document.getElementById(`worker-${dayIndex}`);
+        const taskInput = document.getElementById(`task-${dayIndex}`);
+        const workersDiv = document.getElementById(`workers-${dayIndex}`);
+
+        const workerName = workerInput.value;
+        const taskName = taskInput.value;
+
+        if (workerName && taskName) {
+            const workerDiv = document.createElement("div");
+            workerDiv.innerText = `${workerName}: ${taskName}`;
+            workersDiv.appendChild(workerDiv);
+
+            // Clear input fields
+            workerInput.value = "";
+            taskInput.value = "";
+        } else {
+            alert("Indtast både navn og opgave.");
+        }
+    }
+
+    async function submitShifts() {
+        let shiftsArray = []; // Reset the array on every submission
+        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
+
+        // Loop through each day and collect the worker names and tasks
+        days.forEach((day, index) => {
+            const workersDiv = document.getElementById(`workers-${index}`);
+            const workers = workersDiv.getElementsByTagName("div");
+
+            // Collect each worker's information
+            Array.from(workers).forEach(workerDiv => {
+                const [worker, task] = workerDiv.innerText.split(': ');
+                const shift = {
+                    date: document.getElementById(`date-${index}`).innerText,
+                    worker: worker.trim(),
+                    task: task.trim(),
+                };
+
+                shiftsArray.push(shift);
+            });
+        });
+
+        // Send the shifts array to the server
+        const response = await fetch('http://localhost:8080/api/shifts/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(shiftsArray),
+        });
+
+        if (response.ok) {
+            alert("Vagter er blevet gemt!");
+            console.log("Shifts saved to server:", shiftsArray);
+        } else {
+            alert("Der opstod en fejl ved gemning af vagter.");
+        }
+    }
+
+    // Function to go to the next week
+    function nextWeek() {
+        currentWeekStartDate.setDate(currentWeekStartDate.getDate() + 7);
+        generateWeekDays();
+    }
+
+    // Function to go to the previous week
+    function previousWeek() {
+        currentWeekStartDate.setDate(currentWeekStartDate.getDate() - 7);
+        generateWeekDays();
+    }
+
+    // Initialize the current week start date
+    function initializeCurrentWeek() {
+        const today = new Date();
+        const weekStart = today.getDate() - today.getDay() + 1; // Monday
+        currentWeekStartDate = new Date(today.setDate(weekStart)); // Set the start date of the current week
+        generateWeekDays();
+    }
+
+    // Generate the week's schedule when the page loads
+    window.onload = initializeCurrentWeek;
+    async function submitShifts() {
+        let shiftsArray = []; // Reset the array on every submission
+        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
+
+        // Loop through each day and collect the worker names and tasks
+        days.forEach((day, index) => {
+            const workersDiv = document.getElementById(`workers-${index}`);
+            const workers = workersDiv.getElementsByTagName("div");
+
+            // Collect each worker's information
+            Array.from(workers).forEach(workerDiv => {
+                const [worker, task] = workerDiv.innerText.split(': ');
+                const shift = {
+                    date: document.getElementById(`date-${index}`).innerText,
+                    worker: worker.trim(),
+                    task: task.trim(),
+                };
+
+                shiftsArray.push(shift);
+            });
+        });
+
+        // Send the shifts array to the server
+        const response = await fetch('http://localhost:8080/api/shifts/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(shiftsArray),
+        });
+
+        if (response.ok) {
+            alert("Vagter er blevet gemt!");
+            console.log("Shifts saved to server:", shiftsArray);
+        } else {
+            alert("Der opstod en fejl ved gemning af vagter.");
+        }
+    }
+
 </script>
 </body>
 </html>
