@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FragtmentController {
+
     @GetMapping("/fragments/header")
     public String getIndexHeader() {
         return "fragments/header";
@@ -27,9 +28,21 @@ public class FragtmentController {
     public String showCookiesInfo() {
         return "CookiesShow";
     }
+
+    @GetMapping("/Omos")
+    public String OmOs() {
+        return "OmOs";
+    }
+
+    @GetMapping("/Arbejdsuge")
+    public String arbejdsuge() {return "workSchedule";}
+
+
+=======
     @GetMapping("/adminpanel")
     public String showAdminPanel() {
         return "adminpanel"; // This assumes you have a worker.html file in the templates folder
     }
+
 }
 

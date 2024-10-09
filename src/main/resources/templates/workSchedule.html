@@ -78,10 +78,13 @@
             max-height: 100px;
             overflow-y: auto;
         }
-        /* Navigation buttons */
+
         .nav-buttons {
             text-align: center;
             margin: 20px;
+        }
+        a {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -166,147 +169,111 @@
         </tbody>
     </table>
 </div>
-<button class="opretKnap" onclick="submitShifts()">Opret Vagter</button>
+<a href="/adminpanel"> <button class="opretKnap" onclick="submitShifts()">Opret Vagter og tilbage til adminpanel</button></a>
 
 <script>
+    let shiftsData = {};
     let currentWeekStartDate;
 
     function generateWeekDays() {
-        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
+        const today = new Date(currentWeekStartDate);
+        const weekStart = today.getDate() - today.getDay() + 1;
+        const days = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
 
         for (let i = 0; i < 7; i++) {
-            const currentDate = new Date(currentWeekStartDate);
-            currentDate.setDate(currentDate.getDate() + i);
-
+            const currentDate = new Date(today.setDate(weekStart + i));
             const dayFormatted = String(currentDate.getDate()).padStart(2, '0');
             const monthFormatted = String(currentDate.getMonth() + 1).padStart(2, '0');
             const yearFormatted = currentDate.getFullYear();
+            const formattedDate = `${dayFormatted}-${monthFormatted}-${yearFormatted}`;
 
-            document.getElementById(`date-${i}`).innerText = `${dayFormatted}-${monthFormatted}-${yearFormatted}`;
+            document.getElementById(`date-${i}`).innerText = formattedDate;
+
+
+            const workersDiv = document.getElementById(`workers-${i}`);
+            workersDiv.innerHTML = '';
+
+
+            if (shiftsData[formattedDate]) {
+                shiftsData[formattedDate].forEach(shift => {
+                    const workerEntry = document.createElement("div");
+                    workerEntry.innerText = `${shift.worker}: ${shift.task}`;
+                    workersDiv.appendChild(workerEntry);
+                });
+            }
         }
     }
 
     function addWorker(dayIndex) {
         const workerInput = document.getElementById(`worker-${dayIndex}`);
         const taskInput = document.getElementById(`task-${dayIndex}`);
-        const workersDiv = document.getElementById(`workers-${dayIndex}`);
 
         const workerName = workerInput.value;
         const taskName = taskInput.value;
 
         if (workerName && taskName) {
-            const workerDiv = document.createElement("div");
-            workerDiv.innerText = `${workerName}: ${taskName}`;
-            workersDiv.appendChild(workerDiv);
+            const workersDiv = document.getElementById(`workers-${dayIndex}`);
+            const date = document.getElementById(`date-${dayIndex}`).innerText;
 
-            // Clear input fields
-            workerInput.value = "";
-            taskInput.value = "";
+
+            if (!shiftsData[date]) {
+                shiftsData[date] = [];
+            }
+
+
+            const existingShift = shiftsData[date].find(shift => shift.worker === workerName.trim() && shift.task === taskName.trim());
+
+
+            if (!existingShift) {
+                shiftsData[date].push({
+                    day: dayIndex,
+                    worker: workerName.trim(),
+                    task: taskName.trim()
+                });
+
+
+                const workerEntry = document.createElement("div");
+                workerEntry.innerText = `${workerName}: ${taskName}`;
+                workersDiv.appendChild(workerEntry);
+
+
+                workerInput.value = "";
+                taskInput.value = "";
+            } else {
+                alert("Denne vagt findes allerede for denne dato!");
+            }
         } else {
-            alert("Indtast både navn og opgave.");
+            alert("Indtast både navn og opgave!");
         }
     }
 
-    async function submitShifts() {
-        let shiftsArray = []; // Reset the array on every submission
-        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
+    function submitShifts() {
 
-        // Loop through each day and collect the worker names and tasks
-        days.forEach((day, index) => {
-            const workersDiv = document.getElementById(`workers-${index}`);
-            const workers = workersDiv.getElementsByTagName("div");
-
-            // Collect each worker's information
-            Array.from(workers).forEach(workerDiv => {
-                const [worker, task] = workerDiv.innerText.split(': ');
-                const shift = {
-                    date: document.getElementById(`date-${index}`).innerText,
-                    worker: worker.trim(),
-                    task: task.trim(),
-                };
-
-                shiftsArray.push(shift);
-            });
-        });
-
-        // Send the shifts array to the server
-        const response = await fetch('http://localhost:8080/api/shifts/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(shiftsArray),
-        });
-
-        if (response.ok) {
-            alert("Vagter er blevet gemt!");
-            console.log("Shifts saved to server:", shiftsArray);
-        } else {
-            alert("Der opstod en fejl ved gemning af vagter.");
-        }
+        console.log(shiftsData);
+        alert("Vagter er blevet gemt!");
     }
 
-    // Function to go to the next week
     function nextWeek() {
         currentWeekStartDate.setDate(currentWeekStartDate.getDate() + 7);
         generateWeekDays();
     }
 
-    // Function to go to the previous week
     function previousWeek() {
         currentWeekStartDate.setDate(currentWeekStartDate.getDate() - 7);
         generateWeekDays();
     }
 
-    // Initialize the current week start date
     function initializeCurrentWeek() {
         const today = new Date();
-        const weekStart = today.getDate() - today.getDay() + 1; // Monday
-        currentWeekStartDate = new Date(today.setDate(weekStart)); // Set the start date of the current week
+        const weekStart = today.getDate() - today.getDay() + 1;
+        currentWeekStartDate = new Date(today.setDate(weekStart));
         generateWeekDays();
     }
 
-    // Generate the week's schedule when the page loads
     window.onload = initializeCurrentWeek;
-    async function submitShifts() {
-        let shiftsArray = []; // Reset the array on every submission
-        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
 
-        // Loop through each day and collect the worker names and tasks
-        days.forEach((day, index) => {
-            const workersDiv = document.getElementById(`workers-${index}`);
-            const workers = workersDiv.getElementsByTagName("div");
-
-            // Collect each worker's information
-            Array.from(workers).forEach(workerDiv => {
-                const [worker, task] = workerDiv.innerText.split(': ');
-                const shift = {
-                    date: document.getElementById(`date-${index}`).innerText,
-                    worker: worker.trim(),
-                    task: task.trim(),
-                };
-
-                shiftsArray.push(shift);
-            });
-        });
-
-        // Send the shifts array to the server
-        const response = await fetch('http://localhost:8080/api/shifts/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(shiftsArray),
-        });
-
-        if (response.ok) {
-            alert("Vagter er blevet gemt!");
-            console.log("Shifts saved to server:", shiftsArray);
-        } else {
-            alert("Der opstod en fejl ved gemning af vagter.");
-        }
-    }
 
 </script>
 </body>
 </html>
+
