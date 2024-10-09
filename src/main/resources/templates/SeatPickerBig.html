@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OversigtBig</title>
-    <script>src="https://code.jquery.com/jquery-3.7.1.min.js"</script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>  <!-- Corrected -->
     <style>
-
         .ContainerSeatBig {
             display: flex;
             flex-direction: column;
@@ -18,8 +17,8 @@
             padding: 20px;
             width: 80%;
             max-width: 1200px;
-
         }
+
         .Background-containerSeatBig {
             width: 100vw;
             height: 100vh;
@@ -31,80 +30,89 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
 
-            .ScreenSeatBig {
-                color: white;
-                background-color: darkblue;
-                height: 50px;
-                width: 400px;
-                text-align: center;
-                line-height: 50px;
-            }
-            .BodyScreenBig {
-                margin: 10px;
-                height: 50px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: white;
-            }
-            .TitleSeatBig {
-                font-size: 30px;
-                margin: 20px 20px;
-                padding: 10px 10px;
-                height: 40px;
-                text-align: left;
-            }
-            #log-outputBig {
-                color: black;
-                margin-top: 20px;
-                padding: 10px;
-                border: 1px solid #ccc;
-                background-color: #f0f0f0;
-                max-height: 150px;
-            }
-            #seat-mapBig {
-                justify-content: center;
-                margin: 20px 20px;
-                grid-gap: 5px;
-                grid-template-columns: repeat(16, 20px);
-                display: grid;
-            }
-            .seatBig {
-                cursor: pointer;
-                width: 20px;
-                height: 20px;
-                background-color: green;
-                border: 1px black;
-            }
-            .seatBig.selected {
-                background-color: blue;
-                cursor: pointer;
-            }
-            .seatBig:hover:not(taken) {
-                background-color: white;
-            }
+        .ScreenSeatBig {
+            color: white;
+            background-color: darkblue;
+            height: 50px;
+            width: 400px;
+            text-align: center;
+            line-height: 50px;
+        }
 
-            #buy-seatsBig {
-                padding: 10px 20px;
-                background-color: darkblue;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            #totalPrisBig {
-                font-family: Arial,serif;
-            }}
+        .BodyScreenBig {
+            margin: 10px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        .TitleSeatBig {
+            font-size: 30px;
+            margin: 20px 20px;
+            padding: 10px 10px;
+            height: 40px;
+            text-align: left;
+        }
+
+        #log-outputBig {
+            color: black;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            max-height: 150px;
+        }
+
+        #seat-mapBig {
+            justify-content: center;
+            margin: 20px 20px;
+            grid-gap: 5px;
+            grid-template-columns: repeat(16, 20px);
+            display: grid;
+        }
+
+        .seat {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            background-color: green;
+            border: 1px black;
+        }
+
+        .seat.selected {
+            background-color: blue;
+        }
+
+        .seat.taken {
+            background-color: red;
+            cursor: not-allowed;
+        }
+
+        .seat:hover:not(.taken) {
+            background-color: white;
+        }
+
+        #buy-seatsBig {
+            padding: 10px 20px;
+            background-color: darkblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #totalPrisBig {
+            font-family: Arial, serif;
+        }
     </style>
-
-
 </head>
 <body>
 <div class="Background-containerSeatBig">
-
     <div class="ContainerSeatBig">
-
         <div class="TitleSeatBig">Sædeoversigt</div>
         <div class="BodyScreenBig">
             <div class="ScreenSeatBig">LÆRRED</div>
@@ -118,73 +126,87 @@
     </div>
 </div>
 
-
 <script>
-
     var SelectSeats = [];
     var PriceSeat = 100;
+    var takenSeats = [];
 
     function ShowLogMessage(message) {
-        var LogOutputMessage = document.getElementById('log-outputBig');
-        LogOutputMessage.innerHTML += message + '<br>';
-
+        var LogOutputMessage = $('#log-outputBig');
+        LogOutputMessage.append(message + '<br>');
     }
+
     function SeatMapCreate(Rows, seatsPerRow) {
-        var Seatmap = document.getElementById('seat-mapBig');
+        var Seatmap = $('#seat-mapBig');
 
-        for (var row = 1; row <= Rows; row++){
+        for (var row = 1; row <= Rows; row++) {
             for (var seat = 1; seat <= seatsPerRow; seat++) {
+                var seatDiv = $('<div></div>')
+                    .addClass('seat')
+                    .attr('data-row', row)
+                    .attr('data-seat', seat);
 
-                var SeatDiv = document.createElement('div')
-                SeatDiv.classList.add('seatBig')
+                var seatIdentifier = `Række: ${row}, Sæde: ${seat}`;
+                if (takenSeats.includes(seatIdentifier)) {
+                    seatDiv.addClass('taken');
+                }
 
-                SeatDiv.setAttribute('data-rowBig', row);
-                SeatDiv.setAttribute('data-seatBig', seat);
+                seatDiv.on('click', function () {
+                    if (!$(this).hasClass('taken')) {
+                        $(this).toggleClass('selected');
 
-                SeatDiv.addEventListener('click', function() {
-                    if (!this.classList.contains('taken')) {
-                        this.classList.toggle('selected');
-
-                        var rowNumb = this.getAttribute('data-rowBig');
-                        var seatNumb = this.getAttribute('data-seatBig');
+                        var rowNumb = $(this).attr('data-row');
+                        var seatNumb = $(this).attr('data-seat');
                         var showMessage = `Række: ${rowNumb}, Sæde: ${seatNumb}`;
 
-                        if (this.classList.contains('selected')) {
+                        if ($(this).hasClass('selected')) {
                             SelectSeats.push(showMessage);
                             ShowLogMessage(`Du har valgt ${showMessage}`);
                         } else {
                             SelectSeats = SelectSeats.filter(seat => seat !== showMessage);
-                            var logOutput = document.getElementById('log-outputBig');
-                            logOutput.innerHTML = logOutput.innerHTML.replace(`Du har valgt ${showMessage}<br>`, '');
-
+                            $('#log-outputBig').html($('#log-outputBig').html().replace(`Du har valgt ${showMessage}<br>`, ''));
                         }
                         TotalPriceCalc();
                     }
                 });
-                Seatmap.append(SeatDiv);
+
+                Seatmap.append(seatDiv);
             }
         }
     }
+
     function TotalPriceCalc() {
         var totalPrice = SelectSeats.length * PriceSeat;
-        document.getElementById('totalPrisBig').innerText = `Total pris: ${totalPrice} kr.`;
-
+        $('#totalPrisBig').text(`Total pris: ${totalPrice} kr.`);
     }
-    document.getElementById('buy-seatsBig').addEventListener('click', function () {
-        sessionStorage.setItem('selectedSeats', JSON.stringify(SelectSeats));
 
-        var totalPrice = SelectSeats.length * PriceSeat;
-        sessionStorage.setItem('totalPrice', totalPrice);
+    function LoadTakenSeats(movieTitle, showtime, date) {
+        $.getJSON("/api/tickets", function (data) {
+            data.forEach(function (ticket) {
+                if (ticket.movieTitle === movieTitle && ticket.showtime === showtime && ticket.date === date) {
+                    takenSeats = takenSeats.concat(ticket.selectedSeats);
+                }
+            });
+            SeatMapCreate(25, 16);
+        }).fail(function () {
+            console.error("Error fetching ticket data.");
+        });
+    }
 
-        window.location.href = '/SeatPickerEkstra';
+    $(document).ready(function () {
+        var movieTitle = sessionStorage.getItem('movieTitle');
+        var showtime = sessionStorage.getItem('showtime');
+        var date = sessionStorage.getItem('date');
+
+        LoadTakenSeats(movieTitle, showtime, date);
+
+        $('#buy-seatsBig').on('click', function () {
+            sessionStorage.setItem('selectedSeats', JSON.stringify(SelectSeats));
+            var totalPrice = SelectSeats.length * PriceSeat;
+            sessionStorage.setItem('totalPrice', totalPrice);
+            window.location.href = '/SeatPickerEkstra';
+        });
     });
-
-    SeatMapCreate(25, 16);
 </script>
-
-
-
-
-
 </body>
 </html>
