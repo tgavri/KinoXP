@@ -1,9 +1,7 @@
 package dk.kea.kinoxp;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,16 +30,25 @@ public class FragtmentController {
     public String OmOs() {
         return "OmOs";
     }
-    @GetMapping("/all")
-    public List<Shift> getAllShifts() {
-        return shifts;
+    @GetMapping("/shifts/all")
+    @ResponseBody
+    public String getAllShifts() {
+        return "workSchedule";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/shifts/add")
+    @ResponseBody
     public void addShift(@RequestBody Shift shift) {
         shifts.add(shift);
-
         System.out.println("Shift added: " + shift);
+    }
+
+
+    @DeleteMapping("/shifts/clear")
+    @ResponseBody
+    public void clearShifts() {
+        shifts.clear();
+        System.out.println("All shifts cleared.");
     }
 
 
