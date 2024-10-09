@@ -26,7 +26,7 @@ public class KinoController {
         return "main";
     }
 
-    @GetMapping("/Checkout")
+    @PostMapping("/Checkout")
     @ResponseBody
     public String saveTicket(
             @RequestParam("ticketID") String ticketID,
@@ -35,10 +35,7 @@ public class KinoController {
             @RequestParam("date") String date,
             @RequestParam("selectedSeats") String selectedSeats,
             @RequestParam("totalPrice") String totalPrice,
-            @RequestParam(value = "colaSmall", required = false) String colaSmall,
-            @RequestParam(value = "colaBig", required = false) String colaBig,
-            @RequestParam(value = "popcornSmall", required = false) String popcornSmall,
-            @RequestParam(value = "popcornBig", required = false) String popcornBig) throws JSONException {
+            @RequestParam("extras") String getExtras) throws JSONException {
 
         JSONObject ticketData = new JSONObject();
         ticketData.put("ticketID", ticketID);
@@ -46,23 +43,19 @@ public class KinoController {
         ticketData.put("showtime", showtime);
         ticketData.put("date", date);
 
-        JSONArray seatsArray = new JSONArray(selectedSeats.split("\\n"));
+        JSONArray seatsArray = new JSONArray(selectedSeats);
         ticketData.put("selectedSeats", seatsArray);
 
         ticketData.put("totalPrice", totalPrice);
 
-        JSONObject extras = new JSONObject();
-        extras.put("colaSmall", colaSmall != null ? colaSmall : "");
-        extras.put("colaBig", colaBig != null ? colaBig : "");
-        extras.put("popcornSmall", popcornSmall != null ? popcornSmall : "");
-        extras.put("popcornBig", popcornBig != null ? popcornBig : "");
+        JSONObject extras = new JSONObject(getExtras);
         ticketData.put("extras", extras);
 
-        // Save the ticket using the DataHandler
         dataHandler.saveTicket(ticketData);
 
         return "Ticket saved successfully!";
     }
+
 
     @GetMapping("/api/tickets")
     @ResponseBody

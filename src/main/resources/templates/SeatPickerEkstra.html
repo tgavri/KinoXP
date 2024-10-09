@@ -165,7 +165,43 @@
             sessionStorage.setItem('totalPrice', total);
         }
 
-        document.getElementById('betal-button').addEventListener('click', function() {
+
+        function generateTicketID() {
+            let ticketID = '';
+            for (let i = 0; i < 16; i++) {
+                ticketID += Math.floor(Math.random() * 10);
+            }
+            return ticketID;
+        }
+
+        function generateUniqueTicketID(callback) {
+            let ticketID = generateTicketID();
+
+            function checkTicketID() {
+                $.get('/api/tickets', function (data) {
+                    if (typeof data === 'string') {
+                        data = JSON.parse(data);
+                    }
+                    let existingIDs = data.tickets ? data.tickets.map(ticket => ticket.ticketID) : [];
+
+                    if (existingIDs.includes(ticketID)) {
+                        // Generate a new ticket ID and check again
+                        ticketID = generateTicketID();
+                        checkTicketID();
+                    } else {
+                        // Set the unique ticket ID in sessionStorage
+                        sessionStorage.setItem('ticketID', ticketID);
+                        // Execute the callback function with the generated ticketID
+                        callback(ticketID);
+                    }
+                });
+            }
+
+            // Start checking the generated ID
+            checkTicketID();
+        }
+
+        document.getElementById('betal-button').addEventListener('click', function () {
             const extras = {};
             document.querySelectorAll('.item-quantity').forEach(function (input) {
                 const itemName = input.dataset.itemName;
@@ -175,37 +211,46 @@
                 }
             });
 
-            for (const [key, value] of Object.entries(extras)) {
-                sessionStorage.setItem(key, value);
-            }
+            sessionStorage.setItem('extras', JSON.stringify(extras));
 
-            const ticketData = {
-                ticketID: sessionStorage.getItem('ticketID'),
-                movieTitle: sessionStorage.getItem('movieTitle'),
-                showtime: sessionStorage.getItem('showtime'),
-                date: sessionStorage.getItem('date'),
-                selectedSeats: JSON.parse(sessionStorage.getItem('selectedSeats')),
-                totalPrice: sessionStorage.getItem('totalPrice'),
-                extras: extras
-            };
+            generateUniqueTicketID(function (ticketID) {
+                const ticketData = {
+                    ticketID: ticketID,
+                    movieTitle: sessionStorage.getItem('movieTitle'),
+                    showtime: sessionStorage.getItem('showtime'),
+                    date: sessionStorage.getItem('date'),
+                    selectedSeats: JSON.stringify(selectedSeats),
+                    totalPrice: sessionStorage.getItem('totalPrice'),
+                    extras: JSON.stringify(extras)
+                };
 
-            fetch('/Checkout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(ticketData)
-            })
-                .then(response => response.text())
-                .then(data => {
-                    alert(data);
-                    window.location.href = '/CheckoutPage';
+                fetch('/Checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        ticketID: ticketData.ticketID,
+                        movieTitle: ticketData.movieTitle,
+                        showtime: ticketData.showtime,
+                        date: ticketData.date,
+                        selectedSeats: ticketData.selectedSeats,
+                        totalPrice: ticketData.totalPrice,
+                        extras: ticketData.extras
+                    })
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                    .then(response => response.text())
+                    .then(() => {
+                        window.location.href = '/CheckoutPage';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Der opstod en fejl ved gemning af billetten.');
+                    });
+            });
         });
     });
 </script>
+
 </body>
 </html>
