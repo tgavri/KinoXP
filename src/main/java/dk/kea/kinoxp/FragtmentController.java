@@ -10,6 +10,11 @@ public class FragtmentController {
         return "fragments/header";
     }
 
+    @GetMapping("/fragments/footer")
+    public String getIndexFooter() {
+        return "fragments/footer";
+    }
+
     @GetMapping("/fragments/cookies")
     public String getCookies() {
         return "fragments/cookies";
@@ -21,6 +26,10 @@ public class FragtmentController {
     @GetMapping("/cookiesshow")
     public String showCookiesInfo() {
         return "CookiesShow";
+    }
+    @GetMapping("/adminpanel")
+    public String showAdminPanel() {
+        return "adminpanel"; // This assumes you have a worker.html file in the templates folder
     }
 }
 
