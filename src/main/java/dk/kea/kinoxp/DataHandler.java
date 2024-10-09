@@ -8,11 +8,45 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataHandler {
 
     private static final String TICKET_FILE_PATH = "/app/src/main/resources/static/tickets.json";
 
+
+    private final List<Items> items = new ArrayList<>();
+
+    public DataHandler() {
+        items.add(new Items("Lille Popcorn", 20));
+        items.add(new Items("Stor Popcorn", 35));
+        items.add(new Items("Lille Cola", 20));
+        items.add(new Items("Stor Cola", 30));
+        items.add(new Items("Haribo Clickmix", 69));
+    }
+
+    public List<Items> getItems() {
+        return items;
+    }
+
+    public static class Items {   // MIDLERTIDIG TESTKLASSE
+        private final String name;
+        private final int price;
+
+        public Items(String name, int price) {
+            this.name = name;
+            this.price = price;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+    }
 
     public void saveTicket(JSONObject newTicket) {
         try {

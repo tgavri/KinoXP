@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class KinoController {
@@ -17,7 +18,9 @@ public class KinoController {
     private final DataHandler dataHandler = new DataHandler();
 
     @GetMapping("/CheckoutPage")
-    public String showCheckout() {
+    public String showCheckout(Model model) {
+        List<DataHandler.Items> items = dataHandler.getItems();
+        model.addAttribute("items", items);
         return "Checkout";
     }
     @GetMapping("/")
@@ -25,7 +28,7 @@ public class KinoController {
         return "main";
     }
 
-    @GetMapping("/Checkout")
+    @PostMapping("/Checkout")
     @ResponseBody
     public String saveTicket(
             @RequestParam("ticketID") String ticketID,
@@ -34,37 +37,27 @@ public class KinoController {
             @RequestParam("date") String date,
             @RequestParam("selectedSeats") String selectedSeats,
             @RequestParam("totalPrice") String totalPrice,
-            @RequestParam(value = "colaSmall", required = false) String colaSmall,
-            @RequestParam(value = "colaBig", required = false) String colaBig,
-            @RequestParam(value = "popcornSmall", required = false) String popcornSmall,
-            @RequestParam(value = "popcornBig", required = false) String popcornBig) throws JSONException {
+            @RequestParam("extras") String getExtras) throws JSONException {
 
-        // Create a JSONObject to hold the ticket data
         JSONObject ticketData = new JSONObject();
         ticketData.put("ticketID", ticketID);
         ticketData.put("movieTitle", movieTitle);
         ticketData.put("showtime", showtime);
         ticketData.put("date", date);
 
-        // Convert selectedSeats into a JSONArray
-        JSONArray seatsArray = new JSONArray(selectedSeats.split("\\n"));
+        JSONArray seatsArray = new JSONArray(selectedSeats);
         ticketData.put("selectedSeats", seatsArray);
 
         ticketData.put("totalPrice", totalPrice);
 
-        // Add extras (cola and popcorn) to the JSON object
-        JSONObject extras = new JSONObject();
-        extras.put("colaSmall", colaSmall != null ? colaSmall : "");
-        extras.put("colaBig", colaBig != null ? colaBig : "");
-        extras.put("popcornSmall", popcornSmall != null ? popcornSmall : "");
-        extras.put("popcornBig", popcornBig != null ? popcornBig : "");
+        JSONObject extras = new JSONObject(getExtras);
         ticketData.put("extras", extras);
 
-        // Save the ticket using the DataHandler
         dataHandler.saveTicket(ticketData);
 
         return "Ticket saved successfully!";
     }
+
 
     @GetMapping("/api/tickets")
     @ResponseBody
@@ -73,6 +66,7 @@ public class KinoController {
 
         return allTickets.toString();
     }
+
 
     @PutMapping("/api/tickets")
     @ResponseBody
@@ -95,5 +89,10 @@ public class KinoController {
             e.printStackTrace(); // Log the error for debugging
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete the ticket");
         }
+
+    @GetMapping("/api/items")
+    @ResponseBody
+    public List<DataHandler.Items> getItems() {
+        return dataHandler.getItems();
     }
 }

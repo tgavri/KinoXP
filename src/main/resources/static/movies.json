@@ -50,7 +50,8 @@
             "showtimes": [
               { "showtime": "10:30 AM", "hall": 1 },
               { "showtime": "03:45 PM", "hall": 2 },
-              { "showtime": "06:30 PM", "hall": 1 }
+              { "showtime": "06:30 PM", "hall": 1 },
+              { "showtime": "11:00 PM", "hall": 2}
             ]
           },
           "sun": {
@@ -295,7 +296,31 @@
             ]
           }
         }
+      },
+    {
+      "title": "Climax",
+      "poster": "../static/climax.png",
+      "description": "Diane and her boyfriend, ignore warnings and venture into a desert, facing treacherous situations. Their search for safety in a town fails as more perils emerge. Their ordeal focuses on uncovering the mastermind and surviving.",
+      "youtubeTrailer": "Z_82BfwRHq4",
+      "actors": [
+        "Mia Malkova",
+        "Renan Severo"
+      ],
+      "director": "Ram Gopal Varma",
+      "genre": "Action",
+      "playtime": "52 min",
+      "age": "Tilladt for børn over 18 år",
+      "weekday": {
+        "tue": {
+          "showtimes": [
+            {
+              "showtime": "11:00 PM",
+              "hall": 2
+            }
+          ]
+        }
       }
+    }
     ],
   "upcomingMovies": [
     {

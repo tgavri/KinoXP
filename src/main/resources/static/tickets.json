@@ -15,7 +15,172 @@
         "colaBig": ""
       },
       "movieTitle": "Find Nemo",
+
       "ticketID": "7313081453697177"
+
+      "ticketID": "8205935007334423"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 10, Sæde: 5"
+      ],
+      "totalPrice": "259",
+      "showtime": "06:30 PM",
+      "extras": {
+        "Lille Cola": "1",
+        "Stor Popcorn": "2",
+        "Haribo Clickmix": "1"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "2476575093616702"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 15, Sæde: 6",
+        "Række: 14, Sæde: 10",
+        "Række: 17, Sæde: 11"
+      ],
+      "totalPrice": "5061",
+      "showtime": "01:45 PM",
+      "extras": {
+        "Haribo Clickmix": "69"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "2476575093616702"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 15, Sæde: 9",
+        "Række: 15, Sæde: 10"
+      ],
+      "totalPrice": "48362",
+      "showtime": "11:30 AM",
+      "extras": {
+        "Haribo Clickmix": "698"
+      },
+      "movieTitle": "Weathering With You",
+      "ticketID": "2476575093616702"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 11, Sæde: 7",
+        "Række: 11, Sæde: 6"
+      ],
+      "totalPrice": "260",
+      "showtime": "02:30 PM",
+      "extras": {
+        "Stor Cola": "2"
+      },
+      "movieTitle": "Winnie the Pooh: Blood and Honey",
+      "ticketID": "2476575093616702"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 13, Sæde: 8",
+        "Række: 13, Sæde: 9"
+      ],
+      "totalPrice": "220",
+      "showtime": "07:45 PM",
+      "extras": {
+        "Lille Popcorn": "1"
+      },
+      "movieTitle": "Winnie the Pooh: Blood and Honey",
+      "ticketID": "null"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 15, Sæde: 10",
+        "Række: 15, Sæde: 9"
+      ],
+      "totalPrice": "200",
+      "showtime": "11:00 AM",
+      "extras": {},
+      "movieTitle": "Goebbels and the Führer",
+      "ticketID": "null"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 13, Sæde: 7",
+        "Række: 14, Sæde: 7"
+      ],
+      "totalPrice": "200",
+      "showtime": "11:00 AM",
+      "extras": {},
+      "movieTitle": "Goebbels and the Führer",
+      "ticketID": "null"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 21, Sæde: 9"
+      ],
+      "totalPrice": "130",
+      "showtime": "01:45 PM",
+      "extras": {
+        "Stor Cola": "1"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "null"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 17, Sæde: 7",
+        "Række: 17, Sæde: 8"
+      ],
+      "totalPrice": "200",
+      "showtime": "01:45 PM",
+      "extras": {},
+      "movieTitle": "Find Nemo",
+      "ticketID": "8874900275362179"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 14, Sæde: 8",
+        "Række: 15, Sæde: 8"
+      ],
+      "totalPrice": "200",
+      "showtime": "02:30 PM",
+      "extras": {},
+      "movieTitle": "Winnie the Pooh: Blood and Honey",
+      "ticketID": "4515805571498336"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 14, Sæde: 8",
+        "Række: 14, Sæde: 9"
+      ],
+      "totalPrice": "240",
+      "showtime": "09:30 AM",
+      "extras": {
+        "Lille Cola": "2"
+      },
+      "movieTitle": "Winnie the Pooh: Blood and Honey",
+      "ticketID": "7419790288279495"
+    },
+    {
+      "date": "09\/10\/2024",
+      "selectedSeats": [
+        "Række: 12, Sæde: 7",
+        "Række: 12, Sæde: 8"
+      ],
+      "totalPrice": "614",
+      "showtime": "04:15 PM",
+      "extras": {
+        "Haribo Clickmix": "6"
+      },
+      "movieTitle": "Weathering With You",
+      "ticketID": "6171414160371481"
+
     }
   ]
 }
