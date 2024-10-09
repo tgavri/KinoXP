@@ -23,6 +23,7 @@ public class KinoController {
         model.addAttribute("items", items);
         return "Checkout";
     }
+
     @GetMapping("/")
     public String showMainPage() {
         return "main";
@@ -67,8 +68,7 @@ public class KinoController {
         return allTickets.toString();
     }
 
-
-    @PutMapping("/api/tickets")
+    @PutMapping("/api/tickets/update")
     @ResponseBody
     public ResponseEntity<String> updateTicket(@RequestBody JSONObject updatedTicket) {
         try {
@@ -79,7 +79,8 @@ public class KinoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update the ticket");
         }
     }
-    @DeleteMapping("/api/tickets")
+
+    @DeleteMapping("/api/tickets/delete")
     @ResponseBody
     public ResponseEntity<String> deleteTicket(@RequestBody JSONObject ticketToDelete) {
         try {
@@ -89,10 +90,11 @@ public class KinoController {
             e.printStackTrace(); // Log the error for debugging
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete the ticket");
         }
+    }
 
     @GetMapping("/api/items")
-    @ResponseBody
-    public List<DataHandler.Items> getItems() {
-        return dataHandler.getItems();
+        @ResponseBody
+        public List<DataHandler.Items> getItems () {
+            return dataHandler.getItems();
     }
 }
