@@ -3,6 +3,8 @@ package dk.kea.kinoxp;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ public class KinoController {
         model.addAttribute("items", items);
         return "Checkout";
     }
+
     @GetMapping("/")
     public String showMainPage() {
         return "main";
@@ -65,9 +68,33 @@ public class KinoController {
         return allTickets.toString();
     }
 
-    @GetMapping("/api/items")
+    @PutMapping("/api/tickets/update")
     @ResponseBody
-    public List<DataHandler.Items> getItems() {
-        return dataHandler.getItems();
+    public ResponseEntity<String> updateTicket(@RequestBody JSONObject updatedTicket) {
+        try {
+            dataHandler.updateTicket(updatedTicket);
+            return ResponseEntity.ok("Ticket updated successfully");
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the error for debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update the ticket");
+        }
+    }
+
+    @DeleteMapping("/api/tickets/delete")
+    @ResponseBody
+    public ResponseEntity<String> deleteTicket(@RequestBody JSONObject ticketToDelete) {
+        try {
+            dataHandler.deleteTicket(ticketToDelete);
+            return ResponseEntity.ok("Ticket deleted successfully");
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the error for debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete the ticket");
+        }
+    }
+
+    @GetMapping("/api/items")
+        @ResponseBody
+        public List<DataHandler.Items> getItems () {
+            return dataHandler.getItems();
     }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KinoXP</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
@@ -34,6 +35,7 @@
 
 </div>
 
+<div id="footer-placeholder"></div>
 
 <script>
     $(document).ready(function () {
@@ -42,6 +44,8 @@
         // henter header fra fragments/header.html"
         $('#header-placeholder').load('/fragments/header');
         $('#cookie-placeholder').load('/fragments/cookies');
+        $('#footer-placeholder').load('/fragments/footer');
+
 
         const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
         const today = new Date();
