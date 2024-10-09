@@ -256,7 +256,7 @@
 
       if (confirm('Are you sure you want to delete this ticket?')) {
         $.ajax({
-          url: '/api/tickets',
+          url: '/api/tickets/delete',
           type: 'DELETE',
           contentType: 'application/json',
           data: JSON.stringify({ ticketID: ticketId }), // Send the ticket ID
@@ -297,7 +297,7 @@
 
       // Update the ticket in the JSON file via an API call
       $.ajax({
-        url: '/api/tickets',
+        url: '/api/tickets/update',
         type: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(updatedBooking),
