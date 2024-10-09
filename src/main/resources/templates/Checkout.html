@@ -1,206 +1,152 @@
-    <!DOCTYPE html>
-    <html lang="da">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Checkout</title>
-        <style>
-            .ContainerReceipt {
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: space-between;
-                color: black;
-                text-align: center;
-                background-color: #feffe1;
-                padding: 25px;
-                width: 80%;
-                max-width: 1000px;
-                margin: 0 auto;
-                border-radius: 10px;
-                box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-            }
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        .ContainerReceipt {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            color: black;
+            text-align: center;
+            background-color: #feffe1;
+            padding: 25px;
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
 
-            .TitleReceipt {
-                font-size: 34px;
-                margin-bottom: 24px;
-            }
+        .TitleReceipt {
+            font-size: 34px;
+            margin-bottom: 24px;
+        }
 
-            .TicketDetails {
-                text-align: left;
-                width: 60%;
-            }
+        .TicketDetails {
+            text-align: left;
+            width: 60%;
+        }
 
-            .TicketDetails p {
-                margin: 6px 0;
-                font-size: 20px;
-            }
+        .TicketDetails p {
+            margin: 6px 0;
+            font-size: 20px;
+        }
 
-            .PosterContainer {
-                width: 42%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+        .PosterContainer {
+            width: 42%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-            .PosterContainer img {
-                max-width: 100%;
-                border-radius: 12px;
-            }
+        .PosterContainer img {
+            max-width: 100%;
+            border-radius: 12px;
+        }
 
-            #selected-seats {
-                display: block;
-                white-space: pre-line;
-                font-size: 20px;
-                margin-top: 10px;
-            }
+        #selected-seats {
+            display: block;
+            white-space: pre-line;
+            font-size: 20px;
+            margin-top: 10px;
+        }
 
-            .total-price {
-                font-size: 27px;
-                font-weight: bold;
-                margin-top: 24px;
-            }
-            .printbutton {
-                display: block;
-                width: 15%;
-                margin-bottom: 4px;
-                height: 35px;
-                padding: 7px;
-                background-color: #000080;
-                color: white;
-                border-radius: 10px;
-                border: 2px solid;
-                text-align: center;
-                font-weight: bold;
-                cursor: pointer;
-            }
-        </style>
-    </head>
-    <body>
+        #extras-list {
+            display: block;
+            white-space: pre-line;
+            font-size: 20px;
+            margin-top: 10px;
+        }
 
-    <div class="ContainerReceipt">
-        <div class="TicketDetails">
-            <div class="TitleReceipt">KINOXP</div>
-            <p><strong>Standard Biografbillet - 1 visning</strong></p>
+        .total-price {
+            font-size: 27px;
+            font-weight: bold;
+            margin-top: 24px;
+        }
 
-            <p><strong>Film:</strong> <span id="movie-title"></span></p>
-            <p><strong>Showtime:</strong> <span id="showtime"></span></p>
-            <p><strong>Dato:</strong> <span id="date"></span></p>
-            <p><strong>Valgte Pladser:</strong> <span id="selected-seats"></span></p>
-            <p><strong>Sal: </strong> <span id="hall"></span></p>
+        .printbutton {
+            display: block;
+            width: 15%;
+            margin-bottom: 4px;
+            height: 35px;
+            padding: 7px;
+            background-color: #000080;
+            color: white;
+            border-radius: 10px;
+            border: 2px solid;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
 
-            <p><strong>Billet ID:</strong> <span id="ticket-id"></span></p>
+<div class="ContainerReceipt">
+    <div class="TicketDetails">
+        <div class="TitleReceipt">KINOXP</div>
+        <p><strong>Standard Biografbillet - 1 visning</strong></p>
 
-            <div id="extras"></div>
+        <p><strong>Film:</strong> <span id="movie-title"></span></p>
+        <p><strong>Showtime:</strong> <span id="showtime"></span></p>
+        <p><strong>Dato:</strong> <span id="date"></span></p>
+        <p><strong>Valgte Pladser:</strong> <span id="selected-seats"></span></p>
+        <p><strong>Ekstra:</strong> <span id="extras-list"></span></p>
+        <p><strong>Sal: </strong> <span id="hall"></span></p>
 
-            <div class="total-price">
-                <p><strong>Total Pris:</strong> <span id="total-price"></span> kr</p>
-            </div>
-            <button class="printbutton" onclick="window.print()">Print</button>
+        <p><strong>Billet ID:</strong> <span id="ticket-id"></span></p>
+
+        <div class="total-price">
+            <p><strong>Total Pris:</strong> <span id="total-price"></span> kr</p>
         </div>
-
-        <div class="PosterContainer">
-            <img id="movie-poster" src="" alt="Movie Poster">
-        </div>
+        <button class="printbutton" onclick="window.print()">Print</button>
     </div>
 
-    <script>
-        var movieTitle = sessionStorage.getItem('movieTitle');
-        var showtime = sessionStorage.getItem('showtime');
-        var date = sessionStorage.getItem('date');
-        var selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats'));
-        var hall = sessionStorage.getItem('hall');
-        var totalPrice = sessionStorage.getItem('totalPrice');
-        var colaSmall = sessionStorage.getItem('colaSmall') === 'true' ? 'Ja' : null;
-        var colaBig = sessionStorage.getItem('colaBig') === 'true' ? 'Ja' : null;
-        var popcornSmall = sessionStorage.getItem('popcornSmall') === 'true' ? 'Ja' : null;
-        var popcornBig = sessionStorage.getItem('popcornBig') === 'true' ? 'Ja' : null;
+    <div class="PosterContainer">
+        <img id="movie-poster" src="" alt="Movie Poster">
+    </div>
+</div>
 
-        function generateTicketID() {
-            let ticketID = '';
-            for (let i = 0; i < 16; i++) {
-                ticketID += Math.floor(Math.random() * 10);
-            }
-            return ticketID;
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+
+    $('#movie-title').text(sessionStorage.getItem('movieTitle'));
+    $('#showtime').text(sessionStorage.getItem('showtime'));
+    $('#date').text(sessionStorage.getItem('date'));
+    var selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats') || '[]');
+    if (selectedSeats.length > 0) {
+        $('#selected-seats').text(selectedSeats.join('\n'));
+    }
+    var extras = JSON.parse(sessionStorage.getItem('extras') || '{}');
+    if (Object.keys(extras).length > 0) {
+        var extrasText = Object.entries(extras)
+            .map(([item, quantity]) => `${item}: ${quantity}`)
+            .join('\n');
+        $('#extras-list').text(extrasText);
+    }
+    $('#hall').text(sessionStorage.getItem('hall'));
+    $('#ticket-id').text(sessionStorage.getItem('ticketID'));
+    $('#total-price').text(sessionStorage.getItem('totalPrice'));
+
+    $.getJSON('movies.json', function(data) {
+        const movieTitle = sessionStorage.getItem('movieTitle');
+        const movies = data.runningMovies;
+        const movie = movies.find(m => m.title === movieTitle);
+
+        if (movie) {
+            $('#movie-poster').attr('src', movie.poster);
+        } else {
+            $('#movie-poster').attr('alt', 'Poster not found');
         }
 
-        var ticketID = sessionStorage.getItem('ticketID');
-        if (!ticketID) {
-            ticketID = generateTicketID();
-            sessionStorage.setItem('ticketID', ticketID);
-        }
-        document.getElementById('ticket-id').textContent = ticketID;
-
-        document.getElementById('movie-title').textContent = movieTitle;
-        document.getElementById('showtime').textContent = showtime;
-        document.getElementById('date').textContent = date;
-
-        if (selectedSeats.length > 0) {
-            var seatText = selectedSeats.join('\n');
-            document.getElementById('selected-seats').textContent = seatText;
-        }
-        document.getElementById('hall').textContent = hall;
-        document.getElementById('total-price').textContent = totalPrice;
-        var extrasDiv = document.getElementById('extras');
-        if (colaSmall) {
-            extrasDiv.innerHTML += `<p><strong>Cola (Lille):</strong> ${colaSmall}</p>`;
-        }
-        if (colaBig) {
-            extrasDiv.innerHTML += `<p><strong>Cola (Stor):</strong> ${colaBig}</p>`;
-        }
-        if (popcornSmall) {
-            extrasDiv.innerHTML += `<p><strong>Popcorn (Lille):</strong> ${popcornSmall}</p>`;
-        }
-        if (popcornBig) {
-            extrasDiv.innerHTML += `<p><strong>Popcorn (Stor):</strong> ${popcornBig}</p>`;
-        }
-
-        fetch('movies.json')
-            .then(response => response.json())
-            .then(data => {
-                const movies = data.runningMovies;
-                const movie = movies.find(m => m.title === movieTitle);
-
-                if (movie) {
-                    document.getElementById('movie-poster').src = movie.poster;
-                } else {
-                    document.getElementById('movie-poster').alt = 'Poster not found';
-                }
-            });
-
-        function sendTicketDataToBackend() {
-            const ticketData = {
-                ticketID: ticketID,
-                movieTitle: movieTitle,
-                showtime: showtime,
-                date: date,
-                selectedSeats: selectedSeats.join("\n"),
-                totalPrice: totalPrice,
-                colaSmall: colaSmall || "",
-                colaBig: colaBig || "",
-                popcornSmall: popcornSmall || "",
-                popcornBig: popcornBig || ""
-            };
-
-            const urlParams = new URLSearchParams(ticketData).toString();
-            const url = `/Checkout?${urlParams}`;
-
-            fetch(url, {
-                method: 'GET',
-            })
-                .then(response => response.text())
-                .then(data => {
-                    console.log('Ticket saved:', data);
-                })
-                .catch(error => {
-                    console.error('Error saving ticket:', error);
-                });
-        }
-
-        window.onload = function() {
-            sendTicketDataToBackend();
-        };
-    </script>
-
-    </body>
-    </html>
+        setTimeout(function() {
+            sessionStorage.clear();
+        }, 500);
+    });
+</script>
+</body>
+</html>
