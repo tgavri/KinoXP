@@ -120,23 +120,14 @@
 <div class="Background-containerSeatEkstra">
 
     <div class="ContainerSeatEkstra">
-
         <div class="TitleSeatEkstra">Ekstra køb</div>
-            <div>Valgte Pladser
-                <div id="selected-seats"></div>
-            </div>
-                <div>
-                    <label>Cola lille: <input type="checkbox" id="Cola-Small"></label><br>
-                    <label>Cola Stor: <input type="checkbox" id="Cola-Big"></label><br>
-                    <label>Popcorn lille: <input type="checkbox" id="Pop-lille"></label><br>
-                    <label>Popcorn Stor: <input type="checkbox" id="Pop-Big"></label><br>
-
-                </div>
-                    <div></div>
-                <div>
-                    <p id="totalPrisEkstra">Pris</p>
-                </div>
-
+        <div>Valgte Pladser
+            <div id="selected-seats"></div>
+        </div>
+        <div id="items-container"></div>
+        <div>
+            <p id="totalPrisEkstra">Pris</p>
+        </div>
         <div class="purchase">
             <span id="betal-button">Betal</span>
         </div>
@@ -144,25 +135,63 @@
 </div>
 
 <script>
-    var selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats'));
-    var totalPrice = sessionStorage.getItem('totalPrice');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fetch the list of items from the server
+        fetch('/api/items')
+            .then(response => response.json())
+            .then(items => {
+                const itemsContainer = document.getElementById('items-container');
+                let itemsHtml = '';
 
-    var seatsSelected = document.getElementById('selected-seats');
-    seatsSelected.innerHTML = selectedSeats.join();
+                items.forEach(item => {
+                    itemsHtml += `
+                        <label>${item.name}: ${item.price} kr</label>
+                        <input type="number" min="0" value="0" class="item-quantity"
+                               data-item-name="${item.name}" data-item-price="${item.price}">
+                        <br>`;
+                });
+                itemsContainer.innerHTML = itemsHtml;
+                document.querySelectorAll('.item-quantity').forEach(input => {
+                    input.addEventListener('input', updateTotalPrice);
+                });
+            });
 
-    var PriceTotal = document.getElementById('totalPrisEkstra');
-    PriceTotal.innerHTML = totalPrice + ' kr';
+        var selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats'));
+        var totalPrice = parseFloat(sessionStorage.getItem('totalPrice')) || 0;
+        var seatsSelected = document.getElementById('selected-seats');
 
-    document.getElementById('betal-button').addEventListener('click', function() {              // @LAURITS hvis du tilføjer nedenstående til session et andet sted, så bare slet
-        sessionStorage.setItem('colaSmall', document.getElementById('Cola-Small').checked);     // dem herfra. Evt. gør at i stedet for at det er ja / nej for ekstra, så tilføj antal på hver
-        sessionStorage.setItem('colaBig', document.getElementById('Cola-Big').checked);
-        sessionStorage.setItem('popcornSmall', document.getElementById('Pop-lille').checked);
-        sessionStorage.setItem('popcornBig', document.getElementById('Pop-Big').checked);
+        seatsSelected.innerHTML = selectedSeats.join();
 
-        window.location.href = '/Checkout';
+        var PriceTotal = document.getElementById('totalPrisEkstra');
+        updateTotalPrice();
+
+        function updateTotalPrice() {
+            var total = parseFloat(totalPrice);
+            document.querySelectorAll('.item-quantity').forEach(function (input) {
+                var quantity = parseInt(input.value) || 0;
+                var price = parseInt(input.dataset.itemPrice);
+                total += quantity * price;
+            });
+            PriceTotal.innerHTML = total + ' kr';
+            sessionStorage.setItem('totalPrice', total);
+        }
+
+        document.getElementById('betal-button').addEventListener('click', function() {
+            var extras = {};
+            document.querySelectorAll('.item-quantity').forEach(function (input) {
+                var itemName = input.dataset.itemName;
+                var quantity = input.value;
+                if (quantity > 0) {
+                    extras[itemName] = quantity;
+                }
+            });
+
+            for (const [key, value] of Object.entries(extras)) {
+                sessionStorage.setItem(key, value);
+            }
+
+            window.location.href = '/CheckoutPage';
+        });
     });
-
-
-
-
 </script>
+

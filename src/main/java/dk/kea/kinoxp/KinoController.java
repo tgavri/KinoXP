@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class KinoController {
@@ -15,7 +16,9 @@ public class KinoController {
     private final DataHandler dataHandler = new DataHandler();
 
     @GetMapping("/CheckoutPage")
-    public String showCheckout() {
+    public String showCheckout(Model model) {
+        List<DataHandler.Items> items = dataHandler.getItems();
+        model.addAttribute("items", items);
         return "Checkout";
     }
     @GetMapping("/")
@@ -37,20 +40,17 @@ public class KinoController {
             @RequestParam(value = "popcornSmall", required = false) String popcornSmall,
             @RequestParam(value = "popcornBig", required = false) String popcornBig) throws JSONException {
 
-        // Create a JSONObject to hold the ticket data
         JSONObject ticketData = new JSONObject();
         ticketData.put("ticketID", ticketID);
         ticketData.put("movieTitle", movieTitle);
         ticketData.put("showtime", showtime);
         ticketData.put("date", date);
 
-        // Convert selectedSeats into a JSONArray
         JSONArray seatsArray = new JSONArray(selectedSeats.split("\\n"));
         ticketData.put("selectedSeats", seatsArray);
 
         ticketData.put("totalPrice", totalPrice);
 
-        // Add extras (cola and popcorn) to the JSON object
         JSONObject extras = new JSONObject();
         extras.put("colaSmall", colaSmall != null ? colaSmall : "");
         extras.put("colaBig", colaBig != null ? colaBig : "");
@@ -70,5 +70,11 @@ public class KinoController {
         JSONArray allTickets = dataHandler.getAllTickets();
 
         return allTickets.toString();
+    }
+
+    @GetMapping("/api/items")
+    @ResponseBody
+    public List<DataHandler.Items> getItems() {
+        return dataHandler.getItems();
     }
 }
