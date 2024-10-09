@@ -68,7 +68,6 @@
 <body>
 <div id="header-placeholder">
 
-    <h1>Header Placeholder</h1>
 </div>
 
 <div class="backgroundOmos">
@@ -136,7 +135,7 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#header-placeholder').load('/fragments/header'); // ensure this path is correct
+        $('#header-placeholder').load('/fragments/header');
         $('a').on('click', function(event) {
             if (this.hash !== "") {
                 event.preventDefault();

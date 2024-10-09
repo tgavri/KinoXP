@@ -22,5 +22,14 @@ public class FragtmentController {
     public String showCookiesInfo() {
         return "CookiesShow";
     }
+    @GetMapping("/Omos")
+    public String OmOs() {
+        return "OmOs";
+    }
+    @GetMapping("/ArbejdsKalender")
+    public String arbejdsKalender() {
+        return "workSchedule";
+    }
+
 }
 
