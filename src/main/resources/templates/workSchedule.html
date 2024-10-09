@@ -38,9 +38,25 @@
             background-color: #007bff;
             color: white;
         }
-        td input[type="text"], td input[type="time"] {
-            width: 90%;
+        .worker-input {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+        .worker-input input[type="text"] {
             padding: 5px;
+            margin-right: 5px;
+            width: 40%;
+        }
+        .worker-input input[type="button"] {
+            padding: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .worker-input input[type="button"]:hover {
+            background-color: #0056b3;
         }
         .opretKnap {
             display: block;
@@ -56,68 +72,198 @@
         .opretKnap:hover {
             background-color: #0056b3;
         }
+        .workers-list {
+            text-align: left;
+            margin-top: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        /* Navigation buttons */
+        .nav-buttons {
+            text-align: center;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
 <h1>ArbejdsUge</h1>
+<div class="nav-buttons">
+    <button class="opretKnap" onclick="previousWeek()">Forrige Uge</button>
+    <button class="opretKnap" onclick="nextWeek()">Næste Uge</button>
+</div>
 <div class="schedule-container">
     <table>
         <thead>
         <tr>
-            <th>Dag</th>
-            <th>Dato</th>
-            <th>Start Tid</th>
-            <th>Slut Tid</th>
+            <th>Mandag<br><span id="date-0"></span></th>
+            <th>Tirsdag<br><span id="date-1"></span></th>
+            <th>Onsdag<br><span id="date-2"></span></th>
+            <th>Torsdag<br><span id="date-3"></span></th>
+            <th>Fredag<br><span id="date-4"></span></th>
+            <th>Lørdag<br><span id="date-5"></span></th>
+            <th>Søndag<br><span id="date-6"></span></th>
         </tr>
         </thead>
-        <tbody id="calender-body"></tbody>
+        <tbody id="calendar-body">
+        <tr>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-0" placeholder="Navn">
+                    <input type="text" id="task-0" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(0)">
+                </div>
+                <div id="workers-0" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-1" placeholder="Navn">
+                    <input type="text" id="task-1" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(1)">
+                </div>
+                <div id="workers-1" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-2" placeholder="Navn">
+                    <input type="text" id="task-2" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(2)">
+                </div>
+                <div id="workers-2" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-3" placeholder="Navn">
+                    <input type="text" id="task-3" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(3)">
+                </div>
+                <div id="workers-3" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-4" placeholder="Navn">
+                    <input type="text" id="task-4" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(4)">
+                </div>
+                <div id="workers-4" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-5" placeholder="Navn">
+                    <input type="text" id="task-5" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(5)">
+                </div>
+                <div id="workers-5" class="workers-list"></div>
+            </td>
+            <td>
+                <div class="worker-input">
+                    <input type="text" id="worker-6" placeholder="Navn">
+                    <input type="text" id="task-6" placeholder="Opgave">
+                    <input type="button" value="Tilføj" onclick="addWorker(6)">
+                </div>
+                <div id="workers-6" class="workers-list"></div>
+            </td>
+        </tr>
+        </tbody>
     </table>
 </div>
-<button class="opretKnap" onclick="submitShifts()">Opret Vagt</button>
+<button class="opretKnap" onclick="submitShifts()">Opret Vagter</button>
 
 <script>
-    function genererUgeDage(){
-        const idag = new Date();
-        const ugeStart = idag.getDate() - idag.getDay() + 1;
-        const kalender = document.getElementById("calender-body");
+    let currentWeekStartDate; // Variable to store the start date of the current week
 
-        const dage = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
+    // Function to generate the current week's dates starting from the currentWeekStartDate
+    function generateWeekDays() {
+        const today = new Date(currentWeekStartDate);
+        const weekStart = today.getDate() - today.getDay() + 1; // Monday
+        const days = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
 
-        for(let i = 0; i < 7; i++){
-            const dagsDato = new Date(idag.setDate(ugeStart + i));
-            const dag = String(dagsDato.getDate()).padStart(2, '0');
-            const mdr = String(dagsDato.getMonth() + 1).padStart(2, '0');
-            const år = dagsDato.getFullYear();
+        for (let i = 0; i < 7; i++) {
+            // Calculate the date for the current day
+            const currentDate = new Date(today.setDate(weekStart + i));
+            const dayFormatted = String(currentDate.getDate()).padStart(2, '0');
+            const monthFormatted = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const yearFormatted = currentDate.getFullYear();
+            const formattedDate = `${dayFormatted}-${monthFormatted}-${yearFormatted}`;
 
-            const formattedDate = `${dag}-${mdr}-${år}`;
-            const row = `
-            <tr>
-                <td>${dage[i]}</td>
-                <td>${formattedDate}</td>
-                <td><input type="time" id="start-${dage[i].toLowerCase()}" value="08:00"></td>
-                <td><input type="time" id="end-${dage[i].toLowerCase()}" value="24:00"></td>
-            </tr>
-        `;
-            calendarBody.innerHTML += row;
+            // Set the date next to the weekday
+            document.getElementById(`date-${i}`).innerText = formattedDate;
         }
     }
-    function submitShifts() {
-        let shifts = {};
-        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
 
+    // Function to add a worker's name and task to the day's worker list
+    function addWorker(dayIndex) {
+        const workerInput = document.getElementById(`worker-${dayIndex}`);
+        const taskInput = document.getElementById(`task-${dayIndex}`);
 
-        days.forEach(day => {
-            const startTime = document.getElementById(`start-${day}`).value;
-            const endTime = document.getElementById(`end-${day}`).value;
-            shifts[day] = { startTime, endTime };
-        });
+        const workerName = workerInput.value;
+        const taskName = taskInput.value;
 
+        if (workerName && taskName) {
+            const workersDiv = document.getElementById(`workers-${dayIndex}`);
+            const workerEntry = document.createElement("div");
+            workerEntry.innerText = `${workerName}: ${taskName}`; // Display the worker and task
+            workersDiv.appendChild(workerEntry);
 
-        alert("Oprettet Vagt!");
+            // Clear the input fields
+            workerInput.value = "";
+            taskInput.value = "";
+        } else {
+            alert("Indtast både navn og opgave!");
+        }
     }
 
+    // Function to handle shift submission and store them in an array
+    function submitShifts() {
+        let shiftsArray = []; // Reset the array on every submission
+        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
 
-    window.onload = genererUgeDage;
+        // Loop through each day and collect the worker names and tasks
+        days.forEach((day, index) => {
+            const workersDiv = document.getElementById(`workers-${index}`);
+            const workers = workersDiv.getElementsByTagName("div");
+
+            // Collect each worker's information
+            Array.from(workers).forEach(workerDiv => {
+                const [worker, task] = workerDiv.innerText.split(': ');
+                const shift = {
+                    day: day.charAt(0).toUpperCase() + day.slice(1), // Capitalize first letter
+                    worker: worker.trim(),
+                    task: task.trim(),
+                    date: document.getElementById(`date-${index}`).innerText
+                };
+
+                shiftsArray.push(shift);
+            });
+        });
+
+        // Log the shifts array (you can replace this with any action like saving to server)
+        console.log(shiftsArray);
+        alert("Vagter er blevet gemt!"); // Display a message when shifts are saved
+    }
+
+    // Function to go to the next week
+    function nextWeek() {
+        currentWeekStartDate.setDate(currentWeekStartDate.getDate() + 7);
+        generateWeekDays();
+    }
+
+    // Function to go to the previous week
+    function previousWeek() {
+        currentWeekStartDate.setDate(currentWeekStartDate.getDate() - 7);
+        generateWeekDays();
+    }
+
+    // Initialize the current week start date
+    function initializeCurrentWeek() {
+        const today = new Date();
+        const weekStart = today.getDate() - today.getDay() + 1; // Monday
+        currentWeekStartDate = new Date(today.setDate(weekStart)); // Set the start date of the current week
+        generateWeekDays();
+    }
+
+    // Generate the week's schedule when the page loads
+    window.onload = initializeCurrentWeek;
 </script>
 </body>
 </html>
+
