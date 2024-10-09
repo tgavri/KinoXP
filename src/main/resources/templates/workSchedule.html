@@ -256,8 +256,8 @@
 
     function initializeCurrentWeek() {
         const today = new Date();
-        const weekStart = today.getDate() - today.getDay() + 1; // Monday
-        currentWeekStartDate = new Date(today.setDate(weekStart)); // Set the start date of the current week
+        const weekStart = today.getDate() - today.getDay() + 1;
+        currentWeekStartDate = new Date(today.setDate(weekStart));
         generateWeekDays();
     }
 
