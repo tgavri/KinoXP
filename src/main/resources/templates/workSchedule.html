@@ -83,6 +83,9 @@
             text-align: center;
             margin: 20px;
         }
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -166,11 +169,11 @@
         </tbody>
     </table>
 </div>
-<button class="opretKnap" onclick="submitShifts()">Opret Vagter</button>
+<a href="/adminpanel"> <button class="opretKnap" onclick="submitShifts()">Opret Vagter og tilbage til adminpanel</button></a>
 
 <script>
+    let shiftsData = {};
     let currentWeekStartDate;
-
 
     function generateWeekDays() {
         const today = new Date(currentWeekStartDate);
@@ -178,18 +181,28 @@
         const days = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
 
         for (let i = 0; i < 7; i++) {
-
             const currentDate = new Date(today.setDate(weekStart + i));
             const dayFormatted = String(currentDate.getDate()).padStart(2, '0');
             const monthFormatted = String(currentDate.getMonth() + 1).padStart(2, '0');
             const yearFormatted = currentDate.getFullYear();
             const formattedDate = `${dayFormatted}-${monthFormatted}-${yearFormatted}`;
 
-
             document.getElementById(`date-${i}`).innerText = formattedDate;
+
+
+            const workersDiv = document.getElementById(`workers-${i}`);
+            workersDiv.innerHTML = '';
+
+
+            if (shiftsData[formattedDate]) {
+                shiftsData[formattedDate].forEach(shift => {
+                    const workerEntry = document.createElement("div");
+                    workerEntry.innerText = `${shift.worker}: ${shift.task}`;
+                    workersDiv.appendChild(workerEntry);
+                });
+            }
         }
     }
-
 
     function addWorker(dayIndex) {
         const workerInput = document.getElementById(`worker-${dayIndex}`);
@@ -200,59 +213,55 @@
 
         if (workerName && taskName) {
             const workersDiv = document.getElementById(`workers-${dayIndex}`);
-            const workerEntry = document.createElement("div");
-            workerEntry.innerText = `${workerName}: ${taskName}`;
-            workersDiv.appendChild(workerEntry);
+            const date = document.getElementById(`date-${dayIndex}`).innerText;
 
 
-            workerInput.value = "";
-            taskInput.value = "";
+            if (!shiftsData[date]) {
+                shiftsData[date] = [];
+            }
+
+
+            const existingShift = shiftsData[date].find(shift => shift.worker === workerName.trim() && shift.task === taskName.trim());
+
+
+            if (!existingShift) {
+                shiftsData[date].push({
+                    day: dayIndex,
+                    worker: workerName.trim(),
+                    task: taskName.trim()
+                });
+
+
+                const workerEntry = document.createElement("div");
+                workerEntry.innerText = `${workerName}: ${taskName}`;
+                workersDiv.appendChild(workerEntry);
+
+
+                workerInput.value = "";
+                taskInput.value = "";
+            } else {
+                alert("Denne vagt findes allerede for denne dato!");
+            }
         } else {
             alert("Indtast både navn og opgave!");
         }
     }
 
-
     function submitShifts() {
-        let shiftsArray = [];
-        const days = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
 
-
-        days.forEach((day, index) => {
-            const workersDiv = document.getElementById(`workers-${index}`);
-            const workers = workersDiv.getElementsByTagName("div");
-
-
-            Array.from(workers).forEach(workerDiv => {
-                const [worker, task] = workerDiv.innerText.split(': ');
-                const shift = {
-                    day: day.charAt(0).toUpperCase() + day.slice(1), // Capitalize first letter
-                    worker: worker.trim(),
-                    task: task.trim(),
-                    date: document.getElementById(`date-${index}`).innerText
-                };
-
-                shiftsArray.push(shift);
-            });
-        });
-
-
-        console.log(shiftsArray);
+        console.log(shiftsData);
         alert("Vagter er blevet gemt!");
     }
-
 
     function nextWeek() {
         currentWeekStartDate.setDate(currentWeekStartDate.getDate() + 7);
         generateWeekDays();
     }
 
-
     function previousWeek() {
         currentWeekStartDate.setDate(currentWeekStartDate.getDate() - 7);
         generateWeekDays();
     }
-
 
     function initializeCurrentWeek() {
         const today = new Date();
@@ -261,8 +270,9 @@
         generateWeekDays();
     }
 
-
     window.onload = initializeCurrentWeek;
+
+
 </script>
 </body>
 </html>
