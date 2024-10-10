@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kino</title>
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
 
@@ -15,13 +15,20 @@
         const navbar = `
             <header>
             <div class="navbar">
-                <div class="brand">Kino</div>
-                <button class="menu">Menu</button>
+               <a href="/" class="brand">
+                <img src="https://play-lh.googleusercontent.com/t1NV21ZDfEb_PKu5TL2xNpJpFOZbbGyDs_KqM-dvIU4PZQLOheOrzYVR2d1kE0JNQae7=w480-h960" alt="Kino Logo" class="logo">
+                <span class="brand-text">Din billet til uforglemmelige øjeblikke!</span>
+                </a>
+              <button class="menu">Menu</button>
                 <div class="dropdown-content">
                     <a href="/">Forside</a>
                     <a href="/upcoming">Kommende film</a>
-                    <a href="#">Om os</a>
-                    <a href="#">Log ind</a>
+
+                    <a href="/Omos">Om os</a>
+                    <a id="admin-link" href="/adminpanel" style="display: none;">Medarbejder Panel</a>
+                    <a id="login-link" href="#">Log ind</a>
+                    <a id="logout-link" href="#" style="display: none;">Log ud</a>
+
                 </div>
             </div>
             </header>
@@ -86,31 +93,52 @@
             const username = $('#username').val();
             const password = $('#password').val();
 
-            // Here you can handle the login (e.g., send a request to your server)
-            console.log('Username:', username, 'Password:', password);
-            // Validate the input (you can add your own validation logic)
+            // Validate the input
             if (username === '' || password === '') {
                 alert('Please enter both username and password.');
                 return;
             }
 
-            // Example action: show an alert with the input values
-            alert('Logging in with:\nUsername: ' + username + '\nPassword: ' + password);
+            // Send login request
+            $.post('/api/login', {username, password})
+                .done(function (response) {
+                    alert(response);
+                    $('#loginModal').css('display', 'none'); // Close modal after successful login
+                    sessionStorage.setItem('isLoggedIn', 'true'); // Set login status
+                    updateLoginStatus(); // Update links based on login statu
+                    window.location.href = '/adminpanel'; // Change to your worker page URL
 
-            // fremtidig kode til processering af brugernavn, kode.
-            // $.post('/your-login-endpoint', { username, password })
-            //     .done(function(response) {
-            //         // Handle successful login response
-            //     })
-            //     .fail(function() {
-            //         // Handle login failure
-            //         alert('Login failed. Please try again.');
-            //     });
-
-            // For demonstration, close the modal after submission
-            $('#loginModal').css('display', 'none');
+                })
+                .fail(function () {
+                    alert('Login failed. Please try again.');
+                });
         });
 
+        // Update the visibility of login/logout links
+        function updateLoginStatus() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+
+            if (isLoggedIn) {
+                $('#login-link').hide(); // Hide login link
+                $('#admin-link').show(); // Show admin panel link
+                $('#logout-link').show(); // Show logout link
+            } else {
+                $('#admin-link').hide(); // Hide admin panel link
+                $('#logout-link').hide(); // Hide logout link
+            }
+        }
+
+        // Check login status on page load
+        updateLoginStatus();
+
+        // Handle logout
+        $('#logout-link').on('click', function (e) {
+            e.preventDefault();
+            sessionStorage.removeItem('isLoggedIn'); // Remove login status
+            updateLoginStatus(); // Update links based on login status
+            alert('Du er hermed logget ud.'); // Optional logout message
+            window.location.href = '/'; // Change to your worker page URL
+        });
     });
 </script>
 

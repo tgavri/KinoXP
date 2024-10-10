@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oversigt</title>
-    <script>src="https://code.jquery.com/jquery-3.7.1.min.js"</script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
-
         .ContainerSeatEkstra {
             display: flex;
             flex-direction: column;
@@ -18,8 +19,8 @@
             padding: 20px;
             width: 80%;
             max-width: 1200px;
-
         }
+
         .Background-containerSeatEkstra {
             width: 100vw;
             height: 100vh;
@@ -31,138 +32,233 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
 
-            .ScreenSeatEkstra {
-                color: white;
-                background-color: darkblue;
-                height: 50px;
-                width: 400px;
-                text-align: center;
-                line-height: 50px;
-            }
-            #selected-seats {
-                margin: 10px;
-                height: 50px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: darkblue;
-            }
-            .TitleSeatEkstra {
-                font-size: 30px;
-                margin: 20px 20px;
-                padding: 10px 10px;
-                height: 40px;
-                text-align: left;
-            }
-            #log-outputEkstra {
-                color: black;
-                margin-top: 20px;
-                padding: 10px;
-                border: 1px solid #ccc;
-                background-color: #f0f0f0;
-                max-height: 150px;
-            }
-            #seat-mapEkstra {
-                justify-content: center;
-                margin: 20px 20px;
-                grid-gap: 5px;
-                grid-template-columns: repeat(12, 20px);
-                display: grid;
-            }
-            .seatEkstra {
-                cursor: pointer;
-                width: 20px;
-                height: 20px;
-                background-color: green;
-                border: 1px black;
-            }
-            .seat.selectedEkstra {
-                background-color: blue;
-                cursor: pointer;
-            }
-            .seatEkstra:hover:not(taken) {
-                background-color: white;
-            }
+        .TitleSeatEkstra {
+            font-size: 30px;
+            margin: 20px;
+            text-align: left;
+        }
 
-            #buy-seatsEkstra {
-                padding: 10px 20px;
-                background-color: darkblue;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            #totalPrisEkstra {
-                font-family: Arial,serif;
-            }
+        #selected-seats {
+            margin: 10px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: darkblue;
+            color: white;
+            border-radius: 5px;
+            padding: 10px;
+        }
 
-            .purchase {
-                display: block;
-                width: 15%;
-                margin-bottom: 4px;
-                height: 18px;
-                padding: 7px;
-                background-color: #000080;
-                color: white;
-                border-radius: 10px;
-                border: 2px solid;
-                text-align: center;
-                font-weight: bold;
-                cursor: pointer;
-            }
+        #items-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background-color: #1e1e1e;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .item-row label {
+            flex: 1;
+            color: #fff;
+        }
+
+        .item-row input {
+            width: 60px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        #totalPrisEkstra {
+            font-family: Arial, serif;
+            margin-top: 20px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .purchase {
+            display: block;
+            width: 15%;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #000080;
+            color: white;
+            border-radius: 10px;
+            border: 2px solid;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
-
-
 </head>
 <body>
+<div id="header-placeholder"></div>
 <div class="Background-containerSeatEkstra">
-
     <div class="ContainerSeatEkstra">
-
         <div class="TitleSeatEkstra">Ekstra køb</div>
-            <div>Valgte Pladser
-                <div id="selected-seats"></div>
-            </div>
-                <div>
-                    <label>Cola lille: <input type="checkbox" id="Cola-Small"></label><br>
-                    <label>Cola Stor: <input type="checkbox" id="Cola-Big"></label><br>
-                    <label>Popcorn lille: <input type="checkbox" id="Pop-lille"></label><br>
-                    <label>Popcorn Stor: <input type="checkbox" id="Pop-Big"></label><br>
-
-                </div>
-                    <div></div>
-                <div>
-                    <p id="totalPrisEkstra">Pris</p>
-                </div>
-
+        <div>Valgte Pladser
+            <div id="selected-seats"></div>
+        </div>
+        <div id="items-container"></div>
+        <div>
+            <p id="totalPrisEkstra">Pris</p>
+        </div>
         <div class="purchase">
             <span id="betal-button">Betal</span>
         </div>
     </div>
 </div>
+<div id="footer-placeholder"></div>
 
 <script>
-    var selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats'));
-    var totalPrice = sessionStorage.getItem('totalPrice');
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#header-placeholder').load('/fragments/header');
+        $('#cookie-placeholder').load('/fragments/cookies');
+        $('#footer-placeholder').load('/fragments/footer');
 
-    var seatsSelected = document.getElementById('selected-seats');
-    seatsSelected.innerHTML = selectedSeats.join();
+        fetch('/api/items')
+            .then(response => response.json())
+            .then(items => {
+                const itemsContainer = document.getElementById('items-container');
+                let itemsHtml = '';
 
-    var PriceTotal = document.getElementById('totalPrisEkstra');
-    PriceTotal.innerHTML = totalPrice + ' kr';
+                items.forEach(item => {
+                    itemsHtml += `
+                    <div class="item-row">
+                        <label>${item.name}: ${item.price} kr</label>
+                        <input type="number" min="0" value="0" class="item-quantity"
+                               data-item-name="${item.name}" data-item-price="${item.price}">
+                    </div>`;
+                });
 
-    document.getElementById('betal-button').addEventListener('click', function() {              // @LAURITS hvis du tilføjer nedenstående til session et andet sted, så bare slet
-        sessionStorage.setItem('colaSmall', document.getElementById('Cola-Small').checked);     // dem herfra. Evt. gør at i stedet for at det er ja / nej for ekstra, så tilføj antal på hver
-        sessionStorage.setItem('colaBig', document.getElementById('Cola-Big').checked);
-        sessionStorage.setItem('popcornSmall', document.getElementById('Pop-lille').checked);
-        sessionStorage.setItem('popcornBig', document.getElementById('Pop-Big').checked);
+                itemsContainer.innerHTML = itemsHtml;
 
-        window.location.href = '/CheckoutPage';
+                document.querySelectorAll('.item-quantity').forEach(input => {
+                    input.addEventListener('input', updateTotalPrice);
+                });
+            });
+
+        const selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats')) || [];
+        let totalPrice = parseFloat(sessionStorage.getItem('totalPrice')) || 0;
+
+        const seatsSelected = document.getElementById('selected-seats');
+        seatsSelected.innerHTML = selectedSeats.join(', ');
+
+        const PriceTotal = document.getElementById('totalPrisEkstra');
+        updateTotalPrice();
+
+        function updateTotalPrice() {
+            let total = parseFloat(totalPrice);
+            document.querySelectorAll('.item-quantity').forEach(function (input) {
+                const quantity = parseInt(input.value) || 0;
+                const price = parseInt(input.dataset.itemPrice);
+                total += quantity * price;
+            });
+            PriceTotal.innerHTML = total + ' kr';
+            sessionStorage.setItem('totalPrice', total);
+        }
+
+
+        function generateTicketID() {
+            let ticketID = '';
+            for (let i = 0; i < 16; i++) {
+                ticketID += Math.floor(Math.random() * 10);
+            }
+            return ticketID;
+        }
+
+        function generateUniqueTicketID(callback) {
+            let ticketID = generateTicketID();
+
+            function checkTicketID() {
+                $.get('/api/tickets', function (data) {
+                    if (typeof data === 'string') {
+                        data = JSON.parse(data);
+                    }
+                    let existingIDs = data.tickets ? data.tickets.map(ticket => ticket.ticketID) : [];
+
+                    if (existingIDs.includes(ticketID)) {
+                        // Generate a new ticket ID and check again
+                        ticketID = generateTicketID();
+                        checkTicketID();
+                    } else {
+                        // Set the unique ticket ID in sessionStorage
+                        sessionStorage.setItem('ticketID', ticketID);
+                        // Execute the callback function with the generated ticketID
+                        callback(ticketID);
+                    }
+                });
+            }
+
+            // Start checking the generated ID
+            checkTicketID();
+        }
+
+        document.getElementById('betal-button').addEventListener('click', function () {
+            const extras = {};
+            document.querySelectorAll('.item-quantity').forEach(function (input) {
+                const itemName = input.dataset.itemName;
+                const quantity = input.value;
+                if (quantity > 0) {
+                    extras[itemName] = quantity;
+                }
+            });
+
+            sessionStorage.setItem('extras', JSON.stringify(extras));
+
+            generateUniqueTicketID(function (ticketID) {
+                const ticketData = {
+                    ticketID: ticketID,
+                    movieTitle: sessionStorage.getItem('movieTitle'),
+                    showtime: sessionStorage.getItem('showtime'),
+                    date: sessionStorage.getItem('date'),
+                    selectedSeats: JSON.stringify(selectedSeats),
+                    totalPrice: sessionStorage.getItem('totalPrice'),
+                    extras: JSON.stringify(extras)
+                };
+
+                fetch('/Checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        ticketID: ticketData.ticketID,
+                        movieTitle: ticketData.movieTitle,
+                        showtime: ticketData.showtime,
+                        date: ticketData.date,
+                        selectedSeats: ticketData.selectedSeats,
+                        totalPrice: ticketData.totalPrice,
+                        extras: ticketData.extras
+                    })
+                })
+                    .then(response => response.text())
+                    .then(() => {
+                        window.location.href = '/CheckoutPage';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Der opstod en fejl ved gemning af billetten.');
+                    });
+            });
+        });
     });
-
-
-
-
 </script>
+
+</body>
+</html>

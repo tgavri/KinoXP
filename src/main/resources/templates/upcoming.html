@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KinoXP</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -24,12 +26,16 @@
     </div>
 </div>
 
+<div id="footer-placeholder"></div>
+
 <script>
     $(document).ready(function () {
         let movies = [];
 
         // henter header from "header.html"
         $('#header-placeholder').load('/fragments/header');
+        $('#cookie-placeholder').load('/fragments/cookies');
+        $('#footer-placeholder').load('/fragments/footer');
 
         const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
         const today = new Date();
@@ -43,7 +49,7 @@
                 const title = firstUpcomingMovie.title;
                 const premierDate = firstUpcomingMovie.premierDate;
 
-                $('.background').css('background-image', `url(${frontPageImage}), url('../static/rødegardiner.JPG')`);
+                $('.background').css('background-image', `url(${frontPageImage}), url('/rodegardiner.JPG')`);
                 $('.movie-title').text(title);
                 $('.premier-date').text(`Premiere: ${premierDate}`);
             }

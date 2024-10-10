@@ -6,7 +6,7 @@ body {
 .navbar {
     display: flex;
     align-items: center;
-    background-color: #000080;
+    background: linear-gradient(to bottom, #000080, #0404ed); /* Gradient from blue to lighter blue */
     color: white;
     padding: 10px 20px;
     position: fixed;
@@ -15,6 +15,34 @@ body {
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
+}
+.brand {
+    display: flex; /* Keep flexbox for alignment */
+    align-items: center; /* Center logo and text vertically */
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.logo {
+    max-height: 80px; /* Adjust max height */
+    max-width: 100%; /* Allow scaling */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 30px;
+}
+.brand-text {
+    font-size: 18px; /* Adjust font size as needed */
+    color: white; /* Adjust color as needed */
+    font-weight: bold; /* Make text bold */
+    margin-left: 10px; /* Add space between logo and text */
+}
+
+.menu {
+    margin-left: auto; /* Push the menu button to the right */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .navbar .brand {
@@ -33,7 +61,7 @@ body {
     margin-right: 2%;
     color: white;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
 }
 

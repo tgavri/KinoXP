@@ -14,49 +14,41 @@
           "mon": {
             "showtimes": [
               { "showtime": "09:00 AM", "hall": 1 },
-              { "showtime": "01:45 PM", "hall": 2 },
-              { "showtime": "06:30 PM", "hall": 1 }
+              { "showtime": "01:45 PM", "hall": 2 }
             ]
           },
           "tue": {
             "showtimes": [
               { "showtime": "09:00 AM", "hall": 1 },
-              { "showtime": "01:45 PM", "hall": 2 },
-              { "showtime": "06:30 PM", "hall": 1 }
+              { "showtime": "01:45 PM", "hall": 2 }
             ]
           },
           "wed": {
             "showtimes": [
               { "showtime": "09:00 AM", "hall": 1 },
-              { "showtime": "01:45 PM", "hall": 2 },
-              { "showtime": "06:30 PM", "hall": 1 }
+              { "showtime": "01:45 PM", "hall": 2 }
             ]
           },
           "thu": {
             "showtimes": [
               { "showtime": "09:00 AM", "hall": 1 },
-              { "showtime": "01:45 PM", "hall": 2 },
-              { "showtime": "06:30 PM", "hall": 1 }
+              { "showtime": "01:45 PM", "hall": 2 }
             ]
           },
           "fri": {
             "showtimes": [
-              { "showtime": "09:00 AM", "hall": 1 },
-              { "showtime": "01:45 PM", "hall": 2 },
-              { "showtime": "06:30 PM", "hall": 1 }
+              { "showtime": "09:00 AM", "hall": 1 }
             ]
           },
           "sat": {
             "showtimes": [
               { "showtime": "10:30 AM", "hall": 1 },
-              { "showtime": "03:45 PM", "hall": 2 },
               { "showtime": "06:30 PM", "hall": 1 }
             ]
           },
           "sun": {
             "showtimes": [
               { "showtime": "10:30 AM", "hall": 1 },
-              { "showtime": "03:45 PM", "hall": 2 },
               { "showtime": "06:30 PM", "hall": 1 }
             ]
           }
@@ -104,21 +96,18 @@
           "fri": {
             "showtimes": [
               { "showtime": "09:30 AM", "hall": 2 },
-              { "showtime": "02:30 PM", "hall": 1 },
               { "showtime": "07:45 PM", "hall": 2 }
             ]
           },
           "sat": {
             "showtimes": [
               { "showtime": "11:30 AM", "hall": 2 },
-              { "showtime": "04:45 PM", "hall": 1 },
               { "showtime": "07:30 PM", "hall": 2 }
             ]
           },
           "sun": {
             "showtimes": [
               { "showtime": "11:30 AM", "hall": 2 },
-              { "showtime": "04:45 PM", "hall": 1 },
               { "showtime": "07:30 PM", "hall": 2 }
             ]
           }
@@ -138,8 +127,7 @@
           "mon": {
             "showtimes": [
               { "showtime": "11:00 AM", "hall": 1 },
-              { "showtime": "06:00 PM", "hall": 2 },
-              { "showtime": "08:30 PM", "hall": 1 }
+              { "showtime": "06:00 PM", "hall": 2 }
             ]
           },
           "tue": {
@@ -152,8 +140,7 @@
           "wed": {
             "showtimes": [
               { "showtime": "11:00 AM", "hall": 1 },
-              { "showtime": "06:00 PM", "hall": 2 },
-              { "showtime": "08:30 PM", "hall": 1 }
+              { "showtime": "06:00 PM", "hall": 2 }
             ]
           },
           "thu": {
@@ -166,7 +153,6 @@
           "fri": {
             "showtimes": [
               { "showtime": "11:00 AM", "hall": 1 },
-              { "showtime": "06:00 PM", "hall": 2 },
               { "showtime": "08:30 PM", "hall": 1 }
             ]
           },
@@ -188,7 +174,7 @@
         "title": "My Little Pony: The Movie",
         "poster": "https://m.media-amazon.com/images/M/MV5BNDZiNDRlNGQtNGQ4Ny00NDRiLTkwOWItZDJlZTQ4YTlmM2M3XkEyXkFqcGc@._V1_FMjpg_UY486_.jpg",
         "description": "After a dark force conquers Canterlot, the Mane 6 embark on an unforgettable journey beyond Equestria where they meet new friends and exciting challenges on a quest to use the magic of friendship to save their homeland.",
-        "youtubeTrailer": "aeQe_mZcyf8",
+        "youtubeTrailer": "Ik8-g2eEGpQ",
         "actors": ["Emily Blunt", "Kristin Chenoweth", "Liev Schreiber", "Taye Diggs"],
         "director": "Jayson Thiessen",
         "genre": "Animation, Adventure, Comedy",
@@ -203,8 +189,7 @@
           },
           "tue": {
             "showtimes": [
-              { "showtime": "12:30 PM", "hall": 1 },
-              { "showtime": "04:00 PM", "hall": 2 }
+              { "showtime": "12:30 PM", "hall": 1 }
             ]
           },
           "wed": {
@@ -215,8 +200,7 @@
           },
           "thu": {
             "showtimes": [
-              { "showtime": "12:30 PM", "hall": 1 },
-              { "showtime": "04:00 PM", "hall": 2 }
+              { "showtime": "12:30 PM", "hall": 1 }
             ]
           },
           "fri": {
@@ -228,14 +212,12 @@
           "sat": {
             "showtimes": [
               { "showtime": "12:30 PM", "hall": 1 },
-              { "showtime": "08:30 PM", "hall": 1 },
               { "showtime": "09:30 AM", "hall": 2 }
             ]
           },
           "sun": {
             "showtimes": [
               { "showtime": "12:30 PM", "hall": 1 },
-              { "showtime": "08:30 PM", "hall": 1 },
               { "showtime": "09:30 AM", "hall": 2 }
             ]
           }
@@ -295,14 +277,226 @@
             ]
           }
         }
+      },
+    {
+      "title": "Kill Bill: Vol. 1",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZmMyYzJlZmYtY2I3NC00NjAyLTkyZWItZjdjZDI1YTYyYTEwXkEyXkFqcGc@._V1_FMjpg_UY480_.jpg",
+      "description": "After being betrayed by her former assassination squad and left for dead, the Bride awakens from a coma and embarks on a ruthless quest for revenge. She seeks to eliminate the deadly squad members who betrayed her, leading to intense battles and showdowns.",
+      "youtubeTrailer": "7kSuas6mRpk",
+      "actors": [
+        "Uma Thurman",
+        "Lucy Liu",
+        "David Carradine",
+        "Daryl Hannah"
+      ],
+      "director": "Quentin Tarantino",
+      "genre": "Action, Crime, Thriller",
+      "playtime": "111 min",
+      "age": "Tilladt for børn over 15 år",
+      "weekday": {
+        "mon": {
+          "showtimes": [
+            { "showtime": "08:30 PM", "hall": 1 }
+          ]
+        },
+        "tue": {
+          "showtimes": [
+            { "showtime": "04:00 PM", "hall": 2 }
+          ]
+        },
+        "wed": {
+          "showtimes": [
+            { "showtime": "08:30 PM", "hall": 1 }
+          ]
+        },
+        "thu": {
+          "showtimes": [
+            { "showtime": "04:00 PM", "hall": 2 }
+          ]
+        },
+        "fri": {
+          "showtimes": [
+            { "showtime": "02:30 PM", "hall": 1 },
+            { "showtime": "06:30 PM", "hall": 1 }
+          ]
+        },
+        "sat": {
+          "showtimes": [
+            { "showtime": "08:30 PM", "hall": 1 }
+          ]
+        },
+        "sun": {
+          "showtimes": [
+            { "showtime": "08:30 PM", "hall": 1 }
+          ]
+        }
       }
-    ],
+    },
+    {
+      "title": "Climax",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMGU1N2QwOTgtMDAxYy00NGIyLThkMzEtOGRjNDQyYWI0MDAwXkEyXkFqcGc@._V1_FMjpg_UY337_.jpg",
+      "description": "Diane and her boyfriend, ignore warnings and venture into a desert, facing treacherous situations. Their search for safety in a town fails as more perils emerge. Their ordeal focuses on uncovering the mastermind and surviving.",
+      "youtubeTrailer": "Z_82BfwRHq4",
+      "actors": [
+        "Mia Malkova",
+        "Renan Severo"
+      ],
+      "director": "Ram Gopal Varma",
+      "genre": "Action",
+      "playtime": "52 min",
+      "age": "Tilladt for børn over 18 år",
+      "weekday": {
+        "mon": {
+          "showtimes": [
+            { "showtime": "11:30 PM", "hall": 1 }
+          ]
+        },
+        "tue": {
+          "showtimes": [
+            { "showtime": "11:30 PM", "hall": 1 }
+          ]
+        },
+        "wed": {
+          "showtimes": [
+            { "showtime": "11:30 PM", "hall": 1 }
+          ]
+        },
+        "thu": {
+          "showtimes": [
+            { "showtime": "11:30 PM", "hall": 1 }
+          ]
+        },
+        "fri": {
+          "showtimes": [
+            { "showtime": "11:30 PM", "hall": 2 }
+          ]
+        },
+        "sat": {
+          "showtimes": [
+            { "showtime": "11:30 PM", "hall": 1 }
+          ]
+        },
+        "sun": {
+          "showtimes": [
+            { "showtime": "11:30 PM", "hall": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Taxi Driver",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNjM0YjgxOWYtMTlhOC00MmU3LWIyNTYtMDNjNjczMThhODZkXkEyXkFqcGc@._V1_.jpg",
+      "description": "Travis Bickle, a mentally unstable Vietnam War veteran, takes a job as a nighttime taxi driver in New York City. As he becomes increasingly detached from reality, he sets out to save a young prostitute and attempts to clean up the corrupt city through his own violent means.",
+      "youtubeTrailer": "T5IligQP7Fo",
+      "actors": [
+        "Robert De Niro",
+        "Jodie Foster",
+        "Harvey Keitel",
+        "Cybill Shepherd"
+      ],
+      "director": "Martin Scorsese",
+      "genre": "Crime, Drama, Thriller",
+      "playtime": "114 min",
+      "age": "Tilladt for børn over 15 år",
+      "weekday": {
+        "mon": {
+          "showtimes": [
+            { "showtime": "06:30 PM", "hall": 1 }
+          ]
+        },
+        "tue": {
+          "showtimes": [
+            { "showtime": "06:30 PM", "hall": 1 }
+          ]
+        },
+        "wed": {
+          "showtimes": [
+            { "showtime": "06:30 PM", "hall": 1 }
+          ]
+        },
+        "thu": {
+          "showtimes": [
+            { "showtime": "06:30 PM", "hall": 1 }
+          ]
+        },
+        "fri": {
+          "showtimes": [
+            { "showtime": "06:00 PM", "hall": 2 },
+            { "showtime": "11:15 PM", "hall": 1 }
+          ]
+        },
+        "sat": {
+          "showtimes": [
+            { "showtime": "04:45 PM", "hall": 1 }
+          ]
+        },
+        "sun": {
+          "showtimes": [
+            { "showtime": "04:45 PM", "hall": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Steve Jobs",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMjI0NTAzNzIzN15BMl5BanBnXkFtZTgwMTk1NTE4NjE@._V1_FMjpg_UY720_.jpg",
+      "description": "A biographical drama that offers an intimate look into the life and career of Steve Jobs. The film is structured around three pivotal product launches and delves into Jobs' relationships with his colleagues, family, and his own vision of innovation, showing the struggles and triumphs of a modern tech icon.",
+      "youtubeTrailer": "aEr6K1bwIVs",
+      "actors": [
+        "Michael Fassbender",
+        "Kate Winslet",
+        "Seth Rogen",
+        "Jeff Daniels"
+      ],
+      "director": "Danny Boyle",
+      "genre": "Biography, Drama",
+      "playtime": "122 min",
+      "age": "Tilladt for børn over 11 år",
+      "weekday": {
+        "mon": {
+          "showtimes": [
+            { "showtime": "04:00 AM", "hall": 1 }
+          ]
+        },
+        "tue": {
+          "showtimes": [
+            { "showtime": "04:00 AM", "hall": 1 }
+          ]
+        },
+        "wed": {
+          "showtimes": [
+            { "showtime": "04:00 AM", "hall": 1 }
+          ]
+        },
+        "thu": {
+          "showtimes": [
+            { "showtime": "04:00 AM", "hall": 1 }
+          ]
+        },
+        "fri": {
+          "showtimes": [
+            { "showtime": "01:45 PM", "hall": 2 }
+          ]
+        },
+        "sat": {
+          "showtimes": [
+            { "showtime": "03:45 PM", "hall": 2 }
+          ]
+        },
+        "sun": {
+          "showtimes": [
+            { "showtime": "03:45 PM", "hall": 2 }
+          ]
+        }
+      }
+    }
+  ],
   "upcomingMovies": [
     {
       "title": "Gladiator II",
       "poster": "https://m.media-amazon.com/images/M/MV5BMWYzZTM5ZGQtOGE5My00NmM2LWFlMDEtMGNjYjdmOWM1MzA1XkEyXkFqcGc@._V1_FMjpg_UY337_.jpg",
       "front-page-image": "https://m.media-amazon.com/images/M/MV5BNDQwOTIxODYtMDAyMi00NzY2LWJkNzEtMjMyNGY3ZWQ0OGRkXkEyXkFqcGc@._V1_FMjpg_UX600_.jpg",
-      "youtubeTrailer": "6RRa0kw7T5I",
+      "youtubeTrailer": "Ts0N8swyWFI",
       "description": "Lucius, the nephew of the former gladiator Maximus, must return to the Colosseum to restore Rome’s honor and avenge his family.",
       "actors": ["Paul Mescal", "Connie Nielsen", "Denzel Washington"],
       "director": "Ridley Scott",
@@ -341,7 +535,7 @@
       "title": "Smile 2",
       "poster": "https://m.media-amazon.com/images/M/MV5BNTU4ZDUzNDQtYTY1NC00ZDg4LWFlOGMtYmI5MmE2ZTkzOTM2XkEyXkFqcGc@._V1_FMjpg_UY679_.jpg",
       "front-page-image": "https://m.media-amazon.com/images/M/MV5BYWI4OTE2ODYtNjI3Ni00NTFmLTk0NmUtN2VlZjNkNDJmMjljXkEyXkFqcGc@._V1_FMjpg_UX480_.jpg",
-      "youtubeTrailer": "yqGEz5ytPBM",
+      "youtubeTrailer": "0HY6QFlBzUY",
       "description": "After witnessing several supernatural incidents, a therapist dives deeper into an ominous curse. With time running out, she must uncover the truth behind the horror before it consumes her completely.",
       "actors": ["Sosie Bacon, Jessie T. Usher, Kyle Gallner"],
       "director": "Parker Finn",
@@ -354,7 +548,7 @@
       "title": "Terrifier 3",
       "poster": "https://m.media-amazon.com/images/M/MV5BZDkzMDMwZWItNTNjZS00NzM5LTllYzktZjIxMGQ2ODNmM2JiXkEyXkFqcGc@._V1_FMjpg_UY2560_.jpg",
       "front-page-image": "https://m.media-amazon.com/images/M/MV5BNmE3YzE5N2ItNmQyMy00MzE0LTk4OGYtNmFiMjIxNDAzZmZmXkEyXkFqcGc@._V1_FMjpg_UX600_.jpg",
-      "youtubeTrailer": "Ts0N8swyWFI",
+      "youtubeTrailer": "-3l2KFTj7yY",
       "description": "Art the Clown returns to wreak havoc in a night of terror as a new group of victims faces unspeakable horrors. Will anyone survive the bloodbath, or will the town face its final demise?",
       "actors": ["David Howard Thornton, Lauren LaVera, Samantha Scaffidi"],
       "director": "Damien Leone",

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KinoXP</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
@@ -19,8 +20,7 @@
     </div>
     <div class="container">
         <div class="header-container">
-            <h1>Aktuelle Film</h1>
-            <label for="date-picker">Vælg en dato:</label>
+            <label for="date-picker">Valgt Dato: </label>
             <div id="calendar-container" style="display: none; margin-top: 0;">
                 <input type="date" id="date-picker">
             </div>
@@ -31,23 +31,28 @@
         </div>
         <div class="movie-list" id="movie-list"></div>
     </div>
-
 </div>
 
+<div id="footer-placeholder"></div>
 
 <script>
     $(document).ready(function () {
         let movies = [];
+        let selectedDate = getSelectedDate() || new Date().toISOString().split('T')[0];
 
-        // henter header fra fragments/header.html"
+        $('#date-picker').attr('min', new Date().toISOString().split('T')[0]);
+        updateSelectedDateLabel(selectedDate);
+
+        // henter header fra fragments/header.html
         $('#header-placeholder').load('/fragments/header');
         $('#cookie-placeholder').load('/fragments/cookies');
+        $('#footer-placeholder').load('/fragments/footer');
 
         const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-        const today = new Date();
-        const todayWeekday = weekdayNames[today.getDay()];
+        const selectedDateObj = new Date(selectedDate);
+        const selectedWeekday = weekdayNames[selectedDateObj.getDay()];
 
-        $.getJSON("movies.json", function (movieData) {
+        $.getJSON("/movies.json?v=" + new Date().getTime(), function (movieData) {
             const upcomingMovies = movieData.upcomingMovies;
             if (upcomingMovies.length > 0) {
                 const firstUpcomingMovie = upcomingMovies[0];
@@ -68,7 +73,7 @@
                 $('#genre-filter').append(new Option(genre, genre));
             });
 
-            loadMovieList(movies, todayWeekday);
+            loadMovieList(movies, selectedWeekday);
 
             // hvis en genre er valgt, sorter så kun disse vises
             $('#genre-filter').change(function () {
@@ -76,7 +81,7 @@
                 const filteredMovies = selectedGenre === 'all'
                     ? movies
                     : movies.filter(movie => movie.genre.split(', ').includes(selectedGenre));
-                loadMovieList(filteredMovies, todayWeekday);
+                loadMovieList(filteredMovies, selectedWeekday);
 
                 setTimeout(() => {
                     window.scrollTo({
@@ -87,29 +92,46 @@
             });
         });
 
-        $('#calendarButton').click(function() {
+        $('#calendarButton').click(function () {
             $('#calendar-container').toggle();
-            const date = getSelectedDate();
+        });
+
+        $(document).mouseup(function (e) {
+            const container = $("#calendar-container");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container.hide();
+            }
+        });
+
+        $('#calendar-container').append('<button id="closeCalendar">Close</button>');
+        $('#closeCalendar').click(function () {
+            $('#calendar-container').hide();
         });
 
         $('#date-picker').on('change', function() {
-            const selectedDate = $(this).val();
-            $('#selected-date').text(`Selected date: ${selectedDate}`);
+            selectedDate = $(this).val();
+            sessionStorage.setItem('selectedDate', selectedDate);
+            location.reload(); // Reload page to use the new date
         });
-        function getSelectedDate() {
-            const selectedDate = $('#date-picker').val();
-            return selectedDate;
+
+        function updateSelectedDateLabel(date) {
+            const formattedDate = new Date(date).toLocaleDateString('da-DK', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            $('label[for="date-picker"]').text(`Valgt Dato: ${formattedDate}`);
         }
-        function seatPickerRedirect(movieTitle, showtime, hall, date = null) {
 
-            if (!date) {                                                    // metode hvis en dato ikke modtages fra kalender - det antages
-                const today = new Date();                                   // at dagens dato så skal bruges.
-                const dd = String(today.getDate()).padStart(2, '0');        // find dagens dato
-                const mm = String(today.getMonth() + 1).padStart(2, '0');   // find dagens måned
-                const yyyy = today.getFullYear();                           // find dagens årstal
-                date = `${dd}/${mm}/${yyyy}`;                               // opret format
-            }
+        function getSelectedDate() {
+            return sessionStorage.getItem('selectedDate');
+        }
 
+        function getSelectedDate() {
+            return sessionStorage.getItem('selectedDate');
+        }
+
+        function seatPickerRedirect(movieTitle, showtime, hall, date = selectedDate) {
             sessionStorage.setItem('movieTitle', movieTitle);
             sessionStorage.setItem('showtime', showtime);
             sessionStorage.setItem('date', date);
@@ -225,7 +247,6 @@
                 loadMovieList(movies, todayWeekday);
             });
         }
-
     });
 </script>
 </body>

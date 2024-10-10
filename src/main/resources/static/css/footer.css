@@ -1,0 +1,46 @@
+/* css/footer.css */
+.footer {
+    background: linear-gradient(to bottom, #0404ed, #000080); /* Gradient from blue to lighter blue */
+    color: white; /* Text color */
+    text-align: center; /* Center the text */
+    padding: 20px 0; /* Padding for the footer */
+}
+
+.footer-content {
+    max-width: 1200px; /* Max width for content */
+    margin: 0 auto; /* Center content */
+}
+
+.footer-nav {
+    margin-top: 10px; /* Space between text and links */
+    font-size: 25px;
+}
+
+.footer-nav a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+    margin: 0 15px; /* Space between links */
+}
+
+.footer-nav a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.social-media {
+    margin-top: 15px; /* Space above social media icons */
+}
+
+.social-icon {
+    display: inline-block; /* Align icons horizontally */
+    margin: 0 10px; /* Space between icons */
+}
+
+.social-icon img {
+    width: 30px; /* Set icon size */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.3s; /* Animation for hover effect */
+}
+
+.social-icon img:hover {
+    transform: scale(1.1); /* Scale up on hover */
+}
