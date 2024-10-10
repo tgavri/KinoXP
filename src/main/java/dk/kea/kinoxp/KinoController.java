@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class KinoController {
@@ -67,30 +68,47 @@ public class KinoController {
 
         return allTickets.toString();
     }
+    @GetMapping("/api/ticketsarray")
+    @ResponseBody
+    public String getAllTicketsArray() throws JSONException {
+        JSONArray allTickets = dataHandler.getAllTickets();
+        JSONObject response = new JSONObject();
+        response.put("tickets", allTickets); // Wrap the array in an object
+        return response.toString();
+    }
+
 
     @PutMapping("/api/tickets/update")
     @ResponseBody
-    public ResponseEntity<String> updateTicket(@RequestBody JSONObject updatedTicket) {
+    public ResponseEntity<String> updateTicket(@RequestBody Map<String, Object> updatedTicket) {
         try {
-            dataHandler.updateTicket(updatedTicket);
+            JSONObject jsonObject = new JSONObject(updatedTicket);
+            dataHandler.updateTicket(jsonObject);
             return ResponseEntity.ok("Ticket updated successfully");
         } catch (Exception e) {
-            e.printStackTrace(); // Log the error for debugging
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update the ticket");
+            e.printStackTrace(); // debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to update the ticket: " + e.getMessage());
         }
     }
 
+
     @DeleteMapping("/api/tickets/delete")
     @ResponseBody
-    public ResponseEntity<String> deleteTicket(@RequestBody JSONObject ticketToDelete) {
+    public ResponseEntity<String> deleteTicket(@RequestBody Map<String, String> ticketToDelete) {
         try {
-            dataHandler.deleteTicket(ticketToDelete);
+            String ticketId = ticketToDelete.get("ticketID");
+            if (ticketId == null) {
+                return ResponseEntity.badRequest().body("Ticket ID is required");
+            }
+            dataHandler.deleteTicket(ticketId);
             return ResponseEntity.ok("Ticket deleted successfully");
         } catch (Exception e) {
-            e.printStackTrace(); // Log the error for debugging
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete the ticket");
+            e.printStackTrace(); // debugging
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete the ticket: " + e.getMessage());
         }
     }
+
 
     @GetMapping("/api/items")
         @ResponseBody

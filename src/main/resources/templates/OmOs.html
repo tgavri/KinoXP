@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KinoXP</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
 
@@ -40,6 +42,7 @@
         }
 
         .backgroundOmos {
+
             background-image: url('/rodegardiner.JPG');
             background-size: cover;
             background-position: center;
@@ -135,11 +138,14 @@
             <p><a href="#omos">Tilbage til toppen</a></p>
         </section>
     </div>
+    <div id="footer-placeholder"></div>
+
 </div>
 
 <script>
     $(document).ready(function() {
         $('#header-placeholder').load('/fragments/header');
+        $('#footer-placeholder').load('/fragments/footer');
         $('a').on('click', function(event) {
             if (this.hash !== "") {
                 event.preventDefault();
