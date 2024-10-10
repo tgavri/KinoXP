@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -39,13 +40,15 @@ public class KinoController {
             @RequestParam("date") String date,
             @RequestParam("selectedSeats") String selectedSeats,
             @RequestParam("totalPrice") String totalPrice,
-            @RequestParam("extras") String getExtras) throws JSONException {
+            @RequestParam("extras") String getExtras) throws JSONException, ParseException {
+
+        String tempdate = dataHandler.formatDate(date);
 
         JSONObject ticketData = new JSONObject();
         ticketData.put("ticketID", ticketID);
         ticketData.put("movieTitle", movieTitle);
         ticketData.put("showtime", showtime);
-        ticketData.put("date", date);
+        ticketData.put("date", tempdate);
 
         JSONArray seatsArray = new JSONArray(selectedSeats);
         ticketData.put("selectedSeats", seatsArray);

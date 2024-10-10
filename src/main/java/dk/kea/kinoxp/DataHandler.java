@@ -8,7 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DataHandler {
@@ -28,6 +31,13 @@ public class DataHandler {
 
     public List<Items> getItems() {
         return items;
+    }
+
+    public String formatDate(String date) throws ParseException {
+        SimpleDateFormat ind = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat ud = new SimpleDateFormat("dd-MM-yyyy");
+        Date parsedDate = ind.parse(date);
+        return ud.format(parsedDate);
     }
 
     public static class Items {   // MIDLERTIDIG TESTKLASSE
