@@ -33,13 +33,6 @@ public class DataHandler {
         return items;
     }
 
-    public String formatDate(String date) throws ParseException {
-        SimpleDateFormat ind = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat ud = new SimpleDateFormat("dd-MM-yyyy");
-        Date parsedDate = ind.parse(date);
-        return ud.format(parsedDate);
-    }
-
     public static class Items {   // MIDLERTIDIG TESTKLASSE
         private final String name;
         private final int price;

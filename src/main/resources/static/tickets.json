@@ -1,3 +1,156 @@
 {
-  "tickets": []
+  "tickets": [
+    {
+      "date": "10\/10\/2024",
+      "selectedSeats": [
+        "Række: 16, Sæde: 8",
+        "Række: 16, Sæde: 9"
+      ],
+      "totalPrice": "200",
+      "showtime": "01:45 PM",
+      "extras": {},
+      "movieTitle": "Find Nemo",
+      "ticketID": "3879493081022478"
+    },
+    {
+      "date": "10\/10\/2024",
+      "selectedSeats": [
+        "Række: 17, Sæde: 9",
+        "Række: 18, Sæde: 9",
+        "Række: 18, Sæde: 10"
+      ],
+      "totalPrice": "300",
+      "showtime": "01:45 PM",
+      "extras": {},
+      "movieTitle": "Find Nemo",
+      "ticketID": "0440360241750785"
+    },
+    {
+      "date": "10\/10\/2024",
+      "selectedSeats": [
+        "Række: 15, Sæde: 8",
+        "Række: 14, Sæde: 8"
+      ],
+      "totalPrice": "470",
+      "showtime": "01:45 PM",
+      "extras": {
+        "Lille Cola": "6",
+        "Stor Cola": "5"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "2815852566200851"
+    },
+    {
+      "date": "10\/10\/2024",
+      "selectedSeats": [
+        "Række: 14, Sæde: 9",
+        "Række: 14, Sæde: 10",
+        "Række: 12, Sæde: 10"
+      ],
+      "totalPrice": "665",
+      "showtime": "01:45 PM",
+      "extras": {
+        "Lille Popcorn": "1",
+        "Haribo Clickmix": "5"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "9187239814928791"
+    },
+    {
+      "date": "11\/10\/2024",
+      "selectedSeats": [
+        "Række: 16, Sæde: 9",
+        "Række: 16, Sæde: 10"
+      ],
+      "totalPrice": "430",
+      "showtime": "01:45 PM",
+      "extras": {
+        "Lille Popcorn": "4",
+        "Stor Cola": "5"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "0742893756967984"
+    },
+    {
+      "date": "10\/10\/2024",
+      "selectedSeats": [
+        "Række: 13, Sæde: 6",
+        "Række: 13, Sæde: 7"
+      ],
+      "totalPrice": "230",
+      "showtime": "09:00 AM",
+      "extras": {
+        "Stor Cola": "1"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "1980569296970433"
+    },
+    {
+      "date": "10\/10\/2024",
+      "selectedSeats": [
+        "Række: 14, Sæde: 7"
+      ],
+      "totalPrice": "130",
+      "showtime": "09:00 AM",
+      "extras": {
+        "Stor Cola": "1"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "0200566294849582"
+    },
+    {
+      "date": "11\/10\/2024",
+      "selectedSeats": [
+        "Række: 17, Sæde: 8",
+        "Række: 17, Sæde: 7"
+      ],
+      "totalPrice": "304",
+      "showtime": "01:45 PM",
+      "extras": {
+        "Stor Popcorn": "1",
+        "Haribo Clickmix": "1"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "0229934776537266"
+    },
+    {
+      "date": "10\/10\/2024",
+      "selectedSeats": [
+        "Række: 12, Sæde: 8",
+        "Række: 12, Sæde: 7"
+      ],
+      "totalPrice": "230",
+      "showtime": "01:45 PM",
+      "extras": {
+        "Stor Cola": "1"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "4808068532786744"
+    },
+    {
+      "date": "11\/10\/2024",
+      "selectedSeats": [
+        "Række: 17, Sæde: 10",
+        "Række: 18, Sæde: 10",
+        "Række: 18, Sæde: 11"
+      ],
+      "totalPrice": "300",
+      "showtime": "01:45 PM",
+      "extras": {},
+      "movieTitle": "Find Nemo",
+      "ticketID": "2473813353252913"
+    },
+    {
+      "date": "17\/10\/2024",
+      "selectedSeats": [
+        "Række: 14, Sæde: 7",
+        "Række: 13, Sæde: 7"
+      ],
+      "totalPrice": "200",
+      "showtime": "09:00 AM",
+      "extras": {},
+      "movieTitle": "Find Nemo",
+      "ticketID": "5939543216942870"
+    }
+  ]
 }

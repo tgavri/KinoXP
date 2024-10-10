@@ -40,15 +40,13 @@ public class KinoController {
             @RequestParam("date") String date,
             @RequestParam("selectedSeats") String selectedSeats,
             @RequestParam("totalPrice") String totalPrice,
-            @RequestParam("extras") String getExtras) throws JSONException, ParseException {
-
-        String tempdate = dataHandler.formatDate(date);
+            @RequestParam("extras") String getExtras) throws JSONException {
 
         JSONObject ticketData = new JSONObject();
         ticketData.put("ticketID", ticketID);
         ticketData.put("movieTitle", movieTitle);
         ticketData.put("showtime", showtime);
-        ticketData.put("date", tempdate);
+        ticketData.put("date", date);
 
         JSONArray seatsArray = new JSONArray(selectedSeats);
         ticketData.put("selectedSeats", seatsArray);
@@ -62,7 +60,6 @@ public class KinoController {
 
         return "Ticket saved successfully!";
     }
-
 
     @GetMapping("/api/tickets")
     @ResponseBody
