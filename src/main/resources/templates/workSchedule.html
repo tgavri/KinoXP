@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ArbejdsUge</title>
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/footer.css">
     <style>
         body, html {
@@ -90,6 +91,7 @@
     </style>
 </head>
 <body>
+<div id="header-placeholder"></div>
 <h1>ArbejdsUge</h1>
 <div class="nav-buttons">
     <button class="opretKnap" onclick="previousWeek()">Forrige Uge</button>
@@ -171,9 +173,13 @@
     </table>
 </div>
 <a href="/adminpanel"> <button class="opretKnap" onclick="submitShifts()">Opret Vagter og tilbage til adminpanel</button></a>
+<div id="footer-placeholder"></div>
 
 
 <script>
+    $('#header-placeholder').load('/fragments/header');
+    $('#cookie-placeholder').load('/fragments/cookies');
+    $('#footer-placeholder').load('/fragments/footer');
     let shiftsData = {};
     let currentWeekStartDate;
 
