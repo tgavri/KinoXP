@@ -1,21 +1,3 @@
 {
-  "tickets": [
-    {
-      "date": "10\/10\/2024",
-      "selectedSeats": [
-        "Række: 11",
-        "Sæde: 5",
-        "Række: 11",
-        "Sæde: 6"
-      ],
-      "totalPrice": "400",
-      "showtime": "09:00 AM",
-      "extras": {
-        "Lille Cola": "115",
-        "Stor Cola": "5"
-      },
-      "movieTitle": "Find Nemo",
-      "ticketID": "8740736818180596"
-    }
-  ]
+  "tickets": []
 }
