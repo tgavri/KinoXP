@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OversigtBig</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>  <!-- Corrected -->
     <style>
         .ContainerSeatBig {
+            margin-top: 150px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -21,7 +24,7 @@
 
         .Background-containerSeatBig {
             width: 100vw;
-            height: 100vh;
+            height: 150vh;
             position: relative;
             background-image: url('https://www.avcenter.dk/media/bojogdac/biografstole-i-samsoe-bio.jpg?anchor=center&mode=crop&width=1500&height=0&rnd=132881886021800000');
             background-size: cover;
@@ -111,6 +114,7 @@
     </style>
 </head>
 <body>
+<div id="header-placeholder"></div>
 <div class="Background-containerSeatBig">
     <div class="ContainerSeatBig">
         <div class="TitleSeatBig">Sædeoversigt</div>
@@ -125,8 +129,13 @@
         </div>
     </div>
 </div>
+<div id="footer-placeholder"></div>
 
 <script>
+    $('#header-placeholder').load('/fragments/header');
+    $('#cookie-placeholder').load('/fragments/cookies');
+    $('#footer-placeholder').load('/fragments/footer');
+
     var SelectSeats = [];
     var PriceSeat = 100;
     var takenSeats = [];

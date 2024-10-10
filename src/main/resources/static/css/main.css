@@ -272,24 +272,48 @@ h2 {
 #calendarButton {
     background-color: transparent;
     color: white;
-    padding: 0;
-    outline: none;
-    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    border: 2px solid white;
+    border-radius: 5px;
     cursor: pointer;
-    border-radius: 0;
-}
-#calendarButton img {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0;
-}
-.calender-btn:focus {
     outline: none;
 }
 
-#selected-date {
+#calendar-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#calendar-container input {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #000080;
+    width: 100%;
+    font-size: 18px;
+}
+
+#calendar-container button {
+    background-color: #000080;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
     margin-top: 10px;
+    cursor: pointer;
     font-size: 16px;
+}
+
+#calendar-container button:hover {
+    background-color: #333;
 }
 
