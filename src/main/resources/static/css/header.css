@@ -32,6 +32,12 @@ body {
     font-size: 18px; /* Adjust font size as needed */
     color: white; /* Adjust color as needed */
     font-weight: bold; /* Make text bold */
+    margin-left: 5px; /* Add space between logo and text */
+}
+.brand-textXP {
+    font-size: 25px; /* Adjust font size as needed */
+    color: #f4d6d6; /* Adjust color as needed */
+    font-weight: bold; /* Make text bold */
     margin-left: 10px; /* Add space between logo and text */
 }
 

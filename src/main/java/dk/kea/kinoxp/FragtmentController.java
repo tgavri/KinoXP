@@ -37,11 +37,9 @@ public class FragtmentController {
     @GetMapping("/Arbejdsuge")
     public String arbejdsuge() {return "workSchedule";}
 
-
-=======
     @GetMapping("/adminpanel")
     public String showAdminPanel() {
-        return "adminpanel"; // This assumes you have a worker.html file in the templates folder
+        return "adminpanel";
     }
 
 }
