@@ -40,6 +40,7 @@
         let movies = [];
         let selectedDate = null;
 
+
         $('#header-placeholder').load('/fragments/header');
         $('#cookie-placeholder').load('/fragments/cookies');
         $('#footer-placeholder').load('/fragments/footer');
@@ -47,7 +48,8 @@
         const weekdayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
         const today = new Date();
         const todayWeekday = weekdayNames[today.getDay()];
-
+        const todayDate = today.toISOString().split('T')[0];
+        $('#date-picker').attr('min', todayDate);
         const dd = String(today.getDate()).padStart(2, '0');
         const mm = String(today.getMonth() + 1).padStart(2, '0');
         const yyyy = today.getFullYear();

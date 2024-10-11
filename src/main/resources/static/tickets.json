@@ -15,18 +15,9 @@
     {
       "date": "11\/10\/2024",
       "selectedSeats": [
-        "Række: 2, Sæde: 7",
-        "Række: 2, Sæde: 6",
-        "Række: 2, Sæde: 5",
-        "Række: 2, Sæde: 2",
-        "Række: 2, Sæde: 1",
-        "Række: 2, Sæde: 15",
-        "Række: 3, Sæde: 1",
-        "Række: 3, Sæde: 2",
-        "Række: 3, Sæde: 3",
-        "Række: 3, Sæde: 4"
+        "Række: 2, Sæde: 5"
       ],
-      "totalPrice": "1309",
+      "totalPrice": "409",
       "showtime": "09:00 AM",
       "extras": {
         "Lille Cola": "1",
@@ -37,6 +28,19 @@
       },
       "movieTitle": "Find Nemo",
       "ticketID": "1230320359780554"
+    },
+    {
+      "date": "11\/10\/2024",
+      "selectedSeats": [
+        "Række: 12, Sæde: 8"
+      ],
+      "totalPrice": "169",
+      "showtime": "09:00 AM",
+      "extras": {
+        "Haribo Clickmix": "1"
+      },
+      "movieTitle": "Find Nemo",
+      "ticketID": "9004452782915976"
     }
   ]
 }
