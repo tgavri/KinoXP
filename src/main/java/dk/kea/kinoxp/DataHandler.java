@@ -29,22 +29,48 @@ public class DataHandler {
     public List<Items> getItems() {
         return items;
     }
+    public void addItem(String name, int price) {
+        items.add(new Items(name, price));
+    }
+
+    public void deleteItem(int index) {
+        if (index >= 0 && index < items.size()) {
+            items.remove(index);
+        }
+    }
+
+    public void updateItem(int index, String name, int price) {
+        if (index >= 0 && index < items.size()) {
+            items.get(index).setName(name);
+            items.get(index).setPrice(price);
+        }
+    }
+
+
 
     public static class Items {   // MIDLERTIDIG TESTKLASSE
-        private final String name;
-        private final int price;
+        private String name;
+        private int price;
 
         public Items(String name, int price) {
             this.name = name;
             this.price = price;
         }
 
+
         public String getName() {
             return name;
         }
 
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public int getPrice() {
             return price;
+        }
+        public void setPrice(int price) {
+            this.price = price;
         }
     }
 

@@ -97,4 +97,23 @@ public class KinoController {
         public List<DataHandler.Items> getItems () {
             return dataHandler.getItems();
     }
+
+    @PostMapping("/api/items")
+    @ResponseBody
+    public ResponseEntity<String> addItem (@RequestBody DataHandler.Items items) {
+        dataHandler.addItem(items.getName(), items.getPrice());
+        return ResponseEntity.ok("Item added succesfully");
+    }
+    @PutMapping("/api/items/{index}")
+    @ResponseBody
+    public ResponseEntity<String> updateItem(@PathVariable int index, @RequestBody DataHandler.Items items) {
+        dataHandler.updateItem(index, items.getName(), items.getPrice());
+        return ResponseEntity.ok("Updated Succesfully");
+    }
+    @DeleteMapping("/api/items/{index}")
+    @ResponseBody
+    public ResponseEntity<String> deleteItem(@PathVariable int index) {
+        dataHandler.deleteItem(index);
+        return ResponseEntity.ok("Item deleted Succesfully");
+    }
 }

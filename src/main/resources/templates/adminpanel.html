@@ -127,34 +127,53 @@
 <div id="header-placeholder"></div>
 
 <div id="app" class="background">
-  <div class="title-container">
+    <div class="title-container">
     <h1 class="dashboard-title">Medarbejder Dashboard</h1>
-  </div>
-  <div class="box-container">
-    <div class="box">
-      <div class="box-header" id="toggle-search">
-        <h2>Søg på Ticket ID</h2>
-      </div>
-      <div class="box-content" id="search-content">
-        <label for="search-ticket-id">Indtast Ticket ID:</label>
-        <input type="text" id="search-ticket-id">
-        <button id="search-button">Søg</button>
-        <div id="booking-details" class="booking-details"></div>
-      </div>
     </div>
+      <div class="box-container">
+        <div class="box">
+            <div class="box-header" id="toggle-search">
+           <h2>Søg på Ticket ID</h2>
+            </div>
+          <div class="box-content" id="search-content">
+                  <label for="search-ticket-id">Indtast Ticket ID:</label>
+                  <input type="text" id="search-ticket-id">
+                  <button id="search-button">Søg</button>
+               <div id="booking-details" class="booking-details"></div>
+          </div>
+        </div>
 
-    <div class="box">
-      <div class="box-header" id="toggle-date-search">
-        <h2>Søg for dato</h2>
-      </div>
-      <div class="box-content" id="date-search-content">
-        <label for="search-date">Søg for dato:</label>
-        <input type="date" id="search-date">
-        <button id="date-search-button">Søg</button>
-        <div id="date-booking-details" class="booking-details"></div>
-      </div>
-    </div>
+        <div class="box">
+            <div class="box-header" id="toggle-date-search">
+            <h2>Søg for dato</h2>
+            </div>
+           <div class="box-content" id="date-search-content">
+                <label for="search-date">Søg for dato:</label>
+                <input type="date" id="search-date">
+             <button id="date-search-button">Søg</button>
+            <div id="date-booking-details" class="booking-details"></div>
+           </div>
+        </div>
+
+          <div class="box">
+              <div class="box-header" id="toggle-candy">
+                <h2>Administrer Slik</h2>
+              </div>
+            <div class="box-content" id="candy-content">
+                 <label for="candy-name">Slik Navn:</label>
+                <input type="text" id="candy-name" placeholder="Indtast navn">
+
+                <label for="candy-price">Pris:</label>
+                <input type="text" id="candy-price" placeholder="Indtast pris">
+
+                 <button id="add-candy">Tilføj Slik</button>
+                <div id="candy-list"></div>
+            </div>
+          </div>
+
+
   </div>
+
 </div>
 
 
@@ -167,16 +186,24 @@
     $('#cookie-placeholder').load('/fragments/cookies');
     $('#footer-placeholder').load('/fragments/footer');
 
+      $('#candy-content').hide(); // Initially hide candy content
+      loadCandy();
+      $('#add-candy').click(addCandy);
 
     $('#toggle-search').click(function () {
       $('#search-content').slideToggle();
     });
 
+      $('#toggle-candy').click(function() {
+          console.log("Toggle button clicked"); // Debugging line
+          $('#candy-content').slideToggle();
+      });
+
     $('#toggle-date-search').click(function () {
       $('#date-search-content').slideToggle();
     });
 
-    $('#date-search-button').click(function () {
+    $('#date-search- button').click(function () {
       const selectedDate = $('#search-date').val().trim();
       if (!selectedDate) {
         alert('Please select a date.');
@@ -313,6 +340,68 @@
         }
       });
     });
+        // VIRKER OGSÅ, altså sådan halvt
+      function loadCandy() {
+          fetch('/api/items')
+              .then(response => response.json())
+              .then(items => {
+                  let candyList = document.getElementById("candy-list");
+                  candyList.innerHTML = "";
+                  items.forEach((item, index) => { // Problemer ved nedenstående og har prøvet en masse :D
+                      candyList.innerHTML += `
+
+                     <div>
+             <p>${item.name} - ${item.price} DKK</p>
+             <button onclick="editCandy(${index})">Rediger</button>
+             <button onclick="deleteCandy(${index})">Slet</button>
+                     </div>
+        `;
+
+
+                  });
+              });
+      }
+
+// Add candy item VIRKER
+      function addCandy() {
+          const name = document.getElementById("candy-name").value;
+          const price = document.getElementById("candy-price").value;
+
+          fetch('/api/items', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name, price })
+          }).then(() => loadCandy());
+      }
+
+// Edit candy item VIRKER IKKE
+      function editCandy(index) {
+          const newName = prompt("Indtast nyt navn:");
+          const newPrice = prompt("Indtast ny pris:");
+
+          fetch(`/api/items/${index}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: newName, price: newPrice })
+          }).then(() => loadCandy());
+      }
+
+// Delete candy item VIRKER IKKE
+      function deleteCandy(index) {
+          fetch(`/api/items/${index}`, { method: 'DELETE' })
+              .then(() => loadCandy());
+      }
+
+          document.getElementById("add-candy").addEventListener("click", addCandy);
+
+
+
+
+
+
+
+
   });
+
 </script>
 </html>
