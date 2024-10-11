@@ -1,253 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KinoXP - Worker Dashboard</title>
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/footer.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-      if (isLoggedIn !== 'true') {
-        window.location.href = '/';
-      }
-    });
-  </script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    .background {
-      background-image: url('https://wallpapercave.com/wp/wp2508260.jpg');
-      background-size: cover;
-      background-position: center;
-      padding-top: 100px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KinoXP - Worker Dashboard</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                window.location.href = '/';
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .background {
+            background-image: url('https://wallpapercave.com/wp/wp2508260.jpg');
+            background-size: cover;
+            background-position: center;
+            padding-top: 100px;
+        }
 
-    .title-container {
-      text-align: center;
-      margin-bottom: 80px;
-    }
+        .title-container {
+            text-align: center;
+            margin-bottom: 80px;
+        }
 
-    .dashboard-title {
-      color: white;
-      font-size: 2em;
-    }
+        .dashboard-title {
+            color: white;
+            font-size: 2em;
+        }
 
-    .box-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      margin-top: 50px;
-    }
+        .box-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
 
-    .box {
-      background-color: rgba(0, 0, 0, 0.85);
-      color: white;
-      border-radius: 10px;
-      margin: 0 auto;
-      padding: 20px;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s;
-    }
+        .box {
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            border-radius: 10px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
 
-    .box:hover {
-      transform: scale(1.02);
-    }
+        .box:hover {
+            transform: scale(1.02);
+        }
 
-    .box-header {
-      cursor: pointer;
-      padding: 15px;
-      background-color: #0056b3;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      text-align: center;
-      font-size: 1.25em;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
+        .box-header {
+            cursor: pointer;
+            padding: 15px;
+            background-color: #0056b3;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.25em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
 
-    .box-header:hover {
-      background-color: #004494;
-    }
+        .box-header:hover {
+            background-color: #004494;
+        }
 
-    .box-content {
-      display: none;
-      padding: 10px;
-      border: 1px solid #fff;
-      border-radius: 5px;
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+        .box-content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-    label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: bold;
-    }
+        .candy-item {
+            padding: 5px;
+            width: 80%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
 
-    input[type="text"], input[type="date"], input[type="time"] {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-    }
+        .candy-item input {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            display: none;
+        }
 
-    button {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
+        input[type="text"].candy-input {
+            width: 80%;
+            max-width: 300px;
+            padding: 5px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
 
-    button:hover {
-      background-color: #0056b3;
-      transform: scale(1.05);
-    }
+        .candy-item .text-display {
+            display: block;
+        }
 
-    .booking-details {
-      margin-top: 15px;
-    }
-  </style>
+        .candy-item.editing input {
+            display: inline-block;
+            border: 1px solid #ccc;
+        }
+
+        .candy-item.editing .text-display {
+            display: none;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .booking-details {
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
 <div id="header-placeholder"></div>
 
 <div id="app" class="background">
     <div class="title-container">
-    <h1 class="dashboard-title">Medarbejder Dashboard</h1>
+        <h1 class="dashboard-title">Medarbejder Dashboard</h1>
     </div>
-      <div class="box-container">
+    <div class="box-container">
         <div class="box">
             <div class="box-header" id="toggle-search">
-           <h2>Søg på Ticket ID</h2>
+                <h2>Søg på Ticket ID</h2>
             </div>
-          <div class="box-content" id="search-content">
-                  <label for="search-ticket-id">Indtast Ticket ID:</label>
-                  <input type="text" id="search-ticket-id">
-                  <button id="search-button">Søg</button>
-               <div id="booking-details" class="booking-details"></div>
-          </div>
+            <div class="box-content" id="search-content">
+                <label for="search-ticket-id">Indtast Ticket ID:</label>
+                <input type="text" id="search-ticket-id">
+                <button id="search-button">Søg</button>
+                <div id="booking-details" class="booking-details"></div>
+            </div>
         </div>
 
         <div class="box">
             <div class="box-header" id="toggle-date-search">
-            <h2>Søg for dato</h2>
+                <h2>Søg for dato</h2>
             </div>
-           <div class="box-content" id="date-search-content">
+            <div class="box-content" id="date-search-content">
                 <label for="search-date">Søg for dato:</label>
                 <input type="date" id="search-date">
-             <button id="date-search-button">Søg</button>
-            <div id="date-booking-details" class="booking-details"></div>
-           </div>
+                <button id="date-search-button">Søg</button>
+                <div id="date-booking-details" class="booking-details"></div>
+            </div>
         </div>
 
-          <div class="box">
-              <div class="box-header" id="toggle-candy">
+        <div class="box">
+            <div class="box-header" id="toggle-candy">
                 <h2>Administrer Slik</h2>
-              </div>
+            </div>
             <div class="box-content" id="candy-content">
-                 <label for="candy-name">Slik Navn:</label>
-                <input type="text" id="candy-name" placeholder="Indtast navn">
-
+                <label for="candy-name">Slik Navn:</label>
+                <input type="text" id="candy-name" class="candy-input" placeholder="Indtast navn">
                 <label for="candy-price">Pris:</label>
-                <input type="text" id="candy-price" placeholder="Indtast pris">
-
-                 <button id="add-candy">Tilføj Slik</button>
+                <input type="text" id="candy-price" class="candy-input" placeholder="Indtast pris">
+                <button id="add-candy">Tilføj Slik</button>
                 <div id="candy-list"></div>
             </div>
-          </div>
-
-
-  </div>
-
+        </div>
+    </div>
 </div>
-
-
 
 <div id="footer-placeholder"></div>
 </body>
 <script>
-  $(document).ready(function () {
-    $('#header-placeholder').load('/fragments/header');
-    $('#cookie-placeholder').load('/fragments/cookies');
-    $('#footer-placeholder').load('/fragments/footer');
+    $(document).ready(function () {
+        $('#header-placeholder').load('/fragments/header');
+        $('#footer-placeholder').load('/fragments/footer');
 
-      $('#candy-content').hide(); // Initially hide candy content
-      loadCandy();
-      $('#add-candy').click(addCandy);
+        $('#toggle-search').click(function () {
+            $('#search-content').slideToggle();
+        });
 
-    $('#toggle-search').click(function () {
-      $('#search-content').slideToggle();
-    });
+        $('#toggle-date-search').click(function () {
+            $('#date-search-content').slideToggle();
+        });
 
-      $('#toggle-candy').click(function() {
-          console.log("Toggle button clicked"); // Debugging line
-          $('#candy-content').slideToggle();
-      });
+        $('#date-search-button').click(function () {
+            const selectedDate = $('#search-date').val().trim();
+            if (!selectedDate) {
+                alert('Please select a date.');
+                return;
+            }
 
-    $('#toggle-date-search').click(function () {
-      $('#date-search-content').slideToggle();
-    });
+            // Convert selected date to DD/MM/YYYY format
+            const dateParts = selectedDate.split('-');
+            const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+            console.log("Searching for Date:", formattedDate);
 
-    $('#date-search- button').click(function () {
-      const selectedDate = $('#search-date').val().trim();
-      if (!selectedDate) {
-        alert('Please select a date.');
-        return;
-      }
+            $.getJSON('tickets.json', function (data) {
+                const bookingsForDate = data.tickets.filter(b => b.date === formattedDate);
+                $('#date-booking-details').empty();
+                if (bookingsForDate.length > 0) {
+                    bookingsForDate.forEach(booking => {
+                        $('#date-booking-details').append(`
+              <div class="booking">
+                <p><strong>Movie Title:</strong> <span>${booking.movieTitle}</span></p>
+                <p><strong>Showtime:</strong> <span>${booking.showtime}</span></p>
+                <p><strong>Selected Seats:</strong> <span>${booking.selectedSeats.join(', ')}</span></p>
+                <p><strong>Total Price:</strong> <span>${booking.totalPrice} DKK</span></p>
+                <p><strong>Ticket ID:</strong> ${booking.ticketID}</p>
+                <button class="edit-button">Edit</button>
+                <button class="save-button" style="display:none;">Save</button>
+                <button class="delete-button" data-ticket-id="${booking.ticketID}">Delete</button>
+              </div>
+            `);
+                    });
+                } else {
+                    $('#date-booking-details').text('No bookings found for this date.');
+                }
+            });
+        });
 
-      // Convert selected date to DD/MM/YYYY format
-      const dateParts = selectedDate.split('-');
-      const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-      console.log("Searching for Date:", formattedDate); // Log the searched date
-
-
-      $.getJSON('tickets.json', function (data) {
-        const bookingsForDate = data.tickets.filter(b => b.date === formattedDate);
-        $('#date-booking-details').empty();
-        if (bookingsForDate.length > 0) {
-          bookingsForDate.forEach(booking => {
-            $('#date-booking-details').append(`
-          <div class="booking">
-            <p><strong>Movie Title:</strong> <span>${booking.movieTitle}</span></p>
-            <p><strong>Showtime:</strong> <span>${booking.showtime}</span></p>
-            <p><strong>Selected Seats:</strong> <span>${booking.selectedSeats.join(', ')}</span></p>
-            <p><strong>Total Price:</strong> <span>${booking.totalPrice} DKK</span></p>
-            <p><strong>Ticket ID:</strong> ${booking.ticketID}</p>
-            <button class="edit-button">Edit</button>
-            <button class="save-button" style="display:none;">Save</button>
-            <button class="delete-button" data-ticket-id="${booking.ticketID}">Delete</button>
-          </div>
-        `);
-          });
-        } else {
-          $('#date-booking-details').text('No bookings found for this date.');
-        }
-      });
-    });
-
-    $('#search-button').click(function () {
-      const ticketId = $('#search-ticket-id').val().trim();
-      console.log("Searching for Ticket ID:", ticketId); // Log the searched ID
-      $.getJSON('tickets.json', function (data) {
-        const booking = data.tickets.find(b => b.ticketID === ticketId);
-        $('#booking-details').empty();
-        if (booking) {
-          $('#booking-details').append(`
+        $('#search-button').click(function () {
+            const ticketId = $('#search-ticket-id').val().trim();
+            console.log("Searching for Ticket ID:", ticketId);
+            $.getJSON('tickets.json', function (data) {
+                const booking = data.tickets.find(b => b.ticketID === ticketId);
+                $('#booking-details').empty();
+                if (booking) {
+                    $('#booking-details').append(`
             <div class="booking">
               <p><strong>Movie Title:</strong> <span class="editable" data-field="movieTitle">${booking.movieTitle}</span></p>
               <p><strong>Showtime:</strong> <span class="editable" data-field="showtime">${booking.showtime}</span></p>
@@ -259,149 +279,152 @@
               <button class="delete-button" data-ticket-id="${booking.ticketID}">Delete</button>
             </div>
           `);
-        } else {
-          $('#booking-details').text('No booking found with this Ticket ID.');
-        }
-      });
-    });
-
-    $('#booking-details').on('click', '.edit-button', function () {
-      const ticketId = $(this).closest('.booking').find('p:last-child').text().split(': ')[1];
-      $(this).hide(); // Hide the edit button
-      $(this).siblings('.save-button').show(); // Show the save button
-
-      $('.editable').each(function () {
-        const currentValue = $(this).text();
-        const field = $(this).data('field');
-        $(this).replaceWith(`<input type="text" class="edit-input" data-field="${field}" value="${currentValue}"/>`);
-      });
-
-      $('#edit-ticket-id').val(ticketId); // Set the hidden ticket ID
-    });
-
-    $('#booking-details').on('click', '.delete-button', function() {
-      const ticketId = $(this).data('ticket-id');
-
-      if (confirm('Are you sure you want to delete this ticket?')) {
-        $.ajax({
-          url: '/api/tickets/delete',
-          type: 'DELETE',
-          contentType: 'application/json',
-          data: JSON.stringify({ ticketID: ticketId }), // Send the ticket ID
-          success: function() {
-            alert('Ticket deleted successfully!');
-            $('#search-ticket-id').val(''); // Clear search input
-            $('#booking-details').empty(); // Clear booking details
-          },
-          error: function(xhr) {
-            console.error("Error details:", xhr.responseText);
-            alert('Failed to delete the ticket. Please try again.');
-          }
+                } else {
+                    $('#booking-details').text('No booking found with this Ticket ID.');
+                }
+            });
         });
-      }
-    });
 
+        $('#booking-details').on('click', '.edit-button', function () {
+            const ticketId = $(this).closest('.booking').find('p:last-child').text().split(': ')[1];
+            $(this).hide();
+            $(this).siblings('.save-button').show();
 
-    $('#booking-details').on('click', '.save-button', function() {
-      const ticketId = $(this).siblings('.edit-button').data('ticket-id');
+            $('.editable').each(function () {
+                const currentValue = $(this).text();
+                const field = $(this).data('field');
+                $(this).replaceWith(`<input type="text" class="edit-input" data-field="${field}" value="${currentValue}"/>`);
+            });
 
-      // Define selectedSeats based on the input
-      const selectedSeats = $('.edit-input[data-field="selectedSeats"]').val().split(',').map(seat => seat.trim());
+            $('#edit-ticket-id').val(ticketId);
+        });
 
-      const updatedBooking = {
-        ticketID: ticketId, // Use the ticket ID from the edit button
-        movieTitle: $('.edit-input[data-field="movieTitle"]').val(),
-        showtime: $('.edit-input[data-field="showtime"]').val(),
-        selectedSeats: selectedSeats,
-        totalPrice: (selectedSeats.length * 100).toString(), // Calculate based on number of seats
-        date: "06/10/2024", // Update with the correct date if necessary
-        extras: {
-          popcornSmall: "",
-          colaSmall: "",
-          popcornBig: "",
-          colaBig: ""
+        $('#booking-details').on('click', '.delete-button', function() {
+            const ticketId = $(this).data('ticket-id');
+
+            if (confirm('Are you sure you want to delete this ticket?')) {
+                $.ajax({
+                    url: '/api/tickets/delete',
+                    type: 'DELETE',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ ticketID: ticketId }),
+                    success: function() {
+                        alert('Ticket deleted successfully!');
+                        $('#search-ticket-id').val('');
+                        $('#booking-details').empty();
+                    },
+                    error: function(xhr) {
+                        console.error("Error details:", xhr.responseText);
+                        alert('Failed to delete the ticket. Please try again.');
+                    }
+                });
+            }
+        });
+
+        $('#booking-details').on('click', '.save-button', function() {
+            const ticketId = $(this).siblings('.edit-button').data('ticket-id');
+            const selectedSeats = $('.edit-input[data-field="selectedSeats"]').val().split(',').map(seat => seat.trim());
+
+            const updatedBooking = {
+                ticketID: ticketId,
+                movieTitle: $('.edit-input[data-field="movieTitle"]').val(),
+                showtime: $('.edit-input[data-field="showtime"]').val(),
+                selectedSeats: selectedSeats,
+                totalPrice: (selectedSeats.length * 100).toString(),
+                date: "06/10/2024",
+                extras: {
+                    popcornSmall: "",
+                    colaSmall: "",
+                    popcornBig: "",
+                    colaBig: ""
+                }
+            };
+
+            $.ajax({
+                url: '/api/tickets/update',
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(updatedBooking),
+                success: function() {
+                    alert('Booking updated successfully!');
+                    $('#search-ticket-id').val('');
+                    $('#booking-details').empty();
+                },
+                error: function(xhr) {
+                    console.error("Error details:", xhr.responseText);
+                    alert('Failed to update the booking. Please try again.');
+                }
+            });
+        });
+
+        $('#toggle-candy').click(function() {
+            $('#candy-content').slideToggle(() => {
+                if ($('#candy-content').is(':visible')) {
+                    loadCandy();
+                }
+            });
+        });
+
+        $('#add-candy').click(addCandy);
+
+        function loadCandy() {
+            fetch('/api/items')
+                .then(response => response.json())
+                .then(items => {
+                    let candyList = document.getElementById("candy-list");
+                    candyList.innerHTML = "";
+                    items.forEach((item, index) => {
+                        candyList.innerHTML += `
+              <div id="candy-item-${index}" class="candy-item">
+                <span class="text-display">${item.name} - ${item.price} DKK</span>
+                <input type="text" class="edit-candy-name" value="${item.name}" data-index="${index}" />
+                <input type="text" class="edit-candy-price" value="${item.price}" data-index="${index}" />
+                <button onclick="editCandy(${index})" class="edit-button">Rediger</button>
+                <button onclick="saveCandy(${index})" class="save-button" style="display: none;">Gem</button>
+                <button onclick="deleteCandy(${index})">Slet</button>
+              </div>
+            `;
+                    });
+                });
         }
-      };
 
-      // Update the ticket in the JSON file via an API call
-      $.ajax({
-        url: '/api/tickets/update',
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify(updatedBooking),
-        success: function() {
-          alert('Booking updated successfully!');
-          $('#search-ticket-id').val(''); // Clear search input
-          $('#booking-details').empty(); // Clear booking details
-        },
-        error: function(xhr) {
-          console.error("Error details:", xhr.responseText); // Log the response for debugging
-          alert('Failed to update the booking. Please try again.');
+        function addCandy() {
+            const name = document.getElementById("candy-name").value;
+            const price = document.getElementById("candy-price").value;
+
+            fetch('/api/items', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, price })
+            }).then(() => loadCandy());
         }
-      });
+
+        window.editCandy = function(index) {
+            const candyItem = $(`#candy-item-${index}`);
+            candyItem.addClass('editing');
+            candyItem.find('.edit-button').hide();
+            candyItem.find('.save-button').show();
+        };
+
+        window.saveCandy = function(index) {
+            const candyItem = $(`#candy-item-${index}`);
+            const name = candyItem.find('.edit-candy-name').val();
+            const price = candyItem.find('.edit-candy-price').val();
+
+            fetch(`/api/items/${index}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, price })
+            }).then(() => {
+                loadCandy();
+            });
+        };
+
+        window.deleteCandy = function(index) {
+            fetch(`/api/items/${index}`, {
+                method: 'DELETE'
+            }).then(() => loadCandy());
+        };
     });
-        // VIRKER OGSÅ, altså sådan halvt
-      function loadCandy() {
-          fetch('/api/items')
-              .then(response => response.json())
-              .then(items => {
-                  let candyList = document.getElementById("candy-list");
-                  candyList.innerHTML = "";
-                  items.forEach((item, index) => { // Problemer ved nedenstående og har prøvet en masse :D
-                      candyList.innerHTML += `
-
-                     <div>
-             <p>${item.name} - ${item.price} DKK</p>
-             <button onclick="editCandy(${index})">Rediger</button>
-             <button onclick="deleteCandy(${index})">Slet</button>
-                     </div>
-        `;
-
-
-                  });
-              });
-      }
-
-// Add candy item VIRKER
-      function addCandy() {
-          const name = document.getElementById("candy-name").value;
-          const price = document.getElementById("candy-price").value;
-
-          fetch('/api/items', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ name, price })
-          }).then(() => loadCandy());
-      }
-
-// Edit candy item VIRKER IKKE
-      function editCandy(index) {
-          const newName = prompt("Indtast nyt navn:");
-          const newPrice = prompt("Indtast ny pris:");
-
-          fetch(`/api/items/${index}`, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ name: newName, price: newPrice })
-          }).then(() => loadCandy());
-      }
-
-// Delete candy item VIRKER IKKE
-      function deleteCandy(index) {
-          fetch(`/api/items/${index}`, { method: 'DELETE' })
-              .then(() => loadCandy());
-      }
-
-          document.getElementById("add-candy").addEventListener("click", addCandy);
-
-
-
-
-
-
-
-
-  });
-
 </script>
 </html>

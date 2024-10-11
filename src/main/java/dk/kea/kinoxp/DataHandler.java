@@ -41,14 +41,13 @@ public class DataHandler {
 
     public void updateItem(int index, String name, int price) {
         if (index >= 0 && index < items.size()) {
-            items.get(index).setName(name);
-            items.get(index).setPrice(price);
+            Items item = items.get(index);
+            item.setName(name);
+            item.setPrice(price);
         }
     }
 
-
-
-    public static class Items {   // MIDLERTIDIG TESTKLASSE
+    public static class Items {
         private String name;
         private int price;
 
