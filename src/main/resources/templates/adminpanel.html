@@ -140,9 +140,9 @@
       </div>
       <div class="box-content" id="search-content">
         <label for="search-ticket-id">Indtast Ticket ID:</label>
-        <input type="text" id="search-ticket-id">
+        <input type="text" id="search-ticket-id" style="width: 97%">
         <button id="search-button">Søg</button>
-        <div id="booking-details" class="booking-details"></div>
+        <div id="booking-details" class="booking-details" style="width: 97%"></div>
       </div>
     </div>
 
@@ -152,9 +152,9 @@
       </div>
       <div class="box-content" id="date-search-content">
         <label for="search-date">Søg for dato:</label>
-        <input type="date" id="search-date">
+        <input type="date" id="search-date" style="width: 97%">
         <button id="date-search-button">Søg</button>
-        <div id="date-booking-details" class="booking-details"></div>
+        <div id="date-booking-details" class="booking-details" style="width: 97%"></div>
       </div>
     </div>
   </div>
@@ -187,6 +187,86 @@
       $('#date-search-content').slideToggle();
     });
 
+    // formatering af extras til display fra datahandler getItems hvis der skulle tilføjes nye
+    function formatExtrasDisplay(extras, items, editable = false) {
+      return items.map(item => {
+        const quantity = extras && extras[item.name] ? extras[item.name] : "0";
+        if (editable) {
+          return `
+                <div class="extra-item-row">
+                    <span class="extra-item-name">${item.name} (${item.price} kr)</span>
+                    <input type="number"
+                           class="extra-item-quantity"
+                           data-item-name="${item.name}"
+                           value="${quantity}"
+                           min="0"
+                           style="width: 60px; margin-left: 10px;">
+                </div>`;
+        } else {
+          if (quantity !== "0") {
+            return `<div class="extra-item-row">
+                    ${item.name}: ${quantity}
+                </div>`;
+          }
+          return `<div class="extra-item-row extra-item-zero">
+                ${item.name}: ${quantity}
+            </div>`;
+        }
+      }).join('');
+    }
+    // Helper funktion til extras
+    function collectExtrasFromForm(container) {
+      const extras = {};
+      container.find('.extra-item-quantity').each(function() {
+        const quantity = $(this).val();
+        const itemName = $(this).data('item-name');
+        if (quantity && parseInt(quantity) > 0) {
+          extras[itemName] = quantity;
+        }
+      });
+      return extras;
+    }
+
+    function displayBookingDetails(booking, container) {
+      $.getJSON('/api/items', function(items) {
+        container.empty();
+        if (booking) {
+          container.append(`
+                <div class="booking">
+                    <p><strong>Ticket ID:</strong> <span class="editable" data-field="ticketID">${booking.ticketID}</span></p>
+                    <p><strong>Filmtitel:</strong> <span class="editable" data-field="movieTitle">${booking.movieTitle}</span></p>
+                    <p><strong>Visningstid:</strong> <span class="editable" data-field="showtime">${booking.showtime}</span></p>
+                    <p><strong>Valgte pladser:</strong> <span class="editable" data-field="selectedSeats">${booking.selectedSeats.join(', ')}</span></p>
+                    <p><strong>Total pris:</strong> <span class="editable" data-field="totalPrice">${booking.totalPrice}</span></p>
+                    <p><strong>Dato:</strong> <span class="editable" data-field="date">${booking.date}</span></p>
+                    <div class="extras-section">
+                        <p><strong>Ekstra:</strong></p>
+                        <div class="extras-container" data-items='${JSON.stringify(items)}'>
+                            ${formatExtrasDisplay(booking.extras, items)}
+                        </div>
+                    </div>
+                    <button class="edit-button">Rediger</button>
+                    <button class="save-button" style="display:none;">Gem</button>
+                    <button class="delete-button" data-ticket-id="${booking.ticketID}">Slet</button>
+                </div>
+            `);
+        } else {
+          container.text('Ingen booking fundet.');
+        }
+      });
+    }
+
+    $('#search-button').click(function () {
+      const ticketId = $('#search-ticket-id').val().trim();
+      console.log("Searching for Ticket ID:", ticketId);
+      $.getJSON('/api/tickets', function (data) {
+        const booking = data.find(b => b.ticketID === ticketId);
+        displayBookingDetails(booking, $('#booking-details'));
+      }).fail(function () {
+        alert('Fejl ved hentning af billetdata.');
+      });
+    });
+
     $('#date-search-button').click(function () {
       const selectedDate = $('#search-date').val().trim();
       if (!selectedDate) {
@@ -194,86 +274,65 @@
         return;
       }
 
-      // konverterer dato format DD/MM/YYYY
       const dateParts = selectedDate.split('-');
       const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-      console.log("Searching for Date:", formattedDate); // Log
-
+      console.log("Searching for Date:", formattedDate);
 
       $.getJSON('/api/ticketsarray', function (data) {
         const bookingsForDate = data.tickets.filter(b => b.date === formattedDate);
         $('#date-booking-details').empty();
         if (bookingsForDate.length > 0) {
           bookingsForDate.forEach(booking => {
-            $('#date-booking-details').append(`
-          <div class="booking">
-                            <p><strong>Ticket ID:</strong> <span class="editable" data-field="ticketID">${booking.ticketID}</span></p>
-                            <p><strong>Filmtitel:</strong> <span class="editable" data-field="movieTitle">${booking.movieTitle}</span></p>
-                            <p><strong>Visningstid:</strong> <span class="editable" data-field="showtime">${booking.showtime}</span></p>
-                            <p><strong>Valgte pladser:</strong> <span class="editable" data-field="selectedSeats">${booking.selectedSeats.join(', ')}</span></p>
-                            <p><strong>Total pris:</strong> <span class="editable" data-field="totalPrice">${booking.totalPrice} DKK</span></p>
-                            <p><strong>Dato:</strong> <span class="editable" data-field="date">${booking.date}</span></p>
-                            <p><strong>Ekstra:</strong>
-                                <span class="editable" data-field="extras">${Object.entries(booking.extras).map(([key, value]) => `${key}: ${value}`).join(', ')}</span>
-                            </p>
-                            <button class="edit-button">Rediger</button>
-                            <button class="save-button" style="display:none;">Gem</button>
-                            <button class="delete-button" data-ticket-id="${booking.ticketID}">Slet</button>
-          </div>
-        `);
+            const bookingContainer = $('<div>').appendTo('#date-booking-details');
+            displayBookingDetails(booking, bookingContainer);
           });
         } else {
           $('#date-booking-details').text('Ingen booking fundet på denne dato.');
         }
       });
     });
-    $('#search-button').click(function () {
-      const ticketId = $('#search-ticket-id').val().trim();
-      console.log("Searching for Ticket ID:", ticketId); // Log
-      $.getJSON('/api/tickets', function (data) {
-        const booking = data.find(b => b.ticketID === ticketId);
-        $('#booking-details').empty();
-        if (booking) {
-          $('#booking-details').append(`
-                <div class="booking">
-                    <p><strong>Ticket ID:</strong> <span class="editable" data-field="ticketID">${booking.ticketID}</span></p>
-                    <p><strong>Filmtitel:</strong> <span class="editable" data-field="movieTitle">${booking.movieTitle}</span></p>
-                    <p><strong>Visningstid:</strong> <span class="editable" data-field="showtime">${booking.showtime}</span></p>
-                    <p><strong>Valgte pladser:</strong> <span class="editable" data-field="selectedSeats">${booking.selectedSeats.join(', ')}</span></p>
-                    <p><strong>Total pris:</strong> <span class="editable" data-field="totalPrice">${booking.totalPrice} DKK</span></p>
-                    <p><strong>Dato:</strong> <span class="editable" data-field="date">${booking.date}</span></p>
-                    <p><strong>Ekstra:</strong>
-                        <span class="editable" data-field="extras">${Object.entries(booking.extras).map(([key, value]) => `${key}: ${value}`).join(', ')}</span>
-                    </p>
-                    <button class="edit-button">Rediger</button>
-                    <button class="save-button" style="display:none;">Gem</button>
-                    <button class="delete-button" data-ticket-id="${booking.ticketID}">Slet</button>
-                </div>
-            `);
-        } else {
-          $('#booking-details').text('Ingen booking fundet med dette Ticket ID.');
-        }
-      }).fail(function () {
-        alert('Fejl ved hentning af billetdata.');
-      });
-    });
 
-    $('#booking-details').on('click', '.edit-button', function () {
-      const ticketId = $(this).closest('.booking').find('span[data-field="ticketID"]').text();
+    $('#booking-details, #date-booking-details').on('click', '.edit-button', function () {
+      const booking = $(this).closest('.booking');
+      const ticketId = booking.find('span[data-field="ticketID"]').text();
       $(this).hide();
       $(this).siblings('.save-button').show();
       $(this).data('ticketId', ticketId);
 
-      $('.editable').each(function () {
+      // Behold Ticket ID, movieTitle, dato mm, da de ikke skal kunne ændres.
+      booking.find('.editable').each(function () {
         const currentValue = $(this).text();
         const field = $(this).data('field');
-        $(this).replaceWith(`<input type="text" class="edit-input" data-field="${field}" value="${currentValue}"/>`);
+        if (field !== 'ticketID' && field !== 'movieTitle' && field !== 'date' && field !== 'showtime') {
+          $(this).replaceWith(`<input type="text" class="edit-input" data-field="${field}" value="${currentValue}"/>`);
+        }
       });
 
-      $('#edit-ticket-id').val(ticketId); //
+      // Deling af sæder
+      const selectedSeats = booking.find('span[data-field="selectedSeats"]').text();
+      const seatArray = selectedSeats.split(',').map(seat => seat.trim()); // Split
+      booking.find('span[data-field="selectedSeats"]').replaceWith(
+              `<textarea class="edit-input" data-field="selectedSeats" rows="3">${seatArray.join('\n')}</textarea>`
+      );
+
+
+      // Extras (popcorn, sodavand osv) tilføjelser - virker nu også hvis der bliver tilføjet nye varer
+      const extrasContainer = booking.find('.extras-container');
+      const items = JSON.parse(extrasContainer.attr('data-items'));
+      const currentExtras = {};
+      extrasContainer.find('.extra-item-row').each(function() {
+        const text = $(this).text().trim();
+        const [name, quantity] = text.split(':').map(s => s.trim());
+        if (quantity !== '0') {
+          currentExtras[name] = quantity;
+        }
+      });
+      extrasContainer.html(formatExtrasDisplay(currentExtras, items, true));
     });
 
-    $('#booking-details').on('click', '.delete-button', function () {
+
+
+    $('#booking-details, #date-booking-details').on('click', '.delete-button', function () {
       const ticketId = $(this).data('ticket-id');
 
       if (confirm('Er du sikker på, at du vil slette denne billet?')) {
@@ -296,105 +355,54 @@
       }
     });
 
-    $('#booking-details').on('click', '.save-button', function () {
+    $('#booking-details, #date-booking-details').on('click', '.save-button', function () {
+      const booking = $(this).closest('.booking');
       const ticketId = $(this).siblings('.edit-button').data('ticketId');
 
-      const selectedSeats = $('.edit-input[data-field="selectedSeats"]').val().split(',').map(seat => seat.trim());
-      const extrasString = $('.edit-input[data-field="extras"]').val();
-      const extras = extrasString.split(',').reduce((acc, extra) => {
-        const [key, value] = extra.split(':').map(item => item.trim());
-        acc[key] = value;
-        return acc;
-      }, {});
+      // Sørger for korrekt save af arrayliste af sædevalg.
+      const selectedSeats = $('.edit-input[data-field="selectedSeats"]').val()
+              .split(/(?=Række)/) // Split
+              .map(seat => seat.trim()) // Fjerner tom plads, hvis man glemmer et mellemrum eller lign..
+              .filter(seat => seat && !seat.startsWith(',')) // fjerner tomme værdier
+              .map(seat => seat.replace(/,\s*$/, '')); // fjerner komma foran eller bagved.
 
+      function calculateExtrasTotalPrice(container) {
+        const extras = collectExtrasFromForm(container);
+        const items = JSON.parse(container.find('.extras-container').attr('data-items')); // Henter priser
+        let totalPrice = 0;
 
-      const updatedBooking = {
-        ticketID: ticketId,
-        movieTitle: $('.edit-input[data-field="movieTitle"]').val(),
-        showtime: $('.edit-input[data-field="showtime"]').val(),
-        selectedSeats: selectedSeats,
-        totalPrice: (selectedSeats.length * 100).toString(),
-        date: $('.edit-input[data-field="date"]').val(),
-        extras: extras
-      };
-      console.log("Updated Booking Object:", updatedBooking);
-
-      $.ajax({
-        url: '/api/tickets/update',
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify(updatedBooking),
-        success: function () {
-          alert('Booking opdateret med succes!');
-          $('#search-ticket-id').val('');
-          $('#booking-details').empty();
-        },
-        error: function (xhr) {
-          console.error("Error details:", xhr.responseText);
-          alert('Kunne ikke opdatere booking. Prøv venligst igen.');
-        }
-      });
-    });
-
-    $('#date-booking-details').on('click', '.edit-button', function () {
-      const ticketId = $(this).closest('.booking').find('span[data-field="ticketID"]').text();
-      console.log("Editing Ticket ID:", ticketId); // Debug log
-
-      $(this).hide();
-      $(this).siblings('.save-button').show();
-      $(this).data('ticketId', ticketId);
-
-      $('.editable').each(function () {
-        const currentValue = $(this).text();
-        const field = $(this).data('field');
-        $(this).replaceWith(`<input type="text" class="edit-input" data-field="${field}" value="${currentValue}"/>`);
-      });
-
-      $('#edit-ticket-id').val(ticketId); //
-    });
-
-    $('#date-booking-details').on('click', '.delete-button', function () {
-      const ticketId = $(this).data('ticket-id');
-
-      if (confirm('Er du sikker på, at du vil slette denne billet?')) {
-        $.ajax({
-          url: '/api/tickets/delete',
-          type: 'DELETE',
-          contentType: 'application/json',
-          data: JSON.stringify({ ticketID: ticketId }),
-          success: function () {
-            alert('Billet slettet med succes!');
-            $(this).closest('.booking').remove(); // Slettes fra UI
-            $('#search-ticket-id').val(''); // Renser ticket id
-            $('#booking-details').empty(); // Renser booking detaljer
-          }.bind(this), //
-          error: function (xhr) {
-            console.error("Error details:", xhr.responseText);
-            alert('Kunne ikke slette billetten. Prøv venligst igen.');
+        for (const [itemName, quantity] of Object.entries(extras)) {
+          const item = items.find(i => i.name === itemName); // Find the item details
+          if (item) {
+            totalPrice += item.price * parseInt(quantity); // Udregner totalpris
           }
-        });
-      }
-    });
+        }
 
-    $('#date-booking-details').on('click', '.save-button', function () {
-      const ticketId = $(this).siblings('.edit-button').data('ticketId');
-      const selectedSeats = $('.edit-input[data-field="selectedSeats"]').val().split(',').map(seat => seat.trim());
-      const extrasString = $('.edit-input[data-field="extras"]').val();
-      const extras = extrasString.split(',').reduce((acc, extra) => {
-        const [key, value] = extra.split(':').map(item => item.trim());
-        acc[key] = value;
-        return acc;
-      }, {});
+        return totalPrice; // Extra totalpris
+      }
+      const pricePerSeat = 100; // 100kr pr sæde
+      const numberOfSeats = selectedSeats.length;
+      const extrasTotalPrice = calculateExtrasTotalPrice(booking);
+      const totalPrice = (numberOfSeats * pricePerSeat) + extrasTotalPrice; // Løbende udregning af totalpris ved edit
 
       const updatedBooking = {
         ticketID: ticketId,
-        movieTitle: $('.edit-input[data-field="movieTitle"]').val(),
-        showtime: $('.edit-input[data-field="showtime"]').val(),
+        movieTitle: booking.find('span[data-field="movieTitle"]').text() || '',
+        showtime: booking.find('span[data-field="showtime"]').text() || '',
         selectedSeats: selectedSeats,
-        totalPrice: $('.edit-input[data-field="totalPrice"]').val(),
-        date: $('.edit-input[data-field="date"]').val(),
-        extras: extras
+        totalPrice: totalPrice,
+        date: booking.find('span[data-field="date"]').text() || '',
+        extras: collectExtrasFromForm(booking)
       };
+
+      // Debug
+      console.log("Updated Booking:", updatedBooking);
+
+      // debug
+      if (!updatedBooking.movieTitle || !updatedBooking.showtime || !updatedBooking.date) {
+        alert('Please make sure all required fields are filled.');
+        return;
+      }
 
       $.ajax({
         url: '/api/tickets/update',
@@ -403,8 +411,12 @@
         data: JSON.stringify(updatedBooking),
         success: function () {
           alert('Booking opdateret med succes!');
-          $('#search-ticket-id').val('');
-          $('#booking-details').empty();
+          if (booking.closest('#booking-details').length) {
+            $('#search-ticket-id').val('');
+            $('#booking-details').empty();
+          } else {
+            $('#date-booking-details').empty();
+          }
         },
         error: function (xhr) {
           console.error("Error details:", xhr.responseText);
@@ -412,6 +424,30 @@
         }
       });
     });
+    const style = `
+<style>
+    .extras-container {
+        margin-left: 20px;
+    }
+    .extra-item-row {
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+    }
+    .extra-item-zero {
+        color: #666;
+    }
+    .extra-item-name {
+        min-width: 200px;
+    }
+    .extra-item-quantity {
+        padding: 3px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+    }
+</style>
+`;
+    $(style).appendTo('head');
   });
 </script>
 </html>
