@@ -34,4 +34,4 @@ jobs:
 
       - name: Run tests
         working-directory: ./
-        run: ./mvnw test
+        run: ./mvn test
