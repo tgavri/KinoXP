@@ -29,6 +29,9 @@ jobs:
           restore-keys: |
             maven-${{ runner.os }}-
 
+      - name: Make mvnw executable
+        run: chmod +x ./mvnw
+
       - name: Run tests
-        working-directory: .
+        working-directory: ./
         run: ./mvnw test
