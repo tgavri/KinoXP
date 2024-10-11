@@ -33,5 +33,4 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: Run tests
-        working-directory: ./
-        run: ./mvn test
+        run: mvn test
