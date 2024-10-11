@@ -2,9 +2,9 @@ name: Maven Test
 
 on:
   push:
-    branches: [adminpanel-final]
+    branches: [main]
   pull_request:
-    branches: [adminpanel-final]
+    branches: [main]
 
 jobs:
   test:
