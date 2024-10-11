@@ -73,7 +73,7 @@ public class KinoController {
     public String getAllTicketsArray() throws JSONException {
         JSONArray allTickets = dataHandler.getAllTickets();
         JSONObject response = new JSONObject();
-        response.put("tickets", allTickets); // Wrap the array in an object
+        response.put("tickets", allTickets);
         return response.toString();
     }
 
@@ -112,7 +112,7 @@ public class KinoController {
 
     @GetMapping("/api/items")
         @ResponseBody
-        public List<DataHandler.Items> getItems () {
+        public List<DataHandler.Items> getItems() {
             return dataHandler.getItems();
     }
 }
