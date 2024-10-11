@@ -17,10 +17,10 @@
     });
   </script>
   <style>
-    a {
-      text-decoration: none;
-    }
-    body {
+      a {
+          text-decoration: none;
+      }
+      body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
       color: #333;
@@ -165,8 +165,20 @@
     <div class="box-content" id="vagtplan-content">
     </div>
   </div></a>
+    <div class="box">
+        <div class="box-header" id="toggle-candy">
+            <h2>Administrer Slik</h2>
+        </div>
+        <div class="box-content" id="candy-content">
+            <label for="candy-name">Slik Navn:</label>
+            <input type="text" id="candy-name" class="candy-input" placeholder="Indtast navn">
+            <label for="candy-price">Pris:</label>
+            <input type="text" id="candy-price" class="candy-input" placeholder="Indtast pris">
+            <button id="add-candy">Tilføj Slik</button>
+            <div id="candy-list"></div>
+        </div>
+    </div>
 </div>
-
 
 
 
@@ -424,6 +436,74 @@
         }
       });
     });
+      $('#toggle-candy').click(function() {
+          $('#candy-content').slideToggle(() => {
+              if ($('#candy-content').is(':visible')) {
+                  loadCandy();
+              }
+          });
+      });
+
+      $('#add-candy').click(addCandy);
+
+      function loadCandy() {
+          fetch('/api/items')
+              .then(response => response.json())
+              .then(items => {
+                  let candyList = document.getElementById("candy-list");
+                  candyList.innerHTML = "";
+                  items.forEach((item, index) => {
+                      candyList.innerHTML += `
+              <div id="candy-item-${index}" class="candy-item">
+                <span class="text-display">${item.name} - ${item.price} DKK</span>
+                <input type="text" class="edit-candy-name" value="${item.name}" data-index="${index}" />
+                <input type="text" class="edit-candy-price" value="${item.price}" data-index="${index}" />
+                <button onclick="editCandy(${index})" class="edit-button">Rediger</button>
+                <button onclick="saveCandy(${index})" class="save-button" style="display: none;">Gem</button>
+                <button onclick="deleteCandy(${index})">Slet</button>
+              </div>
+            `;
+                  });
+              });
+      }
+
+      function addCandy() {
+          const name = document.getElementById("candy-name").value;
+          const price = document.getElementById("candy-price").value;
+
+          fetch('/api/items', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name, price })
+          }).then(() => loadCandy());
+      }
+
+      window.editCandy = function(index) {
+          const candyItem = $(`#candy-item-${index}`);
+          candyItem.addClass('editing');
+          candyItem.find('.edit-button').hide();
+          candyItem.find('.save-button').show();
+      };
+
+      window.saveCandy = function(index) {
+          const candyItem = $(`#candy-item-${index}`);
+          const name = candyItem.find('.edit-candy-name').val();
+          const price = candyItem.find('.edit-candy-price').val();
+
+          fetch(`/api/items/${index}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name, price })
+          }).then(() => {
+              loadCandy();
+          });
+      };
+
+      window.deleteCandy = function(index) {
+          fetch(`/api/items/${index}`, {
+              method: 'DELETE'
+          }).then(() => loadCandy());
+      };
     const style = `
 <style>
     .extras-container {
